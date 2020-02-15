@@ -3,9 +3,10 @@
   <Class Name="Core.Camera" Collapsed="true">
     <Position X="6.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Camera.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.TouchScreen" Collapsed="true">
     <Position X="16.75" Y="1.5" Width="1.5" />
@@ -24,14 +25,15 @@
   <Class Name="Core.Keyboard" Collapsed="true">
     <Position X="6.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Keyboard.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Light" Collapsed="true">
     <Position X="2.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAAgAACAAI=</HashCode>
+      <HashCode>IBgAACAAAAQAAAAAIAAAAAAAAAAAAAAAQAgAgAACAAI=</HashCode>
       <FileName>Light.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -46,23 +48,26 @@
   <Class Name="Core.Memory" Collapsed="true">
     <Position X="2.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAACAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Memory.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Microphone" Collapsed="true">
     <Position X="6.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Microphone.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.NetworkModule" Collapsed="true">
     <Position X="6.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>NetworkModule.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.NotificationLight" Collapsed="true">
     <Position X="3.75" Y="4.25" Width="1.5" />
@@ -103,7 +108,7 @@
   <Class Name="Core.Screen" Collapsed="true">
     <Position X="16.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BBAAAAAACEAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <HashCode>JBgAACAACEAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
       <FileName>Screen.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -111,7 +116,7 @@
   <Class Name="Core.Sensor" Collapsed="true">
     <Position X="2.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <HashCode>IBgAACAAAAAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
       <FileName>Sensor.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -119,16 +124,18 @@
   <Class Name="Core.Software" Collapsed="true">
     <Position X="10.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAEAAAAAA=</HashCode>
       <FileName>Software.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Speaker" Collapsed="true">
     <Position X="6.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Speaker.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Storage" Collapsed="true">
     <Position X="3.5" Y="1.75" Width="1.5" />
@@ -147,21 +154,23 @@
   <Class Name="YVMS_SC.Core.MobilePhone" Collapsed="true">
     <Position X="6.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>MobilePhone.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Battery" Collapsed="true">
     <Position X="6.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Battery.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.BiometricSensor" Collapsed="true">
     <Position X="10.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <HashCode>IBgAACAAAAAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
       <FileName>BiometricSensor.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -176,23 +185,26 @@
   <Class Name="Core.Button" Collapsed="true">
     <Position X="14.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Button.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.CameraModule" Collapsed="true">
     <Position X="6.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>CameraModule.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Case" Collapsed="true">
     <Position X="6.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Case.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Chipset">
     <Position X="15.5" Y="3" Width="2.25" />
@@ -231,11 +243,18 @@
           <NewMemberFileName>Chipset.cs</NewMemberFileName>
         </TypeIdentifier>
       </Class>
+      <Class Name="Core.Chipset.ProcessingUnit" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Chipset.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.FingerprintScanner" Collapsed="true">
     <Position X="8.75" Y="2" Width="1.75" />
@@ -263,6 +282,13 @@
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>PowerableComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.ICommonDescription">
+    <Position X="12" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>ICommonDescription.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

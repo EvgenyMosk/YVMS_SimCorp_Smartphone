@@ -1,8 +1,21 @@
-﻿namespace Core
+﻿using System;
+
+namespace Core
 {
-	public class Sensor : PowerableComponent
+	public class Sensor : PowerableComponent, ICommonDescription
 	{
-		protected bool _isTurnedOn;
+		protected Boolean _isTurnedOn;
+
+		public String Model { get; set; }
+		public String Manufacturer { get; set; }
+		public Int32 YearOfProduction { get; set; }
+		public String Version { get; set; }
+
+		public String GetDescription()
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public void TurnOff()
 		{
 			throw new System.NotImplementedException();

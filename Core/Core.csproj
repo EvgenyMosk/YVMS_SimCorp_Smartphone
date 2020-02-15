@@ -58,6 +58,7 @@
     <Compile Include="FaceScanner.cs" />
     <Compile Include="FingerprintScanner.cs" />
     <Compile Include="FlashLight.cs" />
+    <Compile Include="ICommonDescription.cs" />
     <Compile Include="Keyboard.cs" />
     <Compile Include="Light.cs" />
     <Compile Include="LightSensor.cs" />

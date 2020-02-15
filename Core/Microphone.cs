@@ -5,6 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public class Microphone {
+	public class Microphone : ICommonDescription {
+		public String Model { get; set; }
+		public String Manufacturer { get; set; }
+		public Int32 YearOfProduction { get; set; }
+		public String Version { get; set; }
+
+		public String GetDescription() {
+			throw new NotImplementedException();
+		}
 	}
 }
