@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Core
+{
+	public class Sensor : PowerableComponent
+	{
+		protected bool _isTurnedOn;
+		public void TurnOff()
+		{
+			throw new System.NotImplementedException();
+		}
 
-namespace Core {
-	public class Sensor {
+		public void TurnOn()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

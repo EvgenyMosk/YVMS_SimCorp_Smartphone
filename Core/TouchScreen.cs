@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core {
-	public class WirelessConnectionModule {
+namespace Core
+{
+	public class TouchScreen:Screen
+	{
 	}
 }

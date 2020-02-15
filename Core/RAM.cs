@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Core
+{
+	public class RAM : Memory, PowerableComponent
+	{
+		protected bool _isTurnedOn;
+		public void TurnOff()
+		{
+			throw new System.NotImplementedException();
+		}
 
-namespace Core {
-	public class RAM : Memory {
+		public void TurnOn()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

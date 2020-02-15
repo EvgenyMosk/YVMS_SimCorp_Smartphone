@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core {
-	public class WiFi {
+namespace Core
+{
+	public class Keyboard
+	{
 	}
 }

@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Core.Camera" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.TouchScreen" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TouchScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.FlashLight" Collapsed="true">
+    <Position X="2" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FlashLight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Keyboard" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Keyboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Light" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAAgAACAAI=</HashCode>
+      <FileName>Light.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.LightSensor" Collapsed="true">
+    <Position X="3.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LightSensor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Memory" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Memory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Microphone" Collapsed="true">
+    <Position X="6.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Microphone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.NetworkModule" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NetworkModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.NotificationLight" Collapsed="true">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NotificationLight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.OperatingSystem" Collapsed="true">
+    <Position X="10.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OperatingSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.ProximitySensor" Collapsed="true">
+    <Position X="2" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProximitySensor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.RAM" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>RAM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Recovery" Collapsed="true">
+    <Position X="12.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Recovery.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Screen" Collapsed="true">
+    <Position X="16.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAACEAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>Screen.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Sensor" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>Sensor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Software" Collapsed="true">
+    <Position X="10.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Software.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Speaker" Collapsed="true">
+    <Position X="6.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Speaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Storage" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Storage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.TouchButton" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TouchButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YVMS_SC.Core.MobilePhone" Collapsed="true">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MobilePhone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Battery" Collapsed="true">
+    <Position X="6.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Battery.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.BiometricSensor" Collapsed="true">
+    <Position X="10.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>BiometricSensor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Bootloader" Collapsed="true">
+    <Position X="9" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bootloader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Button" Collapsed="true">
+    <Position X="14.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CameraModule" Collapsed="true">
+    <Position X="6.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CameraModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Case" Collapsed="true">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Case.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Chipset">
+    <Position X="15.5" Y="3" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Core.Chipset.CPU" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Core.Chipset.GPU" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Core.Chipset.WirelessConnectionModule" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+      <Class Name="Core.Chipset.WiFi" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Core.Chipset.Bluetooth" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Core.Chipset.NFC" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Chipset.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Chipset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.FingerprintScanner" Collapsed="true">
+    <Position X="8.75" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FingerprintScanner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.FaceScanner" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FaceScanner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.RetinaScanner" Collapsed="true">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RetinaScanner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Core.PowerableComponent">
+    <Position X="10" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>PowerableComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
