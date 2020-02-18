@@ -56,7 +56,7 @@
   <Class Name="Core.Microphone" Collapsed="true">
     <Position X="8" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAEJAAAAAAAAAIAAAAAAAgAAAAAIAA=</HashCode>
       <FileName>Microphone.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -71,7 +71,7 @@
   <Class Name="Core.NotificationLight" Collapsed="true">
     <Position X="3.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>NotificationLight.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -131,7 +131,7 @@
   <Class Name="Core.Speaker" Collapsed="true">
     <Position X="6.25" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAgAAgAAAAAIAAAAAgAAAAAABAAAggAAAAAAAA=</HashCode>
       <FileName>Speaker.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -153,7 +153,7 @@
   <Class Name="YVMS_SC.Core.MobilePhone" Collapsed="true">
     <Position X="6.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAABAAAAIAAABAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>MobilePhone.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -161,7 +161,7 @@
   <Class Name="Core.Battery" Collapsed="true">
     <Position X="6.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgABCAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Battery.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -184,7 +184,7 @@
   <Class Name="Core.Button" Collapsed="true">
     <Position X="14.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAABAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Button.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -192,7 +192,7 @@
   <Class Name="Core.CameraModule" Collapsed="true">
     <Position X="6.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAoAACAAAAAAAAAAIAAAAAEAAAAAAAAAAAgAAAAAAQA=</HashCode>
       <FileName>CameraModule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -301,11 +301,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="Core.IPowerableComponent">
+  <Interface Name="Core.IPowerable">
     <Position X="12" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>IPowerableComponent.cs</FileName>
+      <FileName>IPowerable.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.ICommonDescription">

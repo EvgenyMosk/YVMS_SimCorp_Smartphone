@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Core {
 	public class NetworkModule : WirelessConnectionModule {
-
+		public override void ConnectToDevice() {
+			throw new NotImplementedException();
+		}
 	}
 }

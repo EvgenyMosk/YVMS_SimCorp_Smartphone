@@ -1,7 +1,5 @@
-﻿namespace Core
-{
-	public enum WiFiStandards
-	{
+﻿namespace Core {
+	public enum WiFiStandard {
 		WiFi_802_11a = 1,
 		WiFi_802_11b = 2,
 		WiFi_802_11g = 3,

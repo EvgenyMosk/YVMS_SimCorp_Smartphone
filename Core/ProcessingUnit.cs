@@ -1,17 +1,19 @@
 ﻿using System;
 
 namespace Core {
-	public class ProcessingUnit : ICommonDescription {
-		public String Model { get; set; }
-		public Int32 CoreClock { get; set; }
-		public Int32 ThrottleTemperature { get; set; }
-		public Int32 CriticalTemperature { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+	public abstract class ProcessingUnit : ICommonDescription {
+		public string Model { get; set; }
+		public double Frequency { get; set; }
+		public int ThrottleTemperature { get; set; }
+		public int CriticalTemperature { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
 
-		public String GetDescription() {
-			throw new NotImplementedException();
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
 		}
 	}
 }

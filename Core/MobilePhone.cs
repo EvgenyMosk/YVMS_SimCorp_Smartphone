@@ -7,13 +7,23 @@ using System.Threading.Tasks;
 
 namespace YVMS_SC.Core {
 	public class MobilePhone : ICommonDescription {
-		public String Model { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+		public string Model { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
 
-		public String GetDescription() {
-			throw new NotImplementedException();
+		public void PressPowerButton(int seconds) {
+
+		}
+
+		protected void BootPhone() {
+
+		}
+
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿namespace Core {
-    public interface IPowerableComponent {
+    public interface IPowerable {
         void TurnOn();
         void TurnOff();
     }

@@ -1,17 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core {
 	public class Speaker : ICommonDescription, IAudioOutputDevice {
-		public String Model { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+		public string Model { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
 
-		public String GetDescription() {
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
+		}
+
+		public void PlaySound() {
+			throw new NotImplementedException();
+		}
+
+		public void StartPlayingSound() {
+			throw new NotImplementedException();
+		}
+
+		public void StopPlayingSound() {
+			throw new NotImplementedException();
+		}
+
+		public void VolumeDecrease(int value) {
+			throw new NotImplementedException();
+		}
+
+		public void VolumeIncrease(int value) {
 			throw new NotImplementedException();
 		}
 	}

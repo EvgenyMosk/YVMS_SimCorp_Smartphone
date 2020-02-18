@@ -4,7 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core {
-	public interface IAudioInputDevice {
+namespace Core
+{
+	public interface IAudioInputDevice
+	{
+		void StartRecordingSound();
+		void StopRecordingSound();
+		void InputVolumeIncrease(int delta);
+		void InputVolumeDecrease(int delta);
 	}
 }

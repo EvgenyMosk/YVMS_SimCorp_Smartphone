@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace Core {
 	public class Battery : ICommonDescription {
-		public String Model { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+		public int MaximumCapacity { get; set; }
+		public int CurrentCapacity { get; set; }
 
-		public String GetDescription() {
-			throw new NotImplementedException();
+		public string Model { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
+
+		public void ChangeCurrentCapacity(int delta) {
+
+		}
+
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
 		}
 	}
 }

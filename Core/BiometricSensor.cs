@@ -1,24 +1,26 @@
 ﻿using System;
 
 namespace Core {
-	public abstract class BiometricSensor : IPowerableComponent, ICommonDescription {
-		protected Boolean _isTurnedOn;
+	public abstract class BiometricSensor : IPowerable, ICommonDescription {
+		protected bool _isTurnedOn;
 
-		public String Model { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+		public string Model { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
 
-		public String GetDescription() {
-			throw new System.NotImplementedException();
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
 		}
 
 		public void TurnOff() {
-			throw new System.NotImplementedException();
+			_isTurnedOn = false;
 		}
 
 		public void TurnOn() {
-			throw new System.NotImplementedException();
+			_isTurnedOn = true;
 		}
 	}
 }

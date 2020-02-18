@@ -1,22 +1,28 @@
 ﻿using System;
 
 namespace Core {
-	public abstract class WirelessConnectionModule : IPowerableComponent, ICommonDescription {
-		protected System.Boolean _isTurnedOn;
+	public abstract class WirelessConnectionModule : IPowerable, ICommonDescription {
+		protected bool _isTurnedOn;
 
-		public String Model { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+		public string Model { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
 
-		public String GetDescription() {
-			throw new NotImplementedException();
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
 		}
 
 		public void TurnOff() {
+			_isTurnedOn = false;
 		}
 
 		public void TurnOn() {
+			_isTurnedOn = true;
 		}
+
+		public abstract void ConnectToDevice();
 	}
 }

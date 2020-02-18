@@ -1,7 +1,5 @@
-﻿namespace Core.Enums
-{
-	public enum DisplayType
-	{
+﻿namespace Core.Enums {
+	public enum DisplayType {
 		TFT = 1,
 		IPS = 2,
 		AMOLED = 3,

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core {
-	public interface IAudioOutputDevice {
+﻿namespace Core
+{
+	public interface IAudioOutputDevice
+	{
+		void StartPlayingSound();
+		void StopPlayingSound();
+		void VolumeIncrease(int delta);
+		void VolumeDecrease(int delta);
 	}
 }

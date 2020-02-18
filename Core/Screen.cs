@@ -1,33 +1,30 @@
 ﻿using Core.Enums;
 using System;
 
-namespace Core
-{
-	public class Screen : IPowerableComponent, ICommonDescription
-	{
-		protected Boolean _isTurnedOn;
-		public Int32 HorizontalResolution { get; set; }
-
-		public Int32 VerticalResolution { get; set; }
+namespace Core {
+	public class Screen : IPowerable, ICommonDescription {
+		protected bool _isTurnedOn;
+		public int HorizontalResolution { get; set; }
+		public int VerticalResolution { get; set; }
+		public int SizeInches { get; set; }
 
 		public DisplayType DisplayType { get; set; }
-		public String Model { get; set; }
-		public String Manufacturer { get; set; }
-		public Int32 YearOfProduction { get; set; }
-		public String Version { get; set; }
+		public string Model { get; set; }
+		public string Manufacturer { get; set; }
+		public int? YearOfProduction { get; set; }
+		public string Version { get; set; }
 
-		public String GetDescription()
-		{
+		public string GetDescription() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
+		}
+
+		public void TurnOff() {
 			throw new NotImplementedException();
 		}
 
-		public void TurnOff()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void TurnOn()
-		{
+		public void TurnOn() {
 			throw new NotImplementedException();
 		}
 	}
