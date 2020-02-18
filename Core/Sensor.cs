@@ -2,7 +2,7 @@
 
 namespace Core
 {
-	public class Sensor : PowerableComponent, ICommonDescription
+	public class Sensor : IPowerableComponent, ICommonDescription
 	{
 		protected Boolean _isTurnedOn;
 

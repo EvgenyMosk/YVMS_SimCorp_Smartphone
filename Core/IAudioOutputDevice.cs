@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public class NetworkModule : WirelessConnectionModule {
-
+	public interface IAudioOutputDevice {
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Core
 {
-	public class RAM : Memory, PowerableComponent
+	public class RAM : Memory, IPowerableComponent
 	{
 		protected bool _isTurnedOn;
 		public void TurnOff()

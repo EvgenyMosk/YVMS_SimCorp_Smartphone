@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core {
-	public class Microphone : ICommonDescription, IAudioInputDevice {
+	public class ProcessingUnit : ICommonDescription {
 		public String Model { get; set; }
+		public Int32 CoreClock { get; set; }
+		public Int32 ThrottleTemperature { get; set; }
+		public Int32 CriticalTemperature { get; set; }
 		public String Manufacturer { get; set; }
 		public Int32 YearOfProduction { get; set; }
 		public String Version { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public class Speaker : ICommonDescription {
+	public class Speaker : ICommonDescription, IAudioOutputDevice {
 		public String Model { get; set; }
 		public String Manufacturer { get; set; }
 		public Int32 YearOfProduction { get; set; }

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core {
-	public class NetworkModule : WirelessConnectionModule {
-
+namespace Core.Enums {
+	public enum SimCardStandard {
+		MiniSim = 1,
+		MicroSim = 2,
+		NanoSim = 3,
+		eSim = 4,
 	}
 }

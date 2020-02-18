@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Core
 {
-	public abstract class Light : PowerableComponent, ICommonDescription
+	public abstract class Light : IPowerableComponent, ICommonDescription
 	{
 		protected Boolean _isTurnedOn;
 		public Double PhysicalModuleRadius { get; set; }

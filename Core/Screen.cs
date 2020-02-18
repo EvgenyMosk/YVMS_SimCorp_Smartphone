@@ -3,7 +3,7 @@ using System;
 
 namespace Core
 {
-	public class Screen : PowerableComponent, ICommonDescription
+	public class Screen : IPowerableComponent, ICommonDescription
 	{
 		protected Boolean _isTurnedOn;
 		public Int32 HorizontalResolution { get; set; }
