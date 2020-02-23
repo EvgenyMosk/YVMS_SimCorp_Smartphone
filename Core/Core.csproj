@@ -43,11 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battery.cs" />
-    <Compile Include="BiometricSensor.cs" />
+    <Compile Include="BiometricScanner.cs" />
     <Compile Include="Bluetooth.cs" />
     <Compile Include="Bootloader.cs" />
     <Compile Include="Button.cs" />
-    <Compile Include="CameraLens.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="CameraModule.cs" />
     <Compile Include="Case.cs" />
     <Compile Include="Chipset.cs" />
@@ -55,9 +55,12 @@
     <Compile Include="CPU.cs" />
     <Compile Include="DescriptionFormatter.cs" />
     <Compile Include="Enums\BluetoothStandard.cs" />
+    <Compile Include="Enums\CameraDirectionType.cs" />
+    <Compile Include="Enums\CameraType.cs" />
     <Compile Include="Enums\DisplayType.cs" />
     <Compile Include="Enums\MobileNetworkStandard.cs" />
     <Compile Include="Enums\PersistentMemoryStandard.cs" />
+    <Compile Include="Enums\PhoneBootState.cs" />
     <Compile Include="Enums\SimCardStandard.cs" />
     <Compile Include="Enums\WiredConnectionType.cs" />
     <Compile Include="ExternalComponent.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="GPU.cs" />
     <Compile Include="IAudioInputDevice.cs" />
     <Compile Include="IAudioOutputDevice.cs" />
+    <Compile Include="IBiometricScanningDevice.cs" />
     <Compile Include="ICommonDescription.cs" />
     <Compile Include="Keyboard.cs" />
     <Compile Include="Light.cs" />

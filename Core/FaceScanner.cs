@@ -1,6 +1,4 @@
-﻿namespace Core
-{
-    public class FaceScanner : BiometricSensor
-    {
+﻿namespace Core {
+    public class FaceScanner : BiometricScanner, IBiometricScanningDevice {
     }
 }

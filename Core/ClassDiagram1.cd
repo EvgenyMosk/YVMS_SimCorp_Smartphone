@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Core.CameraLens" Collapsed="true">
+  <Class Name="Core.Camera" Collapsed="true">
     <Position X="8" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
-      <FileName>CameraLens.cs</FileName>
+      <FileName>Camera.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -64,7 +64,7 @@
   <Class Name="Core.NetworkModule" Collapsed="true">
     <Position X="18" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>NetworkModule.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -107,7 +107,7 @@
   <Class Name="Core.Screen" Collapsed="true">
     <Position X="16.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>JBgAACAACEAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
+      <HashCode>NBgAACAACEAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
       <FileName>Screen.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -153,7 +153,7 @@
   <Class Name="YVMS_SC.Core.MobilePhone" Collapsed="true">
     <Position X="6.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAABAAAAIAAABAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAmgACCAAAABCQQUJAAQhAAAAgQBEIAAggyFAIAAAAA=</HashCode>
       <FileName>MobilePhone.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -161,16 +161,16 @@
   <Class Name="Core.Battery" Collapsed="true">
     <Position X="6.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgABCAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAABAAAAAAAAAAAAAAkAAAAAAAA=</HashCode>
       <FileName>Battery.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Core.BiometricSensor" Collapsed="true">
+  <Class Name="Core.BiometricScanner" Collapsed="true">
     <Position X="10.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IBgAACAAAAAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
-      <FileName>BiometricSensor.cs</FileName>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>BiometricScanner.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -192,7 +192,7 @@
   <Class Name="Core.CameraModule" Collapsed="true">
     <Position X="6.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAoAACAAAAAAAAAAIAAAAAEAAAAAAAAAAAgAAAAAAQA=</HashCode>
+      <HashCode>IAoAACAAAAAAAAAAIAAAAAEAACAAAAAAAAgAAAAAAQA=</HashCode>
       <FileName>CameraModule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -211,6 +211,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FingerprintScanner.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.FaceScanner" Collapsed="true">
     <Position X="10.75" Y="2" Width="1.5" />
@@ -218,6 +219,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FaceScanner.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.RetinaScanner" Collapsed="true">
     <Position X="12.5" Y="2" Width="1.5" />
@@ -225,6 +227,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RetinaScanner.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.ExternalComponent" Collapsed="true">
     <Position X="10.75" Y="5.5" Width="1.5" />
@@ -251,7 +254,7 @@
   <Class Name="Core.Chipset" Collapsed="true">
     <Position X="6.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAEIAAAAACIAAAAAAAAAAiAAAAAAAA=</HashCode>
       <FileName>Chipset.cs</FileName>
       <NewMemberFileName>Bluetooth.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -260,14 +263,14 @@
   <Class Name="Core.Bluetooth" Collapsed="true">
     <Position X="14.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Bluetooth.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.CPU" Collapsed="true">
     <Position X="14.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CPU.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -281,7 +284,7 @@
   <Class Name="Core.ProcessingUnit" Collapsed="true">
     <Position X="15.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAgAAAIAAABAAAAAAAAAAABAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAgAAAIAAABAAAAIAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>ProcessingUnit.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -289,14 +292,14 @@
   <Class Name="Core.WiFi" Collapsed="true">
     <Position X="16.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WiFi.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.WirelessConnectionModule" Collapsed="true">
     <Position X="16" Y="2.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IBgAACAAAAAAAAAAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
+      <HashCode>IBgAACAAAAAAAABAIAAAAAAAAAAAAAAAQAgAAAACAAA=</HashCode>
       <FileName>WirelessConnectionModule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

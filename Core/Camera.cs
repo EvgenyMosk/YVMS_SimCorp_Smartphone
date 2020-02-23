@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public class CameraLens : ICommonDescription {
+	public class Camera : ICommonDescription {
+		public CameraType CameraType { get; set; }
+
 		public string Model { get; set; }
 		public string Manufacturer { get; set; }
 		public int? YearOfProduction { get; set; }

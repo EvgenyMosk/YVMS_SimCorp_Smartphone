@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace Core {
-	public abstract class BiometricSensor : IPowerable, ICommonDescription {
-		protected bool _isTurnedOn;
+	public abstract class BiometricScanner : ICommonDescription {
 
 		public string Model { get; set; }
 		public string Manufacturer { get; set; }
@@ -13,14 +12,6 @@ namespace Core {
 			string description;
 			description = DescriptionFormatter.CreateDescription(this);
 			return description;
-		}
-
-		public void TurnOff() {
-			_isTurnedOn = false;
-		}
-
-		public void TurnOn() {
-			_isTurnedOn = true;
 		}
 	}
 }
