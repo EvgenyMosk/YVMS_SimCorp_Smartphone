@@ -45,14 +45,7 @@ namespace Core {
 			return fileName;
 		}
 		public string CutFileEndingAfterCloning(File file) {
-			string fileName = file.FileName;
-			string endingToBeRemoved = " (1)";
-
-			if (fileName.EndsWith(endingToBeRemoved)) {
-				int startIndexOfEnding = fileName.Length - endingToBeRemoved.Length;
-				fileName = fileName.Remove(startIndexOfEnding);
-			}
-			return fileName;
+			return CutFileEndingAfterCloning(file.FileName);
 		}
 		public OperationResult CopyFile(File file, string newPath) {
 			CopyFile(file.FileName, file.Path, newPath);
