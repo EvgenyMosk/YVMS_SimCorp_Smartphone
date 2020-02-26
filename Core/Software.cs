@@ -2,7 +2,7 @@
 
 namespace Core {
 	public abstract class Software : ICommonDescription {
-		public int SpaceRequired { get; set; }
+		public int Size { get; set; }
 		public string Model { get; set; }
 		public string Manufacturer { get; set; }
 		public int? YearOfProduction { get; set; }
