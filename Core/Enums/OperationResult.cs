@@ -8,8 +8,10 @@ namespace Core.Enums {
 	public enum OperationResult {
 		Success = 0,
 		FileNotFound = 1,
-		NotEnoughSpaceOnDisk = 2,
-		NoInternetConnection = 3,
+		FileAlreadyExist = 2,
+		ExceedingAvailableSpace = 3,
+		NotEnoughSpaceOnDisk = 4,
+		NoInternetConnection = 5,
 
 	}
 }

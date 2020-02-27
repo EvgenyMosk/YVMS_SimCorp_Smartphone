@@ -1,6 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using Core.Enums;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Core.Test {
 	[TestClass]
@@ -17,7 +20,11 @@ namespace Core.Test {
 				file2
 			};
 
-			fakeFileManager = new FileManager(files);
+			IMemory storage = new Storage {
+				Capacity = 8192
+			};
+
+			fakeFileManager = new FileManager(files, storage);
 		}
 		[TestMethod]
 		public void CutFileEndingAfterCloningTest_FileNameWithParentheses_ExpectCorrect() {
@@ -42,7 +49,39 @@ namespace Core.Test {
 		[TestMethod]
 		public void CopyFile_FileExists_ExpectIncorrect() {
 			File fileToCopy = new File("SomeFile", @"D:\Documents", 1024);
-			string newFileName
+			//string newFileName
+		}
+		[TestMethod]
+		public void CreateFile_NewFile_ExpectNewFileCreated() {
+			string fileName = "New File";
+			string path = @"D:\Videos\31.08.2016";
+			int size = 1024;
+			int expectedFilesCount = 3;
+			int expectedUsedSpace = 4096;
+			OperationResult expectedResult = OperationResult.Success;
+			OperationResult actualResult;
+
+			actualResult = fakeFileManager.CreateFile(fileName, path, size);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
+		}
+		[TestMethod]
+		public void CreateFile_NewFile_ExpectNoFileCreated() {
+			string fileName = "SomeFile";
+			string path = @"D:\Documents";
+			int size = 1024;
+			int expectedFilesCount = 2;
+			int expectedUsedSpace = 3072;
+			OperationResult expectedResult = OperationResult.FileAlreadyExist;
+			OperationResult actualResult;
+
+			actualResult = fakeFileManager.CreateFile(fileName, path, size);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
 		}
 	}
 }

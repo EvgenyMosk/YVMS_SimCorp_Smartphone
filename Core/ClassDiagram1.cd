@@ -3,7 +3,7 @@
   <Class Name="Core.Camera" Collapsed="true">
     <Position X="8" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAACAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Camera.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -48,7 +48,7 @@
   <Class Name="Core.Memory" Collapsed="true">
     <Position X="2.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAACAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAAAEAIAAAAAACAAAAAAAAAAgIAAAAAAA=</HashCode>
       <FileName>Memory.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -123,7 +123,7 @@
   <Class Name="Core.Software" Collapsed="true">
     <Position X="10.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAgAACAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAEAAAAAA=</HashCode>
+      <HashCode>IAgAACAAAAAAgAAAIAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Software.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
