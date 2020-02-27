@@ -47,9 +47,35 @@ namespace Core.Test {
 			Assert.AreEqual(expectedFileName, actualFileName);
 		}
 		[TestMethod]
-		public void CopyFile_FileExists_ExpectIncorrect() {
-			File fileToCopy = new File("SomeFile", @"D:\Documents", 1024);
-			//string newFileName
+		public void CopyFile_FileExist_ExpectExceedingAvailableSpace() {
+			string fileName = "Another file";
+			string path = @"D:\Pictures";
+			string newPath = @"D:\Pictures";
+			int expectedFilesCount = 2;
+			int expectedSpaceUsed = 3072;
+			OperationResult expectedResult = OperationResult.ExceedingAvailableSpace;
+			fakeFileManager.Storage.Capacity = 4096;
+
+			OperationResult actualResult = fakeFileManager.CopyFile(fileName, path, newPath);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedSpaceUsed, fakeFileManager.Storage.UsedSpace);
+		}
+		[TestMethod]
+		public void CopyFile_FileNotExist_ExpectFileNotFound() {
+			string fileName = "Non-existing file";
+			string path = @"D:\Pictures";
+			string newPath = @"D:\Pictures";
+			int expectedFilesCount = 2;
+			int expectedSpaceUsed = 3072;
+			OperationResult expectedResult = OperationResult.FileNotFound;
+
+			OperationResult actualResult = fakeFileManager.CopyFile(fileName, path, newPath);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedSpaceUsed, fakeFileManager.Storage.UsedSpace);
 		}
 		[TestMethod]
 		public void CreateFile_NewFile_ExpectNewFileCreated() {

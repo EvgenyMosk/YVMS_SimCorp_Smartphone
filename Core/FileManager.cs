@@ -42,8 +42,12 @@ namespace Core {
 			return false;
 		}
 		protected File FindFile(File file) {
-			IEnumerable<File> file1 = Files.Where(x => x.Equals(file));
-			return file1 as File;
+			foreach (File fileItem in Files) {
+				if (fileItem.Equals(file)) {
+					return file;
+				}
+			}
+			return null;
 		}
 		protected bool FileExist(File file) {
 			File foundFile = FindFile(file);
@@ -52,14 +56,15 @@ namespace Core {
 			} else {
 				return true;
 			}
-
 		}
 		public OperationResult CopyFile(string fileName, string path, string newPath) {
 			File searchCriteria = new File(fileName, path, 0);
 
-			if (!FileExist(searchCriteria)
-				|| CreatingFileExceedAvailableSpace(searchCriteria)) {
+			if (!FileExist(searchCriteria)) {
 				return OperationResult.FileNotFound;
+			}
+			if (CreatingFileExceedAvailableSpace(searchCriteria)) {
+				return OperationResult.NotEnoughSpaceOnDisk;
 			}
 
 			File foundFile = FindFile(searchCriteria);

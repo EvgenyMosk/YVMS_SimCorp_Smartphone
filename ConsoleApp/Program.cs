@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Core;
+using Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Core;
-using Core.Enums;
 
 namespace YVMS_SC.ConsoleApp {
 	public class Program {
@@ -25,20 +24,12 @@ namespace YVMS_SC.ConsoleApp {
 			FileManager fileManager = new FileManager(files, storage);
 
 			string fileName = "SomeFile";
-			string path = @"D:\Documents";
+			string path = @"D:\Documents\Lol";
 			int size = 1024;
-			int expectedFilesCount = 2;
-			int expectedUsedSpace = 3072;
-			OperationResult expectedResult = OperationResult.FileAlreadyExist;
 			OperationResult actualResult;
 
 			File file = new File(fileName, path, 0);
-			File res = fileManager.Files.Where(x => x.Equals(file)) as File;
 
-			Console.WriteLine(fileManager.Files[0].Equals(file));
-			Console.WriteLine(fileManager.Files[0].Equals(res));
-
-			actualResult = fileManager.CreateFile(fileName, path, size);
 
 			Console.ReadLine();
 		}
