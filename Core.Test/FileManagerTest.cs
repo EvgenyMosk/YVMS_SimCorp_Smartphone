@@ -47,13 +47,13 @@ namespace Core.Test {
 			Assert.AreEqual(expectedFileName, actualFileName);
 		}
 		[TestMethod]
-		public void CopyFile_FileExist_ExpectExceedingAvailableSpace() {
+		public void CopyFile_FileExist_ExpectNotEnoughSpaceOnDisk() {
 			string fileName = "Another file";
 			string path = @"D:\Pictures";
 			string newPath = @"D:\Pictures";
 			int expectedFilesCount = 2;
 			int expectedSpaceUsed = 3072;
-			OperationResult expectedResult = OperationResult.ExceedingAvailableSpace;
+			OperationResult expectedResult = OperationResult.NotEnoughSpaceOnDisk;
 			fakeFileManager.Storage.Capacity = 4096;
 
 			OperationResult actualResult = fakeFileManager.CopyFile(fileName, path, newPath);
@@ -70,6 +70,21 @@ namespace Core.Test {
 			int expectedFilesCount = 2;
 			int expectedSpaceUsed = 3072;
 			OperationResult expectedResult = OperationResult.FileNotFound;
+
+			OperationResult actualResult = fakeFileManager.CopyFile(fileName, path, newPath);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedSpaceUsed, fakeFileManager.Storage.UsedSpace);
+		}
+		[TestMethod]
+		public void CopyFile_FileNotExist_ExpectSuccess() {
+			string fileName = "SomeFile";
+			string path = @"D:\Documents";
+			string newPath = @"D:\Games";
+			int expectedFilesCount = 3;
+			int expectedSpaceUsed = 4096;
+			OperationResult expectedResult = OperationResult.Success;
 
 			OperationResult actualResult = fakeFileManager.CopyFile(fileName, path, newPath);
 
@@ -101,6 +116,22 @@ namespace Core.Test {
 			int expectedFilesCount = 2;
 			int expectedUsedSpace = 3072;
 			OperationResult expectedResult = OperationResult.FileAlreadyExist;
+			OperationResult actualResult;
+
+			actualResult = fakeFileManager.CreateFile(fileName, path, size);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
+		}
+		[TestMethod]
+		public void CreateFile_NewFile_ExpectNotEnoughSpaceOnDisk() {
+			string fileName = "MS Word Document";
+			string path = @"D:\Documents";
+			int size = 6144;
+			int expectedFilesCount = 2;
+			int expectedUsedSpace = 3072;
+			OperationResult expectedResult = OperationResult.NotEnoughSpaceOnDisk;
 			OperationResult actualResult;
 
 			actualResult = fakeFileManager.CreateFile(fileName, path, size);

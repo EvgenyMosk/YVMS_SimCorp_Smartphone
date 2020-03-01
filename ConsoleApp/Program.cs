@@ -1,10 +1,11 @@
-﻿using Core;
-using Core.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Core;
+using Core.Enums;
 
 namespace YVMS_SC.ConsoleApp {
 	public class Program {
@@ -18,17 +19,17 @@ namespace YVMS_SC.ConsoleApp {
 			};
 
 			IMemory storage = new Storage {
-				Capacity = 8192
+				Capacity = 4096
 			};
 
 			FileManager fileManager = new FileManager(files, storage);
 
-			string fileName = "SomeFile";
-			string path = @"D:\Documents\Lol";
-			int size = 1024;
-			OperationResult actualResult;
+			string fileName = "Another file";
+			string path = @"D:\Pictures";
 
 			File file = new File(fileName, path, 0);
+
+			OperationResult opRes = fileManager.CopyFile(file, @"D:\Videos");
 
 
 			Console.ReadLine();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,10 @@ using Core.Enums;
 
 namespace Core {
 	public class FileManager : Software, IFileManager {
-		public List<File> Files { get; set; }
+		public IList<File> Files { get; set; }
 		public IMemory Storage { get; set; }
 
-		public FileManager(IEnumerable<File> files, IMemory storage) {
+		public FileManager(IList<File> files, IMemory storage) {
 			Storage = storage;
 			Files = new List<File>();
 
@@ -44,7 +45,7 @@ namespace Core {
 		protected File FindFile(File file) {
 			foreach (File fileItem in Files) {
 				if (fileItem.Equals(file)) {
-					return file;
+					return fileItem;
 				}
 			}
 			return null;
@@ -63,11 +64,13 @@ namespace Core {
 			if (!FileExist(searchCriteria)) {
 				return OperationResult.FileNotFound;
 			}
-			if (CreatingFileExceedAvailableSpace(searchCriteria)) {
+
+			File foundFile = FindFile(searchCriteria);
+
+			if (CreatingFileExceedAvailableSpace(foundFile)) {
 				return OperationResult.NotEnoughSpaceOnDisk;
 			}
 
-			File foundFile = FindFile(searchCriteria);
 
 			File newFile = foundFile.Clone() as File;
 			CorrectFileNameAndPath(path, newPath, newFile);
@@ -105,7 +108,7 @@ namespace Core {
 				return OperationResult.FileAlreadyExist;
 			}
 			if (CreatingFileExceedAvailableSpace(newFile)) {
-				return OperationResult.ExceedingAvailableSpace;
+				return OperationResult.NotEnoughSpaceOnDisk;
 			}
 
 			AddFileToStorage(newFile);
@@ -128,7 +131,6 @@ namespace Core {
 		public string GetFileProperties(string fileName, string path) {
 			throw new NotImplementedException();
 		}
-
 		public string GetFileProperties(File file) {
 			GetFileProperties(file.FileName, file.Path);
 			throw new NotImplementedException();
@@ -137,7 +139,6 @@ namespace Core {
 		public OperationResult RenameFile(string fileName, string path, string newFileName) {
 			throw new NotImplementedException();
 		}
-
 		public OperationResult RenameFile(File file, string newFileName) {
 			RenameFile(file.FileName, file.Path, newFileName);
 			throw new NotImplementedException();

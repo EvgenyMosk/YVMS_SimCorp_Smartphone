@@ -1,13 +1,14 @@
-﻿using Core.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Core.Enums;
+
 namespace Core {
 	public interface IFileManager {
-		List<File> Files { get; set; }
+		IList<File> Files { get; set; }
 		OperationResult CreateFile(string fileName, string path, int size);
 		OperationResult CopyFile(string fileName, string path, string newPath);
 		OperationResult CopyFile(File file, string newPath);
