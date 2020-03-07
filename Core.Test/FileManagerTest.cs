@@ -32,7 +32,7 @@ namespace Core.Test {
 			string actualFileName;
 			string expectedFileName = "Some File with some name after cloning";
 
-			actualFileName = fakeFileManager.CutFileEndingAfterCloning(fileName);
+			actualFileName = fakeFileManager.CutFileNameEndingAfterCloning(fileName);
 
 			Assert.AreEqual(expectedFileName, actualFileName);
 		}
@@ -42,7 +42,7 @@ namespace Core.Test {
 			string actualFileName;
 			string expectedFileName = "Some File with some name after cloning";
 
-			actualFileName = fakeFileManager.CutFileEndingAfterCloning(fileName);
+			actualFileName = fakeFileManager.CutFileNameEndingAfterCloning(fileName);
 
 			Assert.AreEqual(expectedFileName, actualFileName);
 		}
@@ -109,7 +109,7 @@ namespace Core.Test {
 			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
 		}
 		[TestMethod]
-		public void CreateFile_NewFile_ExpectNoFileCreated() {
+		public void CreateFile_ExistingFile_ExpectNoFileCreated() {
 			string fileName = "SomeFile";
 			string path = @"D:\Documents";
 			int size = 1024;
@@ -139,6 +139,75 @@ namespace Core.Test {
 			Assert.AreEqual(expectedResult, actualResult);
 			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
 			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
+		}
+		[TestMethod]
+		public void RenameFile_NewValidFileName_ExpectFileWasRenamed() {
+			string fileName = "SomeFile";
+			string path = @"D:\Documents";
+			string newFileName = "RenamedFile";
+			int expectedUsedSpace = 3072;
+			List<string> expectedFileNames = new List<string> {
+				"RenamedFile",
+				"Another file"
+			};
+			int expectedFilesCount = expectedFileNames.Count;
+			OperationResult expectedResult = OperationResult.Success;
+			OperationResult actualResult;
+
+			actualResult = fakeFileManager.RenameFile(fileName, path, newFileName);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count); // Check against expectedFileNames which serves as "expectedFilesCount" in another Test Cases
+			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
+			for (int i = 0; i < expectedFileNames.Count; i++) {
+				Assert.AreEqual(expectedFileNames[i], fakeFileManager.Files[i].FileName);
+			}
+		}
+		[TestMethod]
+		public void RenameFile_ExistingFileName_ExpectFileWasNotRenamed() {
+			string fileName = "SomeFile";
+			string path = @"D:\Documents";
+			string newFileName = "SomeFile";
+			int expectedUsedSpace = 3072;
+			List<string> expectedFileNames = new List<string> {
+				"SomeFile",
+				"Another file"
+			};
+			int expectedFilesCount = expectedFileNames.Count;
+			OperationResult expectedResult = OperationResult.FileWithSuchNameAlreadyExist;
+			OperationResult actualResult;
+
+			actualResult = fakeFileManager.RenameFile(fileName, path, newFileName);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
+			for (int i = 0; i < expectedFileNames.Count; i++) {
+				Assert.AreEqual(expectedFileNames[i], fakeFileManager.Files[i].FileName);
+			}
+		}
+		[TestMethod]
+		public void RenameFile_FileNotExist_ExpectFileNotFound() {
+			string fileName = "Very interesting filename";
+			string path = @"D:\Documents";
+			string newFileName = "Even more interesting filename";
+			int expectedUsedSpace = 3072;
+			List<string> expectedFileNames = new List<string> {
+				"SomeFile",
+				"Another file"
+			};
+			int expectedFilesCount = expectedFileNames.Count;
+			OperationResult expectedResult = OperationResult.FileNotFound;
+			OperationResult actualResult;
+
+			actualResult = fakeFileManager.RenameFile(fileName, path, newFileName);
+
+			Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedFilesCount, fakeFileManager.Files.Count);
+			Assert.AreEqual(expectedUsedSpace, fakeFileManager.Storage.UsedSpace);
+			for (int i = 0; i < expectedFileNames.Count; i++) {
+				Assert.AreEqual(expectedFileNames[i], fakeFileManager.Files[i].FileName);
+			}
 		}
 	}
 }

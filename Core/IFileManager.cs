@@ -11,12 +11,12 @@ namespace Core {
 		IList<File> Files { get; set; }
 		OperationResult CreateFile(string fileName, string path, int size);
 		OperationResult CopyFile(string fileName, string path, string newPath);
-		OperationResult CopyFile(File file, string newPath);
+		OperationResult CopyFile(File fileToCopy, string newPath);
 		OperationResult DeleteFile(string fileName, string path);
 		string GetFileProperties(string fileName, string path);
 		string GetFileProperties(File file);
 		OperationResult RenameFile(string fileName, string path, string newFileName);
-		OperationResult RenameFile(File file, string newFileName);
+		OperationResult RenameFile(File fileToRename, string newFileName);
 		IEnumerable<File> SearchFiles(string fileName);
 	}
 }

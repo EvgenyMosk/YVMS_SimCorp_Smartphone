@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Enums {
-	public enum PhoneBootState {
-		Off = 1,
-		Recovery = 2,
-		Bootloader = 3,
-		System = 4,
+	public enum PresetsPhones {
+		MicrosoftLumia640XL = 1,
+
 	}
 }

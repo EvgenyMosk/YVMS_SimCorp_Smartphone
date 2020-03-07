@@ -15,7 +15,6 @@ namespace Core {
 		public FileManager(IList<File> files, IMemory storage) {
 			Storage = storage;
 			Files = new List<File>();
-
 			foreach (File file in files) {
 				AddFileToStorage(file);
 			}
@@ -25,7 +24,7 @@ namespace Core {
 			Storage.UsedSpace += file.Size;
 		}
 		protected void RemoveFileFromStorage(File file) {
-			File fileToBeRemoved = FindFile(file);
+			File fileToBeRemoved = FindFileInStorage(file);
 			Files.Remove(fileToBeRemoved);
 			Storage.UsedSpace -= fileToBeRemoved.Size;
 		}
@@ -42,7 +41,7 @@ namespace Core {
 
 			return false;
 		}
-		protected File FindFile(File file) {
+		protected File FindFileInStorage(File file) {
 			foreach (File fileItem in Files) {
 				if (fileItem.Equals(file)) {
 					return fileItem;
@@ -50,8 +49,8 @@ namespace Core {
 			}
 			return null;
 		}
-		protected bool FileExist(File file) {
-			File foundFile = FindFile(file);
+		protected bool FileExistInStorage(File file) {
+			File foundFile = FindFileInStorage(file);
 			if (foundFile == null) {
 				return false;
 			} else {
@@ -61,16 +60,15 @@ namespace Core {
 		public OperationResult CopyFile(string fileName, string path, string newPath) {
 			File searchCriteria = new File(fileName, path, 0);
 
-			if (!FileExist(searchCriteria)) {
+			if (!FileExistInStorage(searchCriteria)) {
 				return OperationResult.FileNotFound;
 			}
 
-			File foundFile = FindFile(searchCriteria);
+			File foundFile = FindFileInStorage(searchCriteria);
 
 			if (CreatingFileExceedAvailableSpace(foundFile)) {
 				return OperationResult.NotEnoughSpaceOnDisk;
 			}
-
 
 			File newFile = foundFile.Clone() as File;
 			CorrectFileNameAndPath(path, newPath, newFile);
@@ -78,14 +76,16 @@ namespace Core {
 
 			return OperationResult.Success;
 		}
-
+		public OperationResult CopyFile(File fileToCopy, string newPath) {
+			return CopyFile(fileToCopy.FileName, fileToCopy.Path, newPath);
+		}
 		protected void CorrectFileNameAndPath(string path, string newPath, File newFile) {
 			newFile.Path = newPath;
 			if (!path.Equals(newPath)) {
-				newFile.FileName = CutFileEndingAfterCloning(newFile);
+				newFile.FileName = CutFileNameEndingAfterCloning(newFile);
 			}
 		}
-		public string CutFileEndingAfterCloning(string fileName) {
+		public string CutFileNameEndingAfterCloning(string fileName) {
 			string endingToBeRemoved = " (1)";
 
 			if (fileName.EndsWith(endingToBeRemoved)) {
@@ -94,17 +94,14 @@ namespace Core {
 			}
 			return fileName;
 		}
-		public string CutFileEndingAfterCloning(File file) {
-			return CutFileEndingAfterCloning(file.FileName);
-		}
-		public OperationResult CopyFile(File file, string newPath) {
-			return CopyFile(file.FileName, file.Path, newPath);
+		public string CutFileNameEndingAfterCloning(File file) {
+			return CutFileNameEndingAfterCloning(file.FileName);
 		}
 
 		public OperationResult CreateFile(string fileName, string path, int size) {
 			File newFile = new File(fileName, path, size);
 
-			if (FileExist(newFile)) {
+			if (FileExistInStorage(newFile)) {
 				return OperationResult.FileAlreadyExist;
 			}
 			if (CreatingFileExceedAvailableSpace(newFile)) {
@@ -118,11 +115,11 @@ namespace Core {
 		public OperationResult DeleteFile(string fileName, string path) {
 			File fileToBeDeleted = new File(fileName, path, 0);
 
-			if (!FileExist(fileToBeDeleted)) {
+			if (!FileExistInStorage(fileToBeDeleted)) {
 				return OperationResult.FileNotFound;
 			}
 
-			File foundFile = FindFile(fileToBeDeleted);
+			File foundFile = FindFileInStorage(fileToBeDeleted);
 
 			RemoveFileFromStorage(foundFile);
 			return OperationResult.Success;
@@ -137,11 +134,27 @@ namespace Core {
 		}
 
 		public OperationResult RenameFile(string fileName, string path, string newFileName) {
-			throw new NotImplementedException();
+			File fileToRename = new File(fileName, path, 0);
+			return RenameFile(fileToRename, newFileName);
 		}
-		public OperationResult RenameFile(File file, string newFileName) {
-			RenameFile(file.FileName, file.Path, newFileName);
-			throw new NotImplementedException();
+		public OperationResult RenameFile(File fileToRename, string newFileName) {
+			if (fileToRename.FileName.Equals(newFileName)) {
+				return OperationResult.FileWithSuchNameAlreadyExist;
+			}
+
+			if (!FileExistInStorage(fileToRename)) {
+				return OperationResult.FileNotFound;
+			}
+
+			for (int i = 0; i < Files.Count; i++) {
+				if (Files[i].FileName.Equals(newFileName)) {
+					return OperationResult.FileWithSuchNameAlreadyExist;
+				}
+			}
+
+			File fileToRenameInStorage = FindFileInStorage(fileToRename);
+			fileToRenameInStorage.FileName = newFileName;
+			return OperationResult.Success;
 		}
 
 		public IEnumerable<File> SearchFiles(string fileName) {

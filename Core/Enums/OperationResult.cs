@@ -9,9 +9,10 @@ namespace Core.Enums {
 		Success = 0,
 		FileNotFound = 1,
 		FileAlreadyExist = 2,
-		ExceedingAvailableSpace = 3,
-		NotEnoughSpaceOnDisk = 4,
-		NoInternetConnection = 5,
+		FileWithSuchNameAlreadyExist = 3,
+		ExceedingAvailableSpace = 4,
+		NotEnoughSpaceOnDisk = 5,
+		NoInternetConnection = 6,
 
 	}
 }
