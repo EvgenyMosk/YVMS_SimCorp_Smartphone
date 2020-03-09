@@ -1,8 +1,9 @@
-﻿using Core.Enums;
-using System;
+﻿using System;
+
+using Core.Enums;
 
 namespace Core {
-	public class Screen : IPowerable, ICommonDescription {
+	public class Screen : IPowerable, ICommonDescription, IDisplay {
 		protected bool _isTurnedOn;
 		public int HorizontalResolution { get; set; }
 		public int VerticalResolution { get; set; }

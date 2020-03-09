@@ -8,7 +8,7 @@ using Core.Enums;
 
 namespace Core {
 	public class ChipsetFactory {
-		public static IChipset CreateChipset(string chipsetModelToBeCreated = "Snapdragon 400") {
+		public static IChipset CreateChipset(PresetsChipsets presetChipset) {
 			CPU snapdragon400 = new CPU {
 				Cores = 4,
 				CriticalTemperature = 60,
@@ -32,8 +32,8 @@ namespace Core {
 
 			IChipset chipset;
 
-			switch (chipsetModelToBeCreated.Trim().ToLower()) {
-				case "snapdragon 400":
+			switch (presetChipset) {
+				case PresetsChipsets.Snapdragon400:
 					chipset = new Chipset(snapdragon400, adreno305, wifi, bluetooth, model, manufacturer, yearOfProduction, version);
 					break;
 				default:
@@ -42,7 +42,7 @@ namespace Core {
 
 			return chipset;
 		}
-		public static IChipset CreateChipset(PresetsChipsets presetChipset) {
+		public static IChipset CreateChipset() {
 			return new Chipset();
 		}
 	}

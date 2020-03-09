@@ -1,6 +1,4 @@
-﻿namespace Core
-{
-	public class TouchButton : Button
-	{
+﻿namespace Core {
+	public class TouchButton : Button {
 	}
 }

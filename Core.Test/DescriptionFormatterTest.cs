@@ -128,7 +128,7 @@ namespace Core.Test {
 			Assert.IsFalse(isVersionPresent);
 		}
 		[TestMethod]
-		public void CreateDescription_AllWhitespaces_ExpectNULLDescription() {
+		public void CreateDescription_AllWhitespaces_ExpectBlankDescription() {
 			string model = "";
 			string manufacturer = "";
 			int? yearOfProduction = null;

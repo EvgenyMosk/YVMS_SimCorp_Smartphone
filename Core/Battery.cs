@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public class Battery : ICommonDescription {
+	public class Battery : IPowerSource {
 		public int MaximumCapacity { get; set; }
 		public int CurrentCapacity { get; set; }
 

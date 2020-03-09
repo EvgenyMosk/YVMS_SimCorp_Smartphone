@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Core.Enums;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Core.Test {
@@ -12,7 +14,7 @@ namespace Core.Test {
 	public class ChipsetFactoryTest {
 		[TestMethod]
 		public void CreateNewChipset_AllDataSnap400_ExpectNewChipset() {
-			string chipsetToBeCreated = "snapdragon 400";
+			PresetsChipsets chipsetToBeCreated = PresetsChipsets.Snapdragon400;
 			string expectedModel = "Snapdragon 400";
 			string expectedManufacturer = "Qualcomm";
 			int expectedYearOfProduction = 2015;

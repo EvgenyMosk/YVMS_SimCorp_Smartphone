@@ -79,9 +79,16 @@
     <Compile Include="IBiometricScanningDevice.cs" />
     <Compile Include="IChipset.cs" />
     <Compile Include="ICommonDescription.cs" />
+    <Compile Include="IDisplay.cs" />
     <Compile Include="IFileManager.cs" />
+    <Compile Include="ILauncherApp.cs" />
     <Compile Include="IMemory.cs" />
     <Compile Include="IMobilePhone.cs" />
+    <Compile Include="IOperatingSystem.cs" />
+    <Compile Include="IPhoneCallsApp.cs" />
+    <Compile Include="IPowerSource.cs" />
+    <Compile Include="ITextMessagingApp.cs" />
+    <Compile Include="IWebBrowser.cs" />
     <Compile Include="Keyboard.cs" />
     <Compile Include="Light.cs" />
     <Compile Include="LightSensor.cs" />
