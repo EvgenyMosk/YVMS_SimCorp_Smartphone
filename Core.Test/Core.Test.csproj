@@ -52,6 +52,7 @@
     <Compile Include="ChipsetFactoryTest.cs" />
     <Compile Include="DescriptionFormatterTest.cs" />
     <Compile Include="FileManagerTest.cs" />
+    <Compile Include="MobilePhoneConfiguratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

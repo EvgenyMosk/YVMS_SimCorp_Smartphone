@@ -44,12 +44,13 @@ namespace Core {
 		//public WiFi WiFi { get; set; }
 		//public Bluetooth Bluetooth { get; set; }
 		#endregion
+		/// TODO: Refactor to reflect how many seconds the user holds the button
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
 			if (secondsButtonBeingHold <= 0) {
 				throw new ArgumentException("Button cannot be hold for ZERO or NEGATIVE number of seconds");
+			} else if (secondsButtonBeingHold >= 2) {
+				BootPhone();
 			}
-
-			BootPhone();
 		}
 
 		protected void BootPhone() {

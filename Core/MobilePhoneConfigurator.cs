@@ -12,15 +12,17 @@ namespace Core {
 			IMobilePhone mobilePhone = new MobilePhone();
 
 			IChipset chipset;
-			//List<SimCard> simCards;
+
 			IDisplay display;
 			Button powerButton;
 			NetworkModule networkModule;
-			//IAudioInputDevice audioInputDevice;
-			//IAudioOutputDevice audioOutputDevice;
+
 			Battery battery; //IPowerSource
 			RAM ram;
 			Storage internalStorage;
+			//List<SimCard> simCards;
+			//IAudioInputDevice audioInputDevice;
+			//IAudioOutputDevice audioOutputDevice;
 			//SdCard sdCard;
 			//ProximitySensor proximitySensor;
 			//LightSensor lightSensor;
@@ -38,8 +40,6 @@ namespace Core {
 					networkModule = new NetworkModule();
 					ram = new RAM();
 					internalStorage = new Storage();
-					//wiFi = new WiFi();
-					//bluetooth = new Bluetooth();
 
 					mobilePhone.Chipset = chipset;
 					mobilePhone.Screen = display;
@@ -48,14 +48,50 @@ namespace Core {
 					mobilePhone.NetworkModule = networkModule;
 					mobilePhone.RAM = ram;
 					mobilePhone.InternalStorage = internalStorage;
+
+					mobilePhone.Model = "Lumia 640 XL";
+					mobilePhone.Manufacturer = "Microsoft";
+					mobilePhone.YearOfProduction = 2015;
+
+					InstallEssentialSoftware(mobilePhone);
+					mobilePhone.OperatingSystem.Model = "Windows 10 Mobile";
+					mobilePhone.OperatingSystem.Manufacturer = "Microsoft";
+					mobilePhone.OperatingSystem.Version = "10.493";
 					break;
 				default:
 					throw new NotImplementedException();
 			}
 			return mobilePhone;
 		}
-		private static IMobilePhone AssemblePartsTogether(IMobilePhone mobilePhone, IChipset chipset, RAM ram) {
-			return new MobilePhone();
+		/// TODO: Create a method that will take mobilePhone and add a custom object to it
+		//private static IMobilePhone AssemblePartsTogether(IMobilePhone mobilePhone, IChipset chipset, RAM ram) {
+		//	return new MobilePhone();
+		//}
+		private static void InstallEssentialSoftware(IMobilePhone mobilePhone) {
+			if (mobilePhone == null) {
+				throw new ArgumentNullException("Cannot install Software when mobilePhone is null!");
+			}
+			InstallRecovery(mobilePhone);
+			InstallBootloader(mobilePhone);
+			InstallOperatingSystem(mobilePhone);
+		}
+		public static void InstallRecovery(IMobilePhone mobilePhone) {
+			if (mobilePhone == null) {
+				throw new ArgumentNullException("Cannot install Recovery when mobilePhone is null!");
+			}
+			mobilePhone.Recovery = new Recovery();
+		}
+		public static void InstallBootloader(IMobilePhone mobilePhone) {
+			if (mobilePhone == null) {
+				throw new ArgumentNullException("Cannot install Bootloader when mobilePhone is null!");
+			}
+			mobilePhone.Bootloader = new Bootloader();
+		}
+		public static void InstallOperatingSystem(IMobilePhone mobilePhone) {
+			if (mobilePhone == null) {
+				throw new ArgumentNullException("Cannot install OS when mobilePhone is null!");
+			}
+			mobilePhone.OperatingSystem = new OperatingSystem();
 		}
 	}
 }
