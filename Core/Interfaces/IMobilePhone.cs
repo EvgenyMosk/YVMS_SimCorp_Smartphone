@@ -17,8 +17,8 @@ namespace Core {
 		IDisplay Screen { get; set; } //===
 		Button PowerButton { get; set; } // ===
 		NetworkModule NetworkModule { get; set; }
-		IAudioInputDevice InternalAudioInputDevice { get; set; }
-		IAudioOutputDevice InternalAudioOutputDevice { get; set; }
+		IAudioInputDevice AudioInputDevice { get; set; }
+		IAudioOutputDevice<object> AudioOutputDevice { get; set; }
 		IPowerSource Battery { get; set; }
 		RAM RAM { get; set; }
 		Storage InternalStorage { get; set; }

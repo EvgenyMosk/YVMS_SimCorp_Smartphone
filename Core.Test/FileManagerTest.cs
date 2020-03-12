@@ -27,7 +27,7 @@ namespace Core.Test {
 			fakeFileManager = new FileManager(files, storage);
 		}
 		[TestMethod]
-		public void CutFileEndingAfterCloningTest_FileNameWithParentheses_ExpectCorrect() {
+		public void CutFileEndingAfterCloning_FileNameWithParentheses_ExpectCorrect() {
 			string fileName = "Some File with some name after cloning (1)";
 			string actualFileName;
 			string expectedFileName = "Some File with some name after cloning";
@@ -37,7 +37,7 @@ namespace Core.Test {
 			Assert.AreEqual(expectedFileName, actualFileName);
 		}
 		[TestMethod]
-		public void CutFileEndingAfterCloningTest_FileNameWithoutParentheses_ExpectCorrect() {
+		public void CutFileEndingAfterCloning_FileNameWithoutParentheses_ExpectCorrect() {
 			string fileName = "Some File with some name after cloning";
 			string actualFileName;
 			string expectedFileName = "Some File with some name after cloning";

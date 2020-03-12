@@ -28,8 +28,8 @@ namespace Core {
 		public IDisplay Screen { get; set; } //===
 		public Button PowerButton { get; set; } // ===
 		public NetworkModule NetworkModule { get; set; }
-		public IAudioInputDevice InternalAudioInputDevice { get; set; }
-		public IAudioOutputDevice InternalAudioOutputDevice { get; set; }
+		public IAudioInputDevice AudioInputDevice { get; set; }
+		public IAudioOutputDevice<object> AudioOutputDevice { get; set; }
 		public IPowerSource Battery { get; set; }
 		public RAM RAM { get; set; }
 		public Storage InternalStorage { get; set; }
@@ -44,7 +44,7 @@ namespace Core {
 		//public WiFi WiFi { get; set; }
 		//public Bluetooth Bluetooth { get; set; }
 		#endregion
-		/// TODO: Refactor to reflect how many seconds the user holds the button
+		/// TODO: Refactor to reflect how many seconds the user holds the button and to support turning screen of/off
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
 			if (secondsButtonBeingHold <= 0) {
 				throw new ArgumentException("Button cannot be hold for ZERO or NEGATIVE number of seconds");
@@ -110,6 +110,19 @@ namespace Core {
 			}
 		}
 
+		public void AudioOutputDevicePlayAudioFile(string audioFile) {
+			if (AudioOutputDevice == null) {
+				return;
+			}
+			AudioOutputDevice.PlayFile(audioFile);
+		}
+
+		public void AudioOutputDeviceChangeVolume(int delta) {
+			if (AudioOutputDevice == null) {
+				return;
+			}
+			AudioOutputDevice.ChangeVolume(delta);
+		}
 		public virtual string GetDescription() {
 			string description;
 			description = DescriptionFormatter.CreateDescription(this);
