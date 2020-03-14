@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,6 @@ namespace Core {
 		#region Hardware Components
 		public IChipset Chipset { get; set; }
 		public List<SimCard> SimCards { get; set; }
-		//public NotificationLight NotificationLight { get; set; }
 		public IDisplay Screen { get; set; } //===
 		public Button PowerButton { get; set; } // ===
 		public NetworkModule NetworkModule { get; set; }
@@ -33,16 +33,7 @@ namespace Core {
 		public IPowerSource Battery { get; set; }
 		public RAM RAM { get; set; }
 		public Storage InternalStorage { get; set; }
-		//public SdCard ExternalStorage { get; set; } // ===
 		public Case Case { get; set; }
-		//public FaceScanner FaceScanner { get; set; } // ===
-		//public FingerprintScanner FingerprintScanner { get; set; } // ===
-		//public RetinaScanner RetinaScanner { get; set; } // ===
-		//public ProximitySensor ProximitySensor { get; set; }
-		//public LightSensor LightSensor { get; set; }
-		//public List<CameraModule> CameraModules { get; set; }
-		//public WiFi WiFi { get; set; }
-		//public Bluetooth Bluetooth { get; set; }
 		#endregion
 		/// TODO: Refactor to reflect how many seconds the user holds the button and to support turning screen of/off
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
@@ -127,6 +118,23 @@ namespace Core {
 			string description;
 			description = DescriptionFormatter.CreateDescription(this);
 			return description;
+		}
+		public override string ToString() {
+			StringBuilder description = new StringBuilder();
+
+			foreach (PropertyInfo lol in GetType().GetProperties()) {
+				description.AppendLine(lol.Name);
+
+				if (lol is ICommonDescription) {
+					Console.WriteLine("YES!");
+					description.AppendLine("    " + DescriptionFormatter.CreateDescription((ICommonDescription)lol));
+				} else {
+					Console.WriteLine("NO");
+				}
+				description.AppendLine();
+			}
+
+			return description.ToString();
 		}
 	}
 }

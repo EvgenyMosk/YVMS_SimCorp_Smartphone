@@ -13,7 +13,6 @@ namespace Core {
 		// Hardware
 		IChipset Chipset { get; set; }
 		List<SimCard> SimCards { get; set; }
-		//NotificationLight NotificationLight { get; set; }
 		IDisplay Screen { get; set; } //===
 		Button PowerButton { get; set; } // ===
 		NetworkModule NetworkModule { get; set; }
@@ -22,15 +21,6 @@ namespace Core {
 		IPowerSource Battery { get; set; }
 		RAM RAM { get; set; }
 		Storage InternalStorage { get; set; }
-		//SdCard ExternalStorage { get; set; } // ===
 		Case Case { get; set; }
-		//FaceScanner FaceScanner { get; set; } // ===
-		//FingerprintScanner FingerprintScanner { get; set; } // ===
-		//RetinaScanner RetinaScanner { get; set; } // ===
-		//ProximitySensor ProximitySensor { get; set; }
-		//LightSensor LightSensor { get; set; }
-		//List<CameraModule> CameraModules { get; set; }
-		//WiFi WiFi { get; set; }
-		//Bluetooth Bluetooth { get; set; }
 	}
 }

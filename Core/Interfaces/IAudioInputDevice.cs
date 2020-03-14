@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public interface IAudioInputDevice {
+	public interface IAudioInputDevice : ICommonDescription {
 		void StartRecordingSound();
 		void StopRecordingSound();
 		void InputVolumeIncrease(int delta);

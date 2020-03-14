@@ -10,7 +10,8 @@ using Core.Enums;
 namespace YVMS_SC.ConsoleApp {
 	public class Program {
 		private static void Main(string[] args) {
-
+			IMobilePhone mobilePhone = MobilePhoneConfigurator.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
+			Console.WriteLine(mobilePhone);
 
 			Console.ReadLine();
 		}
