@@ -1,6 +1,4 @@
-﻿namespace Core
-{
-	public class Bootloader : Software
-	{
+﻿namespace Core {
+	public class Bootloader : Software {
 	}
 }

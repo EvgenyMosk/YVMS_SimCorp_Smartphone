@@ -9,5 +9,8 @@ namespace Core {
 		public override void ConnectToDevice() {
 			throw new NotImplementedException();
 		}
+		public override string ToString() {
+			return DescriptionFormatter.CreateDescription(this);
+		}
 	}
 }

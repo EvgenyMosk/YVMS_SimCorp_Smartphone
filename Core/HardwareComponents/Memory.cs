@@ -11,10 +11,9 @@ namespace Core {
 		public string Version { get; set; }
 		public int UsedSpace { get; set; }
 
-		public Memory() : this("Manufacturer", "Model", 1024, 2000, "v.1.0") {
-		}
+		public Memory() { }
 
-		protected Memory(string manufacturer, string model, int capacity, int? yearOfProduction, string version) {
+		public Memory(string manufacturer, string model, int capacity, int? yearOfProduction, string version) {
 			Manufacturer = manufacturer;
 			Model = model;
 			Capacity = capacity;
@@ -22,10 +21,8 @@ namespace Core {
 			Version = version;
 		}
 
-		public string GetDescription() {
-			string description;
-			description = DescriptionFormatter.CreateDescription(this);
-			return description;
+		public override string ToString() {
+			return DescriptionFormatter.CreateDescription(this);
 		}
 	}
 }

@@ -44,5 +44,48 @@ namespace Core {
 
 			return description.ToString();
 		}
+		public static void GenerateRandomDescription(ICommonDescription targetForDescription) {
+			Random random = new Random();
+			GenerateRandomDescription(targetForDescription, random);
+		}
+		public static void GenerateRandomDescription(ICommonDescription targetForDescription, Random random) {
+			targetForDescription.Model = GenerateRandomString_Helper(20, random);
+			targetForDescription.Manufacturer = GenerateRandomString_Helper(10, random);
+			targetForDescription.YearOfProduction = random.Next(DateTime.Now.Year - 20, DateTime.Now.Year);
+			targetForDescription.Version = GenerateRandomString_Helper(7, random);
+		}
+		public static string GenerateRandomString_Helper(int length, Random random) {
+			if (length <= 0 || random == null) {
+				return "";
+			}
+			//https://www.educative.io/edpresso/how-to-generate-a-random-string-in-c-sharp
+			StringBuilder word = new StringBuilder();
+			char letter;
+
+			for (int i = 0; i < length; i++) {
+				double flt = random.NextDouble();
+				int shift = Convert.ToInt32(Math.Floor(25 * flt));
+				letter = Convert.ToChar(shift + 65);
+				word.Append(letter);
+			}
+
+			return word.ToString();
+		}
+		public static string GenerateRandomVersion_Helper(int length, Random random) {
+			if (length <= 0) {
+				return "";
+			}
+
+			StringBuilder version = new StringBuilder();
+			version.Append("v");
+			int number = 0;
+
+			for (int i = 0; i < length; i++) {
+				number = random.Next(0, int.MaxValue);
+				version.Append("." + Convert.ToString(number));
+			}
+
+			return version.ToString();
+		}
 	}
 }

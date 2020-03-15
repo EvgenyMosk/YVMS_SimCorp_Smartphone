@@ -9,6 +9,5 @@ namespace Core {
         string Manufacturer { get; set; }
         int? YearOfProduction { get; set; }
         string Version { get; set; }
-        string GetDescription();
     }
 }

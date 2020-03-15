@@ -114,27 +114,32 @@ namespace Core {
 			}
 			AudioOutputDevice.ChangeVolume(delta);
 		}
-		public virtual string GetDescription() {
-			string description;
-			description = DescriptionFormatter.CreateDescription(this);
-			return description;
-		}
+
 		public override string ToString() {
-			StringBuilder description = new StringBuilder();
+			StringBuilder mobilePhoneDescription = new StringBuilder();
 
-			foreach (PropertyInfo lol in GetType().GetProperties()) {
-				description.AppendLine(lol.Name);
+			mobilePhoneDescription.AppendLine(Manufacturer + " " + Model + " (" + YearOfProduction + ")");
 
-				if (lol is ICommonDescription) {
-					Console.WriteLine("YES!");
-					description.AppendLine("    " + DescriptionFormatter.CreateDescription((ICommonDescription)lol));
-				} else {
-					Console.WriteLine("NO");
+			// Loop through Properties of a MobilePhone
+			foreach (PropertyInfo property in GetType().GetProperties()) {
+				Type propertyType = property.PropertyType;
+
+				// Loop through Interfaces that Property implements
+				foreach (Type interfaceThatPropImpl in propertyType.GetInterfaces()) {
+					// If there is ICommonDescription among them - Get it's values:
+					// Model, Manufacturer, YearOfProduction, Version
+					if (interfaceThatPropImpl.Name.Equals(nameof(ICommonDescription))) {
+						string propertyValue = property.GetValue(this, null)?.ToString();
+
+						if (!string.IsNullOrWhiteSpace(propertyValue)) {
+							mobilePhoneDescription.AppendLine("  >> " + property.Name + " <<");
+							mobilePhoneDescription.AppendLine(propertyValue);
+						}
+					}
 				}
-				description.AppendLine();
 			}
 
-			return description.ToString();
+			return mobilePhoneDescription.ToString();
 		}
 	}
 }
