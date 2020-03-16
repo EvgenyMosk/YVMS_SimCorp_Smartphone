@@ -18,10 +18,6 @@ namespace YVMS_SC.ConsoleApp {
 			DescriptionFormatter.GenerateRandomDescription(mobilePhone.PowerButton, random);
 			DescriptionFormatter.GenerateRandomDescription(mobilePhone.Bootloader, random);
 			DescriptionFormatter.GenerateRandomDescription(mobilePhone.Recovery, random);
-			//foreach (PropertyInfo item in mobilePhone.GetType().GetProperties()) {
-			//	Console.WriteLine("===== " + item.Name + " =====");
-			//	Console.WriteLine(item.GetValue(mobilePhone, null));
-			//}
 
 			Console.WriteLine(mobilePhone);
 

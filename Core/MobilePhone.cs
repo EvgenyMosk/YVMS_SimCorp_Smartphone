@@ -122,24 +122,30 @@ namespace Core {
 
 			// Loop through Properties of a MobilePhone
 			foreach (PropertyInfo property in GetType().GetProperties()) {
-				Type propertyType = property.PropertyType;
-
-				// Loop through Interfaces that Property implements
-				foreach (Type interfaceThatPropImpl in propertyType.GetInterfaces()) {
-					// If there is ICommonDescription among them - Get it's values:
-					// Model, Manufacturer, YearOfProduction, Version
-					if (interfaceThatPropImpl.Name.Equals(nameof(ICommonDescription))) {
-						string propertyValue = property.GetValue(this, null)?.ToString();
-
-						if (!string.IsNullOrWhiteSpace(propertyValue)) {
-							mobilePhoneDescription.AppendLine("  >> " + property.Name + " <<");
-							mobilePhoneDescription.AppendLine(propertyValue);
-						}
-					}
-				}
+				LoopThroughPropertyInterfaces_Helper(mobilePhoneDescription, property);
 			}
 
 			return mobilePhoneDescription.ToString();
+		}
+		private void LoopThroughPropertyInterfaces_Helper(StringBuilder mobilePhoneDescription, PropertyInfo property) {
+			Type propertyType = property.PropertyType;
+
+			// Loop through Interfaces that Property implements
+			foreach (Type interfaceThatPropImpl in propertyType.GetInterfaces()) {
+				// If there is ICommonDescription among them - Get it's values:
+				// Model, Manufacturer, YearOfProduction, Version
+				if (interfaceThatPropImpl.Name.Equals(nameof(ICommonDescription))) {
+					AppendDescription_Helper(mobilePhoneDescription, property);
+				}
+			}
+		}
+		private void AppendDescription_Helper(StringBuilder mobilePhoneDescription, PropertyInfo property) {
+			string propertyValue = property.GetValue(this, null)?.ToString();
+
+			if (!string.IsNullOrWhiteSpace(propertyValue)) {
+				mobilePhoneDescription.AppendLine("  >> " + property.Name + " <<");
+				mobilePhoneDescription.AppendLine(propertyValue);
+			}
 		}
 	}
 }

@@ -49,12 +49,21 @@ namespace Core {
 			GenerateRandomDescription(targetForDescription, random);
 		}
 		public static void GenerateRandomDescription(ICommonDescription targetForDescription, Random random) {
-			targetForDescription.Model = GenerateRandomString_Helper(20, random);
-			targetForDescription.Manufacturer = GenerateRandomString_Helper(10, random);
+			int lengthForString = GenerateLength_Helper(random, 1, 20);
+			targetForDescription.Model = GenerateRandomString(lengthForString, random);
+
+			lengthForString = GenerateLength_Helper(random, 1, 20);
+			targetForDescription.Manufacturer = GenerateRandomString(lengthForString, random);
+
 			targetForDescription.YearOfProduction = random.Next(DateTime.Now.Year - 20, DateTime.Now.Year);
-			targetForDescription.Version = GenerateRandomString_Helper(7, random);
+
+			lengthForString = GenerateLength_Helper(random, 1, 20);
+			targetForDescription.Version = GenerateRandomString(lengthForString, random);
 		}
-		public static string GenerateRandomString_Helper(int length, Random random) {
+		private static int GenerateLength_Helper(Random random, int min, int max) {
+			return random.Next(min, max);
+		}
+		public static string GenerateRandomString(int length, Random random) {
 			if (length <= 0 || random == null) {
 				return "";
 			}
@@ -71,7 +80,7 @@ namespace Core {
 
 			return word.ToString();
 		}
-		public static string GenerateRandomVersion_Helper(int length, Random random) {
+		public static string GenerateRandomVersion(int length, Random random) {
 			if (length <= 0) {
 				return "";
 			}
