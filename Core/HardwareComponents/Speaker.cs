@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Core {
-	public class Speaker : IAudioOutputDevice<string> {
+	public class Speaker : IAudioOutputDevice {
 		public IOutput Output { get; set; }
 		public int AudioVolumeLevelCurrent { get; set; }
 		public string AudioFile { get; set; }

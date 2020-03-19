@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public abstract class HeadphonesDecorator : IAudioOutputDevice<string> {
-		protected readonly IAudioOutputDevice<string> _audioOutputDevice;
+	public abstract class HeadphonesDecorator : IAudioOutputDevice {
+		protected readonly IAudioOutputDevice _audioOutputDevice;
 		public IOutput Output { get; set; }
 		public int AudioVolumeLevelCurrent { get; set; }
 		public string AudioFile { get; set; }
@@ -15,7 +15,7 @@ namespace Core {
 		public int? YearOfProduction { get; set; }
 		public string Version { get; set; }
 
-		public HeadphonesDecorator(IAudioOutputDevice<string> audioOutputDevice) {
+		public HeadphonesDecorator(IAudioOutputDevice audioOutputDevice) {
 			_audioOutputDevice = audioOutputDevice;
 		}
 		public void ChangeVolume(int delta) {

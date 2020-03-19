@@ -9,7 +9,7 @@ using Core.Enums;
 namespace Core.HardwareComponents {
 	public class HeadphonesWireless : HeadphonesDecorator, IWirelessConnectionModule {
 		public IList<IWirelessConnectionModule> connectedDevices { get; set; }
-		public HeadphonesWireless(IAudioOutputDevice<string> audioOutputDevice) : base(audioOutputDevice) {
+		public HeadphonesWireless(IAudioOutputDevice audioOutputDevice) : base(audioOutputDevice) {
 			connectedDevices = new List<IWirelessConnectionModule>();
 		}
 
@@ -32,6 +32,11 @@ namespace Core.HardwareComponents {
 
 		public IEnumerable<IWirelessConnectionModule> SearchForDevicesNearby() {
 			throw new NotImplementedException();
+		}
+		public override string ToString() {
+			string description;
+			description = DescriptionFormatter.CreateDescription(this);
+			return description;
 		}
 	}
 }

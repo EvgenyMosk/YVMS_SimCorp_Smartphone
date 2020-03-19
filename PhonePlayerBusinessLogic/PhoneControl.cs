@@ -8,15 +8,17 @@ using Core;
 
 namespace PhonePlayerBusinessLogic {
     public class PhoneControl {
-        protected IMobilePhone mobilePhone { get; set; }
-        public PhoneControl(IMobilePhone mobilePhone, IAudioOutputDevice<string> audioOutputDevice, IOutput output) {
+        public IMobilePhone mobilePhone { get; set; }
+        public PhoneControl(IMobilePhone mobilePhone, IAudioOutputDevice audioOutputDevice, IOutput output) {
             if (mobilePhone == null) {
                 throw new ArgumentNullException(nameof(mobilePhone));
             }
             this.mobilePhone = mobilePhone;
 
-            this.mobilePhone.AudioOutputDevice = audioOutputDevice as IAudioOutputDevice<object>;
-            this.mobilePhone.AudioOutputDevice.Output = output;
+            this.mobilePhone.AudioOutputDevice = audioOutputDevice as IAudioOutputDevice;
+            if (mobilePhone.AudioOutputDevice != null) {
+                this.mobilePhone.AudioOutputDevice.Output = output;
+            }
         }
         public virtual void PlayAudio(string audioFile) {
             if (mobilePhone.AudioOutputDevice == null || string.IsNullOrWhiteSpace(audioFile)) {

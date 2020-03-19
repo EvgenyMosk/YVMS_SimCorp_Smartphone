@@ -29,7 +29,7 @@ namespace Core {
 		public Button PowerButton { get; set; } // ===
 		public NetworkModule NetworkModule { get; set; }
 		public IAudioInputDevice AudioInputDevice { get; set; }
-		public IAudioOutputDevice<object> AudioOutputDevice { get; set; }
+		public IAudioOutputDevice AudioOutputDevice { get; set; }
 		public IPowerSource Battery { get; set; }
 		public RAM RAM { get; set; }
 		public Storage InternalStorage { get; set; }
