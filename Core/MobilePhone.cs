@@ -101,14 +101,19 @@ namespace Core {
 			}
 		}
 
-		public void AudioOutputDevicePlayAudioFile(string audioFile) {
+		public void AudioOutputPlayAudioFile(string audioFile) {
 			if (AudioOutputDevice == null) {
 				return;
 			}
 			AudioOutputDevice.PlayFile(audioFile);
 		}
-
-		public void AudioOutputDeviceChangeVolume(int delta) {
+		public void AudioOutputStopPlayingAudioFile() {
+			if (AudioOutputDevice == null) {
+				return;
+			}
+			AudioOutputDevice.StopPlayingAudio();
+		}
+		public void AudioOutputChangeVolume(int delta) {
 			if (AudioOutputDevice == null) {
 				return;
 			}

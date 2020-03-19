@@ -5,11 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	/// <summary>
-	/// Decorator-pattern for Headphones class
-	/// </summary>
-	public class WirelessHeadphones : IAudioOutputDevice<string> {
-		private IAudioOutputDevice<string> _audioOutputDevice;
+	public abstract class HeadphonesDecorator : IAudioOutputDevice<string> {
+		protected readonly IAudioOutputDevice<string> _audioOutputDevice;
 		public IOutput Output { get; set; }
 		public int AudioVolumeLevelCurrent { get; set; }
 		public string AudioFile { get; set; }
@@ -18,22 +15,18 @@ namespace Core {
 		public int? YearOfProduction { get; set; }
 		public string Version { get; set; }
 
-		public WirelessHeadphones(IAudioOutputDevice<string> audioOutputDevice) {
+		public HeadphonesDecorator(IAudioOutputDevice<string> audioOutputDevice) {
 			_audioOutputDevice = audioOutputDevice;
 		}
-
 		public void ChangeVolume(int delta) {
 			_audioOutputDevice.ChangeVolume(delta);
 		}
-
-		public string GetDescription() {
-			throw new NotImplementedException();
-		}
-
 		public void PlayFile(string audioFile) {
 			_audioOutputDevice.PlayFile(audioFile);
 		}
-
+		public string PlayFileAndReturnString(string audioFile) {
+			return _audioOutputDevice.PlayFileAndReturnString(audioFile);
+		}
 		public void StopPlayingAudio() {
 			_audioOutputDevice.StopPlayingAudio();
 		}

@@ -6,5 +6,6 @@
 		void PlayFile(T audioFile);
 		void StopPlayingAudio();
 		void ChangeVolume(int delta);
+		string PlayFileAndReturnString(string audioFile);
 	}
 }

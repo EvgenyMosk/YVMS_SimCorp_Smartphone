@@ -8,10 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Core;
+
+using PhonePlayerBusinessLogic;
+
 namespace GUI {
-	public partial class Form1 : Form {
-		public Form1() {
+	public partial class PlaybackControl : Form {
+		private PhoneControl phoneController { get; set; }
+		public PlaybackControl() {
 			InitializeComponent();
+
+			IOutput output = new ConsoleWriter();
 		}
 
 		private void button1_Click(object sender, EventArgs e) {

@@ -7,7 +7,15 @@ using System.Threading.Tasks;
 namespace Core {
 	public class Headphones : IAudioOutputDevice<string> {
 		protected int vAudioVolumeLevelUpperThreshold = 100;
-		protected static int vAudioVolumeLevelLowerThreshold = 0;
+		protected const int vAudioVolumeLevelLowerThreshold = 0;
+
+		public Headphones(IOutput output) {
+			Output = output;
+		}
+		public Headphones(int audioVolumeLevelUpperThreshold, IOutput output) {
+			vAudioVolumeLevelUpperThreshold = audioVolumeLevelUpperThreshold;
+			Output = output;
+		}
 		public IOutput Output { get; set; }
 		public int AudioVolumeLevelCurrent { get; set; } = 0;
 		public string AudioFile { get; set; }
@@ -34,12 +42,20 @@ namespace Core {
 				Output.Output(AudioFile);
 			}
 		}
+		public string PlayFileAndReturnString(string audioFile) {
+			AudioFile = audioFile;
+			if (Output != null) {
+				return Output.OutputAsString(audioFile);
+			} else {
+				return string.Empty;
+			}
+		}
 
 		public void StopPlayingAudio() {
 			AudioFile = null;
 		}
 
-		public string GetDescription() {
+		public override string ToString() {
 			string description;
 			description = DescriptionFormatter.CreateDescription(this);
 			return description;

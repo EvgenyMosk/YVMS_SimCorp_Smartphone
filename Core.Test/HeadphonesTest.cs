@@ -17,11 +17,15 @@ namespace Core.Test {
 			public void Output(object data) {
 				Console.WriteLine(data.ToString());
 			}
+
+			public string OutputAsString(object data) {
+				return data.ToString();
+			}
 		}
 
 		[TestInitialize]
 		public void SetUp() {
-			headphones = new Headphones();
+			headphones = new Headphones(new FakeOutput());
 		}
 
 		[TestMethod]

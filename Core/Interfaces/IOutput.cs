@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace Core {
 	public interface IOutput {
 		void Output(object data);
+		string OutputAsString(object data);
 	}
 }

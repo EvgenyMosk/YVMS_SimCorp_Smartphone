@@ -9,5 +9,9 @@ namespace Core {
 		public void Output(object data) {
 			Console.WriteLine(data);
 		}
+
+		public string OutputAsString(object data) {
+			return data.ToString();
+		}
 	}
 }

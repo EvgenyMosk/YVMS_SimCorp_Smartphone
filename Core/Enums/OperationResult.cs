@@ -13,6 +13,6 @@ namespace Core.Enums {
 		ExceedingAvailableSpace = 4,
 		NotEnoughSpaceOnDisk = 5,
 		NoInternetConnection = 6,
-
+		DeviceNotExist = 7,
 	}
 }

@@ -26,10 +26,6 @@ namespace Core.Test {
 		public string Manufacturer { get; set; }
 		public int? YearOfProduction { get; set; }
 		public string Version { get; set; }
-
-		public string GetDescription() {
-			throw new NotImplementedException();
-		}
 	}
 	[TestClass]
 	public class MobilePhoneConfiguratorTest {

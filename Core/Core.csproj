@@ -46,6 +46,7 @@
     <Compile Include="Enums\OperationResult.cs" />
     <Compile Include="Enums\PresetsChipsets.cs" />
     <Compile Include="Enums\PresetsPhones.cs" />
+    <Compile Include="HardwareComponents\HeadphonesWireless.cs" />
     <Compile Include="SoftwareComponents\FileManager.cs" />
     <Compile Include="HardwareComponents\Battery.cs" />
     <Compile Include="HardwareComponents\Bluetooth.cs" />
@@ -99,8 +100,8 @@
     <Compile Include="Enums\WiFiFrequency.cs" />
     <Compile Include="Enums\WiFiStandard.cs" />
     <Compile Include="HardwareComponents\WiFi.cs" />
-    <Compile Include="HardwareComponents\WirelessConnectionModule.cs" />
-    <Compile Include="HardwareComponents\WirelessHeadphones.cs" />
+    <Compile Include="Interfaces\IWirelessConnectionModule.cs" />
+    <Compile Include="HardwareComponents\HeadphonesDecorator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

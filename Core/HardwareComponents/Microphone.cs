@@ -11,7 +11,7 @@ namespace Core {
 		public int? YearOfProduction { get; set; }
 		public string Version { get; set; }
 
-		public string GetDescription() {
+		public override string ToString() {
 			string description;
 			description = DescriptionFormatter.CreateDescription(this);
 			return description;
