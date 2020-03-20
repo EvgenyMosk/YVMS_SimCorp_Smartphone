@@ -22,6 +22,7 @@ namespace YVMS_SC.ConsoleApp {
 
 			Console.WriteLine(mobilePhone);
 
+			Console.WriteLine(string.Empty); ;
 			Console.ReadLine();
 		}
 	}

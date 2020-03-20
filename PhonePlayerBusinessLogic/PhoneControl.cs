@@ -15,7 +15,8 @@ namespace PhonePlayerBusinessLogic {
             }
             this.mobilePhone = mobilePhone;
 
-            this.mobilePhone.AudioOutputDevice = audioOutputDevice as IAudioOutputDevice;
+            this.mobilePhone.AudioOutputDevice = audioOutputDevice;
+
             if (mobilePhone.AudioOutputDevice != null) {
                 this.mobilePhone.AudioOutputDevice.Output = output;
             }

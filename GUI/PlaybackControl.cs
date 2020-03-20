@@ -90,7 +90,7 @@ namespace GUI {
 			string selectedFileName = string.Empty;
 
 			if (openFileDialog1.ShowDialog() == DialogResult.OK) {
-				selectedFileName = openFileDialog1.SafeFileName;
+				selectedFileName = openFileDialog1.SafeFileName + "\n";
 			}
 
 			return selectedFileName;
