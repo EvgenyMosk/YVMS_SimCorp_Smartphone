@@ -7,7 +7,6 @@ namespace Core {
 	public class OperatingSystem : Software, IOperatingSystem {
 		public ILauncherApp LauncherApp { get; set; }
 		public IFileManager FileManager { get; set; }
-		public IWebBrowser WebBrowser { get; set; }
 		public IPhoneCallsApp PhoneCallsApp { get; set; }
 		public ITextMessagingApp TextMessagingApp { get; set; }
 		public IList<Software> InstalledApplications { get; set; }

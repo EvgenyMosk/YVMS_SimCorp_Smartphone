@@ -6,7 +6,6 @@ namespace Core {
 	public interface IOperatingSystem {
 		ILauncherApp LauncherApp { get; set; }
 		IFileManager FileManager { get; set; }
-		IWebBrowser WebBrowser { get; set; }
 		IPhoneCallsApp PhoneCallsApp { get; set; }
 		ITextMessagingApp TextMessagingApp { get; set; }
 		IList<Software> InstalledApplications { get; set; }

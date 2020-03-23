@@ -79,7 +79,6 @@
     <Compile Include="Interfaces\IPhoneCallsApp.cs" />
     <Compile Include="Interfaces\IPowerSource.cs" />
     <Compile Include="Interfaces\ITextMessagingApp.cs" />
-    <Compile Include="Interfaces\IWebBrowser.cs" />
     <Compile Include="HardwareComponents\Memory.cs" />
     <Compile Include="HardwareComponents\Microphone.cs" />
     <Compile Include="MobilePhone.cs" />
