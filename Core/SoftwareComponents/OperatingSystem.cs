@@ -5,10 +5,7 @@ using Core.Enums;
 
 namespace Core {
 	public class OperatingSystem : Software, IOperatingSystem {
-		public ILauncherApp LauncherApp { get; set; }
 		public IFileManager FileManager { get; set; }
-		public IPhoneCallsApp PhoneCallsApp { get; set; }
-		public ITextMessagingApp TextMessagingApp { get; set; }
 		public IList<Software> InstalledApplications { get; set; }
 
 		public OperationResult MakePhoneCall(IMobilePhone target) {

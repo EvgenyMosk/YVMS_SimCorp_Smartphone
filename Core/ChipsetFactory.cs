@@ -22,8 +22,6 @@ namespace Core {
 				Version = ""
 			};
 			GPU adreno305 = new GPU();
-			WiFi wifi = new WiFi();
-			Bluetooth bluetooth = new Bluetooth();
 
 			string model = "Snapdragon 400";
 			string manufacturer = "Qualcomm";
@@ -34,7 +32,7 @@ namespace Core {
 
 			switch (presetChipset) {
 				case PresetsChipsets.Snapdragon400:
-					chipset = new Chipset(snapdragon400, adreno305, wifi, bluetooth, model, manufacturer, yearOfProduction, version);
+					chipset = new Chipset(snapdragon400, adreno305, model, manufacturer, yearOfProduction, version);
 					break;
 				default:
 					throw new NotImplementedException();

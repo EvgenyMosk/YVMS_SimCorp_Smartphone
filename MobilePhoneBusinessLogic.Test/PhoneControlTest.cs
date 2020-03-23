@@ -18,20 +18,10 @@ namespace PhonePlayerBusinessLogic.Test {
 
 		private class FakeMobilePhone : IMobilePhone {
 			public PhoneBootState PhoneBootState { get; set; }
-			public Recovery Recovery { get; set; }
-			public Bootloader Bootloader { get; set; }
 			public Core.OperatingSystem OperatingSystem { get; set; }
 			public IChipset Chipset { get; set; }
-			public List<SimCard> SimCards { get; set; }
-			public IDisplay Screen { get; set; }
-			public Button PowerButton { get; set; }
-			public NetworkModule NetworkModule { get; set; }
-			public IAudioInputDevice AudioInputDevice { get; set; }
 			public IAudioOutputDevice AudioOutputDevice { get; set; }
-			public IPowerSource Battery { get; set; }
-			public RAM RAM { get; set; }
-			public Storage InternalStorage { get; set; }
-			public Case Case { get; set; }
+			public IMemory InternalStorage { get; set; }
 			public string Model { get; set; }
 			public string Manufacturer { get; set; }
 			public int? YearOfProduction { get; set; }

@@ -7,6 +7,5 @@ using System.Threading.Tasks;
 namespace Core.Enums {
 	public enum PresetsPhones {
 		MicrosoftLumia640XL = 1,
-
 	}
 }

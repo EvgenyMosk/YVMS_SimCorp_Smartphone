@@ -27,8 +27,6 @@ namespace Core.Test {
 			Assert.IsNotNull(actualChipset);
 			Assert.IsNotNull(actualChipset.CPU);
 			Assert.IsNotNull(actualChipset.GPU);
-			Assert.IsNotNull(actualChipset.WiFi);
-			Assert.IsNotNull(actualChipset.Bluetooth);
 			Assert.AreEqual(expectedCPUFrequencyCurrent, actualChipset.CPU.FrequencyCurrent);
 			Assert.AreEqual(expectedModel, actualChipset.Model);
 			Assert.AreEqual(expectedManufacturer, actualChipset.Manufacturer);

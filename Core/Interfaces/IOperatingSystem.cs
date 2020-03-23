@@ -4,10 +4,7 @@ using Core.Enums;
 
 namespace Core {
 	public interface IOperatingSystem {
-		ILauncherApp LauncherApp { get; set; }
 		IFileManager FileManager { get; set; }
-		IPhoneCallsApp PhoneCallsApp { get; set; }
-		ITextMessagingApp TextMessagingApp { get; set; }
 		IList<Software> InstalledApplications { get; set; }
 
 		OperationResult MakePhoneCall(IMobilePhone target);

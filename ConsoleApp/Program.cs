@@ -15,10 +15,6 @@ namespace YVMS_SC.ConsoleApp {
 			IMobilePhone mobilePhone = MobilePhoneConfigurator.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 
 			Random random = new Random();
-			DescriptionFormatter.GenerateRandomDescription(mobilePhone.RAM, random);
-			DescriptionFormatter.GenerateRandomDescription(mobilePhone.PowerButton, random);
-			DescriptionFormatter.GenerateRandomDescription(mobilePhone.Bootloader, random);
-			DescriptionFormatter.GenerateRandomDescription(mobilePhone.Recovery, random);
 
 			Console.WriteLine(mobilePhone);
 

@@ -8,22 +8,28 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace Core.Test {
-	[TestClass()]
+	[TestClass]
 	public class DescriptionFormatterTest {
+		public class FakeObject : ICommonDescription {
+			public string Model { get; set; }
+			public string Manufacturer { get; set; }
+			public int? YearOfProduction { get; set; }
+			public string Version { get; set; }
+		}
 		[TestMethod]
 		public void CreateDescription_ModelManufYearVer_ExpectFullDescription() {
 			string model = "TheModelThatWasSet";
 			string manufacturer = "SomeSortOfManufacturer";
 			int yearOfProduction = 1916;
 			string version = "0.1.2.3.4.5.6.7.8.9";
-			ICommonDescription testSubject = new MobilePhone {
+			ICommonDescription testObject = new FakeObject {
 				Model = model,
 				Manufacturer = manufacturer,
 				YearOfProduction = yearOfProduction,
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testSubject);
+			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -41,13 +47,13 @@ namespace Core.Test {
 			string manufacturer = "SomeSortOfManufacturer";
 			int yearOfProduction = 1916;
 			string version = "0.1.2.3.4.5.6.7.8.9";
-			ICommonDescription testSubject = new Microphone {
+			ICommonDescription testObject = new FakeObject {
 				Model = model,
 				YearOfProduction = yearOfProduction,
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testSubject);
+			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -64,13 +70,13 @@ namespace Core.Test {
 			string manufacturer = "SomeSortOfManufacturer";
 			int yearOfProduction = 1916;
 			string version = "0.1.2.3.4.5.6.7.8.9";
-			ICommonDescription testSubject = new Microphone {
+			ICommonDescription testObject = new FakeObject {
 				Manufacturer = manufacturer,
 				YearOfProduction = yearOfProduction,
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testSubject);
+			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -87,13 +93,13 @@ namespace Core.Test {
 			string manufacturer = "SomeSortOfManufacturer";
 			int yearOfProduction = 1916;
 			string version = "0.1.2.3.4.5.6.7.8.9";
-			ICommonDescription testSubject = new Microphone {
+			ICommonDescription testObject = new FakeObject {
 				Model = model,
 				Manufacturer = manufacturer,
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testSubject);
+			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -110,13 +116,13 @@ namespace Core.Test {
 			string manufacturer = "SomeSortOfManufacturer";
 			int yearOfProduction = 1916;
 			string version = "0.1.2.3.4.5.6.7.8.9";
-			ICommonDescription testSubject = new Microphone {
+			ICommonDescription testObject = new FakeObject {
 				Model = model,
 				Manufacturer = manufacturer,
 				YearOfProduction = yearOfProduction,
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testSubject);
+			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -133,7 +139,7 @@ namespace Core.Test {
 			string manufacturer = "";
 			int? yearOfProduction = null;
 			string version = "";
-			ICommonDescription testSubject = new Microphone {
+			ICommonDescription testObject = new FakeObject {
 				Model = model,
 				Manufacturer = manufacturer,
 				YearOfProduction = yearOfProduction,
@@ -141,7 +147,7 @@ namespace Core.Test {
 			};
 			string expectedDescription = "";
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testSubject);
+			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
 
 			Assert.AreEqual(expectedDescription, actualDescription);
 		}
