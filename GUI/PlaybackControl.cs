@@ -25,7 +25,8 @@ namespace GUI {
 			InitComboBox_Helper(comboBox1);
 			Output = new ConsoleWriter();
 			IMobilePhone mobilePhone = MobilePhoneConfigurator.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
-			phoneControl = new PhoneControl(mobilePhone, null, Output);
+			IAudioOutputDevice audioOutputDevice = SelectOutputDevice(comboBox1.SelectedItem);
+			phoneControl = new PhoneControl(mobilePhone, audioOutputDevice, Output);
 		}
 
 		private void InitComboBox_Helper(ComboBox comboBox) {
@@ -105,6 +106,12 @@ namespace GUI {
 		}
 
 		private void buttonStop_Click(object sender, EventArgs e) {
+			if (phoneControl == null
+				|| phoneControl.mobilePhone == null
+				|| phoneControl.mobilePhone.AudioOutputDevice == null) {
+				MessageBox.Show("No device that can be used for uotput found!");
+				return;
+			}
 			PrintToImaginaryConsole(visualConsole, phoneControl.mobilePhone.AudioOutputDevice, string.Empty);
 			textBoxAudioFile.Text = string.Empty;
 		}

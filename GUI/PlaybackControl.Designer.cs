@@ -136,6 +136,7 @@
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(5);
+			this.MaximizeBox = false;
 			this.Name = "PlaybackControl";
 			this.Text = "Remote phone playback control";
 			this.groupBox1.ResumeLayout(false);
