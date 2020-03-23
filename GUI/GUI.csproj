@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RichTextBoxWriter.cs" />
     <Compile Include="PlaybackControl.cs">
       <SubType>Form</SubType>
     </Compile>

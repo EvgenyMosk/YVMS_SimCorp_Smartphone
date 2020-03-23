@@ -14,7 +14,7 @@ namespace Core {
 		public string Model { get; set; }
 		public string Manufacturer { get; set; }
 		public int? YearOfProduction { get; set; }
-		public string Version { get; set; }
+		public string Version { get; protected set; }
 
 		#region Software components
 		public OS OperatingSystem { get; set; }

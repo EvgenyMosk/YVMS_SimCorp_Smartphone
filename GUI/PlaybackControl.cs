@@ -23,7 +23,7 @@ namespace GUI {
 			InitializeComponent();
 
 			InitComboBox_Helper(comboBox1);
-			Output = new ConsoleWriter();
+			Output = new RichTextBoxWriter(visualConsole); // visualConsole => RichTextBox
 			IMobilePhone mobilePhone = MobilePhoneConfigurator.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 			IAudioOutputDevice audioOutputDevice = SelectOutputDevice(comboBox1.SelectedItem);
 			phoneControl = new PhoneControl(mobilePhone, audioOutputDevice, Output);
@@ -41,7 +41,10 @@ namespace GUI {
 			}
 			IAudioOutputDevice outputDevice = SelectOutputDevice(comboBox1.SelectedItem);
 			phoneControl.mobilePhone.AudioOutputDevice = outputDevice;
-			PrintToImaginaryConsole(visualConsole, phoneControl.mobilePhone.AudioOutputDevice, textBoxAudioFile.Text);
+
+			string audioFile = textBoxAudioFile.Text;
+
+			PrintToImaginaryConsole(phoneControl.mobilePhone.AudioOutputDevice, audioFile);
 		}
 
 		private IAudioOutputDevice SelectOutputDevice(object selectedItem) {
@@ -65,20 +68,20 @@ namespace GUI {
 			}
 			return outputDevice;
 		}
-		private void PrintToImaginaryConsole(RichTextBox richTextBox, IAudioOutputDevice audioOutput, string audioFile) {
-			StringBuilder textToAppend = new StringBuilder();
-
-			textToAppend.AppendLine("=======================");
-			textToAppend.Append("Sound can be heard through:\n" + audioOutput.ToString());
-
-			string audioFileToPlay = audioOutput.PlayFileAndReturnString(audioFile);
-			if (string.IsNullOrWhiteSpace(audioFileToPlay)) {
-				audioFileToPlay = "%NO_FILE_SELECTED%";
+		private void PrintToImaginaryConsole(IAudioOutputDevice audioOutputDevice, string audioFile) {
+			if (audioOutputDevice == null) {
+				MessageBox.Show("Audio device cannot be null!");
+				return;
 			}
-			textToAppend.Append("Current file: " + audioFileToPlay);
 
-			richTextBox.AppendText(textToAppend.ToString());
-			richTextBox.ScrollToCaret();
+			if (string.IsNullOrWhiteSpace(audioFile)) {
+				audioFile = "%NO_FILE_SELECTED%";
+			}
+
+			visualConsole.AppendText("=======================\n");
+			visualConsole.AppendText("Sound can be heard through:\n" + phoneControl.mobilePhone.AudioOutputDevice.ToString());
+
+			phoneControl.mobilePhone.AudioOutputDevice.PlayFile(audioFile);
 		}
 		private string PickFile() {
 			OpenFileDialog openFileDialog1 = new OpenFileDialog {
@@ -109,10 +112,10 @@ namespace GUI {
 			if (phoneControl == null
 				|| phoneControl.mobilePhone == null
 				|| phoneControl.mobilePhone.AudioOutputDevice == null) {
-				MessageBox.Show("No device that can be used for uotput found!");
+				MessageBox.Show("No device that can be used for output found!");
 				return;
 			}
-			PrintToImaginaryConsole(visualConsole, phoneControl.mobilePhone.AudioOutputDevice, string.Empty);
+			PrintToImaginaryConsole(phoneControl.mobilePhone.AudioOutputDevice, string.Empty);
 			textBoxAudioFile.Text = string.Empty;
 		}
 	}
