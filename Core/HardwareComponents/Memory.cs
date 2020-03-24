@@ -10,21 +10,13 @@ namespace Core {
 		public string Version { get; set; }
 		public int UsedSpace { get; set; }
 
-		public Memory(string manufacturer, string model, int capacity, int? yearOfProduction, string version) {
-			Manufacturer = manufacturer;
-			Model = model;
-			Capacity = capacity;
-			YearOfProduction = yearOfProduction;
-			Version = version;
-		}
-
-		public Memory(string model, string manufacturer, int capacity, int usedSpace, int? yearOfProduction, string version) {
+		public Memory(string model, string manufacturer, int? yearOfProduction, string version, int capacity) {
 			Model = model;
 			Manufacturer = manufacturer;
-			Capacity = capacity;
-			UsedSpace = usedSpace;
 			YearOfProduction = yearOfProduction;
 			Version = version;
+			Capacity = capacity;
+			UsedSpace = 0;
 		}
 
 		public override string ToString() {

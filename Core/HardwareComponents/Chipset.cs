@@ -2,31 +2,23 @@
 
 namespace Core {
 	public class Chipset : ICommonDescription, IChipset {
-		public string Model { get; set; }
-		public string Manufacturer { get; set; }
-		public int? YearOfProduction { get; set; }
+		public string Model { get; }
+		public string Manufacturer { get; }
+		public int? YearOfProduction { get; }
 		public string Version { get; set; }
 
-		public CPU CPU { get; set; }
-		public GPU GPU { get; set; }
-
-		public Chipset() : this(null, null) { }
+		public CPU CPU { get; }
 		public Chipset(
 			CPU cpu,
-			GPU gpu,
 			string model = "CHIPSET_MODEL",
 			string manufacturer = "CHIPSET_MANUFACTURER",
 			int? yearOfProduction = null,
 			string version = "VERSION_PREALPHA") {
 			if (cpu == null) {
-				cpu = new CPU();
-			}
-			if (gpu == null) {
-				gpu = new GPU();
+				throw new ArgumentNullException(nameof(cpu));
 			}
 
 			CPU = cpu;
-			GPU = gpu;
 			Model = model;
 			Manufacturer = manufacturer;
 			YearOfProduction = yearOfProduction;

@@ -11,10 +11,10 @@ using OS = Core.OperatingSystem;
 
 namespace Core {
 	public class MobilePhone : IMobilePhone {
-		public string Model { get; set; }
-		public string Manufacturer { get; set; }
-		public int? YearOfProduction { get; set; }
-		public string Version { get; protected set; }
+		public string Model { get; }
+		public string Manufacturer { get; }
+		public int? YearOfProduction { get; }
+		public string Version { get; set; }
 
 		#region Software components
 		public OS OperatingSystem { get; set; }
@@ -25,6 +25,13 @@ namespace Core {
 		public IAudioOutputDevice AudioOutputDevice { get; set; }
 		public IMemory InternalStorage { get; set; }
 		#endregion
+		public MobilePhone(string model, string manufacturer, IChipset chipset, int? yearOfProduction, string version) {
+			Model = model;
+			Manufacturer = manufacturer;
+			Chipset = chipset;
+			YearOfProduction = yearOfProduction;
+			Version = version;
+		}
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
 			if (secondsButtonBeingHold <= 0) {
 				throw new ArgumentException("Button cannot be hold for ZERO or NEGATIVE number of seconds");

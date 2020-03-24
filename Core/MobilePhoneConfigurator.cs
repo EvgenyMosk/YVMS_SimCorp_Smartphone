@@ -9,46 +9,52 @@ using Core.Enums;
 namespace Core {
 	public static class MobilePhoneConfigurator {
 		public static IMobilePhone CreateMobilePhone(PresetsPhones presetPhone) {
-			IMobilePhone mobilePhone = new MobilePhone();
-
+			IMobilePhone mobilePhone;
 			IChipset chipset;
-
 			IMemory internalStorage;
 
 			switch (presetPhone) {
 				case PresetsPhones.MicrosoftLumia640XL:
 					/// TODO: Move to separate methods
 					chipset = ChipsetFactory.CreateChipset(PresetsChipsets.Snapdragon400);
-					internalStorage = new Memory("Micron", "LPDDR3", 8192, 2015, "v.1.0");
 
-					mobilePhone.Chipset = chipset;
-					mobilePhone.InternalStorage = internalStorage;
+					// Create information about memory
+					string model = "eMMC";
+					string manufacturer = "Micron";
+					int yearOfProduction = 2015;
+					string version = "v.1.0";
+					int capacity = 8192;
 
-					mobilePhone.Model = "Lumia 640 XL";
-					mobilePhone.Manufacturer = "Microsoft";
-					mobilePhone.YearOfProduction = 2015;
+					internalStorage = new Memory(model, manufacturer, yearOfProduction, version, capacity);
 
-					InstallEssentialSoftware(mobilePhone);
-					mobilePhone.OperatingSystem.Model = "Windows 10 Mobile";
-					mobilePhone.OperatingSystem.Manufacturer = "Microsoft";
-					mobilePhone.OperatingSystem.Version = "10.493";
+					// Create information about phone itself
+					model = "Lumia 640 XL";
+					manufacturer = "Microsoft";
+					yearOfProduction = 2015;
+					version = "v.1.2";
+
+					mobilePhone = new MobilePhone(model, manufacturer, chipset, yearOfProduction, version);
+
+					// Create information about OS
+					model = "Windows 10 Mobile";
+					manufacturer = "Microsoft";
+					yearOfProduction = 2015;
+					version = "10.493";
+					int size = 1456;
+
+					InstallOperatingSystem(mobilePhone, model, manufacturer, yearOfProduction, version, size);
+
 					break;
 				default:
 					throw new NotImplementedException();
 			}
 			return mobilePhone;
 		}
-		private static void InstallEssentialSoftware(IMobilePhone mobilePhone) {
-			if (mobilePhone == null) {
-				throw new ArgumentNullException("Cannot install Software when mobilePhone is null!");
-			}
-			InstallOperatingSystem(mobilePhone);
-		}
-		public static void InstallOperatingSystem(IMobilePhone mobilePhone) {
+		public static void InstallOperatingSystem(IMobilePhone mobilePhone, string model, string manufacturer, int? yearOfProduction, string version, int size) {
 			if (mobilePhone == null) {
 				throw new ArgumentNullException("Cannot install OS when mobilePhone is null!");
 			}
-			mobilePhone.OperatingSystem = new OperatingSystem();
+			mobilePhone.OperatingSystem = new OperatingSystem(model, manufacturer, yearOfProduction, version, size);
 		}
 	}
 }

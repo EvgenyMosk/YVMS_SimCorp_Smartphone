@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Core {
     public interface ICommonDescription {
-        string Model { get; set; }
-        string Manufacturer { get; set; }
-        int? YearOfProduction { get; set; }
+        string Model { get; }
+        string Manufacturer { get; }
+        int? YearOfProduction { get; }
         string Version { get; set; }
     }
 }

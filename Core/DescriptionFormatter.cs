@@ -44,21 +44,26 @@ namespace Core {
 
 			return description.ToString();
 		}
-		public static void GenerateRandomDescription(ICommonDescription targetForDescription) {
+		public static void GenerateRandomDescription() {
 			Random random = new Random();
-			GenerateRandomDescription(targetForDescription, random);
+			GenerateRandomDescription(random);
 		}
-		public static void GenerateRandomDescription(ICommonDescription targetForDescription, Random random) {
+		public static DescriptionContainer GenerateRandomDescription(Random random) {
+			DescriptionContainer description;
+
 			int lengthForString = GenerateLength_Helper(random, 1, 20);
-			targetForDescription.Model = GenerateRandomString(lengthForString, random);
+			string model = GenerateRandomString(lengthForString, random);
 
 			lengthForString = GenerateLength_Helper(random, 1, 20);
-			targetForDescription.Manufacturer = GenerateRandomString(lengthForString, random);
+			string manufacturer = GenerateRandomString(lengthForString, random);
 
-			targetForDescription.YearOfProduction = random.Next(DateTime.Now.Year - 20, DateTime.Now.Year);
+			int yearOfProduction = random.Next(DateTime.Now.Year - 20, DateTime.Now.Year);
 
 			lengthForString = GenerateLength_Helper(random, 1, 20);
-			targetForDescription.Version = GenerateRandomString(lengthForString, random);
+			string version = GenerateRandomString(lengthForString, random);
+
+			description = new DescriptionContainer(model, manufacturer, yearOfProduction, version);
+			return description;
 		}
 		private static int GenerateLength_Helper(Random random, int min, int max) {
 			return random.Next(min, max);

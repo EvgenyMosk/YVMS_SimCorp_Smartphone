@@ -20,7 +20,7 @@ namespace Core.Test {
 				file2
 			};
 
-			IMemory storage = new Memory("SK Hynix", "LPDDR3", 8192, 2015, "v.1.2.3.4");
+			IMemory storage = new Memory("SK Hynix", "eMMC", 8192, 2015, "v.1.2.3.4");
 
 			fakeFileManager = new FileManager(files, storage);
 		}

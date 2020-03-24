@@ -9,19 +9,23 @@ using Core.Enums;
 namespace Core {
 	public class ChipsetFactory {
 		public static IChipset CreateChipset(PresetsChipsets presetChipset) {
-			CPU snapdragon400 = new CPU {
-				Cores = 4,
-				CriticalTemperature = 60,
-				ThrottleTemperature = 50,
-				FrequencyMax = 1.2,
-				FrequencyCurrent = 0.0,
-				Lithography = 28,
-				Model = "A7",
-				Manufacturer = "Cortex",
-				YearOfProduction = 2015,
-				Version = ""
-			};
-			GPU adreno305 = new GPU();
+			int cpu_cores = 4;
+			int cpu_criticalTemperature = 60;
+			int cpu_throttleTemperature = 50;
+			double cpu_fequencyMax = 1.2;
+			int cpu_lithography = 28;
+			string cpu_model = "A7";
+			string cpu_manufacturer = "Cortex";
+			int cpu_yearOfProduction = 2015;
+			string cpu_version = "v.1.0";
+
+
+
+			CPU snapdragon400 = new CPU(cpu_model,
+				cpu_manufacturer, cpu_fequencyMax,
+				cpu_throttleTemperature, cpu_criticalTemperature,
+				cpu_yearOfProduction, cpu_version,
+				cpu_cores, cpu_lithography);
 
 			string model = "Snapdragon 400";
 			string manufacturer = "Qualcomm";
@@ -32,7 +36,7 @@ namespace Core {
 
 			switch (presetChipset) {
 				case PresetsChipsets.Snapdragon400:
-					chipset = new Chipset(snapdragon400, adreno305, model, manufacturer, yearOfProduction, version);
+					chipset = new Chipset(snapdragon400, model, manufacturer, yearOfProduction, version);
 					break;
 				default:
 					throw new NotImplementedException();

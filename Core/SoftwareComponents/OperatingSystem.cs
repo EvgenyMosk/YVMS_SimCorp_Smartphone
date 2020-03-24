@@ -8,6 +8,9 @@ namespace Core {
 		public IFileManager FileManager { get; set; }
 		public IList<Software> InstalledApplications { get; set; }
 
+		public OperatingSystem(string model, string manufacturer, int? yearOfProduction, string version, int size) : base(model, manufacturer, yearOfProduction, version, size) {
+
+		}
 		public OperationResult MakePhoneCall(IMobilePhone target) {
 			throw new NotImplementedException();
 		}
