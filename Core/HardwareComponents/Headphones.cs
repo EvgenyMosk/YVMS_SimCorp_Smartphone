@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace Core {
 	public class Headphones : IAudioOutputDevice {
-		protected int vAudioVolumeLevelUpperThreshold = 100;
+		protected int vAudioVolumeLevelUpperThreshold;
 		protected const int vAudioVolumeLevelLowerThreshold = 0;
 
-		public Headphones(IOutput output) {
+		public Headphones(string model, string manufacturer, int? yearOfProduction, string version, IOutput output, int upperVolumeLevel = 100) {
+			Model = model;
+			Manufacturer = manufacturer;
+			YearOfProduction = yearOfProduction;
+			Version = version;
 			Output = output;
-		}
-		public Headphones(int audioVolumeLevelUpperThreshold, IOutput output) {
-			vAudioVolumeLevelUpperThreshold = audioVolumeLevelUpperThreshold;
-			Output = output;
+			vAudioVolumeLevelUpperThreshold = upperVolumeLevel;
 		}
 		public IOutput Output { get; set; }
 		public int AudioVolumeLevelCurrent { get; set; } = 0;
 		public string AudioFile { get; set; }
-		public string Model { get; set; }
-		public string Manufacturer { get; set; }
-		public int? YearOfProduction { get; set; }
+		public string Model { get; }
+		public string Manufacturer { get; }
+		public int? YearOfProduction { get; }
 		public string Version { get; set; }
 
 		public void ChangeVolume(int delta) {

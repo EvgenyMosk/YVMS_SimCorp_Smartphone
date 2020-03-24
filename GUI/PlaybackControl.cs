@@ -52,16 +52,10 @@ namespace GUI {
 
 			switch (selectedItem.ToString().Trim().ToLower()) {
 				case "standard headphones":
-					outputDevice = new Headphones(Output) {
-						Manufacturer = "SONY",
-						Model = "MDR-XB660AP"
-					};
+					outputDevice = new Headphones("MDR-XB660AP", "SONY", 2018, "v.1.0", Output);
 					break;
 				case "wireless headphones":
-					outputDevice = new HeadphonesWireless(new Headphones(Output)) {
-						Manufacturer = "ASUS",
-						Model = "Strix Wireless"
-					};
+					outputDevice = new HeadphonesWireless(new Headphones("Strix Wireless", "ASUS", 2017, "v.1.1", Output));
 					break;
 				default:
 					throw new ArgumentException("Ho appropriate headphones found!");

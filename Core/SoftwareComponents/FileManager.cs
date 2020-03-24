@@ -9,8 +9,8 @@ using Core.Enums;
 
 namespace Core {
 	public class FileManager : Software, IFileManager {
-		public IList<File> Files { get; set; }
-		public IMemory Storage { get; set; }
+		public IList<File> Files { get; }
+		public IMemory Storage { get; }
 
 		public FileManager(string model, string manufacturer, int? yearOfProduction, string version, int size,
 			IList<File> files, IMemory storage)
