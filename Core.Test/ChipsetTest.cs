@@ -11,7 +11,7 @@ namespace Core.Test {
 	/// Summary description for ChipsetFactoryTest
 	/// </summary>
 	[TestClass]
-	public class ChipsetFactoryTest {
+	public class ChipsetTest {
 		[TestMethod]
 		public void CreateNewChipset_AllDataSnap400_ExpectNewChipset() {
 			PresetsChipsets chipsetToBeCreated = PresetsChipsets.Snapdragon400;
@@ -22,7 +22,7 @@ namespace Core.Test {
 			double expectedCPUFrequencyCurrent = 0.0;
 			IChipset actualChipset;
 
-			actualChipset = ChipsetFactory.CreateChipset(chipsetToBeCreated);
+			actualChipset = Chipset.CreateChipset(chipsetToBeCreated);
 
 			Assert.IsNotNull(actualChipset);
 			Assert.IsNotNull(actualChipset.CPU);

@@ -12,7 +12,9 @@ namespace Core {
 		public IList<File> Files { get; set; }
 		public IMemory Storage { get; set; }
 
-		public FileManager(IList<File> files, IMemory storage) {
+		public FileManager(string model, string manufacturer, int? yearOfProduction, string version, int size,
+			IList<File> files, IMemory storage)
+			: base(model, manufacturer, yearOfProduction, version, size) {
 			Storage = storage;
 			Files = new List<File>();
 			foreach (File file in files) {

@@ -20,9 +20,9 @@ namespace Core.Test {
 				file2
 			};
 
-			IMemory storage = new Memory("SK Hynix", "eMMC", 8192, 2015, "v.1.2.3.4");
+			IMemory storage = new Memory("fake_model", "fake_manufacturer", 9999, "v.1.2.3.4", 8192);
 
-			fakeFileManager = new FileManager(files, storage);
+			fakeFileManager = new FileManager("fake_model", "fake_manufacturer", 9999, "v.1.2.3.4", 1, files, storage);
 		}
 		[TestMethod]
 		public void CutFileEndingAfterCloning_FileNameWithParentheses_ExpectCorrect() {

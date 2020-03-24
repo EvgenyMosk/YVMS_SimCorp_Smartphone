@@ -49,12 +49,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChipsetFactoryTest.cs" />
+    <Compile Include="ChipsetTest.cs" />
     <Compile Include="ConsoleWriterTest.cs" />
     <Compile Include="DescriptionFormatterTest.cs" />
     <Compile Include="FileManagerTest.cs" />
     <Compile Include="HeadphonesTest.cs" />
-    <Compile Include="MobilePhoneConfiguratorTest.cs" />
+    <Compile Include="MobilePhoneTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

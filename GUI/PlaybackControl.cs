@@ -24,7 +24,7 @@ namespace GUI {
 
 			InitComboBox_Helper(comboBox1);
 			Output = new RichTextBoxWriter(visualConsole); // visualConsole => RichTextBox
-			IMobilePhone mobilePhone = MobilePhoneConfigurator.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
+			IMobilePhone mobilePhone = MobilePhone.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 			IAudioOutputDevice audioOutputDevice = SelectOutputDevice(comboBox1.SelectedItem);
 			phoneControl = new PhoneControl(mobilePhone, audioOutputDevice, Output);
 		}

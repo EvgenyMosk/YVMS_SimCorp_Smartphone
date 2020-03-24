@@ -18,10 +18,7 @@ namespace Core.Test {
 		public IMemory InternalStorage { get; set; }
 	}
 	[TestClass]
-	public class MobilePhoneConfiguratorTest {
-		private IMobilePhone GetFakePhone() {
-			return new FakeMobilePhone();
-		}
+	public class MobilePhoneTest {
 		[TestMethod]
 		public void CreateMobilePhone_PresetMicrosoftLumia() {
 			string expectedMobilePhoneModel = "Lumia 640 XL";
@@ -32,7 +29,7 @@ namespace Core.Test {
 			int? actualMobilePhoneYearOfProduction;
 			PresetsPhones presetToUse = PresetsPhones.MicrosoftLumia640XL;
 
-			IMobilePhone testPhone = MobilePhoneConfigurator.CreateMobilePhone(presetToUse);
+			IMobilePhone testPhone = MobilePhone.CreateMobilePhone(presetToUse);
 			actualMobilePhoneModel = testPhone.Model;
 			actualMobilePhoneManufacturer = testPhone.Manufacturer;
 			actualMobilePhoneYearOfProduction = testPhone.YearOfProduction;
@@ -42,29 +39,11 @@ namespace Core.Test {
 			Assert.AreEqual(expectedMobilePhoneManufacturer.ToLower().Trim(), actualMobilePhoneManufacturer.ToLower().Trim());
 			Assert.AreEqual(expectedMobilePhoneYearOfProduction, actualMobilePhoneYearOfProduction);
 		}
-		//[TestMethod]
-		//public void InstallRecovery_NotNullMobilePhone_ExpectNotNullRecovery() {
-		//	IMobilePhone mobilePhone = GetFakePhone();
-
-		//	Assert.IsNotNull(mobilePhone.Recovery);
-		//}
-		//[TestMethod]
-		//public void InstallBootloader_NotNullMobilePhone_ExpectNotNullBootloader() {
-		//	IMobilePhone mobilePhone = GetFakePhone();
-
-		//	Assert.IsNotNull(mobilePhone.Bootloader);
-		//}
 		[TestMethod]
 		public void InstallOperatingSystem_NullMobilePhone_ExpectArgumentNullException() {
 			IMobilePhone mobilePhone = null;
 
-			Assert.ThrowsException<ArgumentNullException>(() => MobilePhoneConfigurator.InstallOperatingSystem(mobilePhone));
+			Assert.ThrowsException<ArgumentNullException>(() => MobilePhone.InstallOperatingSystem(mobilePhone, null, null, null, null, 1));
 		}
-		//[TestMethod]
-		//public void InstallOperatingSystem_NotNullMobilePhone_ExpectNotNullOperatingSystem() {
-		//	IMobilePhone mobilePhone = GetFakePhone();
-
-		//	Assert.IsNotNull(mobilePhone.OperatingSystem);
-		//}
 	}
 }

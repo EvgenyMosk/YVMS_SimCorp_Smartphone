@@ -12,7 +12,7 @@ namespace YVMS_SC.ConsoleApp {
 	public class Program {
 
 		private static void Main(string[] args) {
-			IMobilePhone mobilePhone = MobilePhoneConfigurator.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
+			IMobilePhone mobilePhone = MobilePhone.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 
 			Random random = new Random();
 
