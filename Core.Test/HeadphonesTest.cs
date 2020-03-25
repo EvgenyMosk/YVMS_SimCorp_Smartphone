@@ -26,7 +26,7 @@ namespace Core.Test {
 
 		[TestInitialize]
 		public void SetUp() {
-			Headphones = new Headphones(new FakeOutput());
+			Headphones = new Headphones("model", "manufacturer", 9999, "v.1.2.3.4", new FakeOutput());
 		}
 
 		[TestMethod]
