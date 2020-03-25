@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core {
+namespace Core.HardwareComponents {
 	public class Headphones : IAudioOutputDevice {
 		protected int vAudioVolumeLevelUpperThreshold;
 		protected const int vAudioVolumeLevelLowerThreshold = 0;

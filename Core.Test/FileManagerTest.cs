@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using Core.Enums;
+using Core.HardwareComponents;
+using Core.SoftwareComponents;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

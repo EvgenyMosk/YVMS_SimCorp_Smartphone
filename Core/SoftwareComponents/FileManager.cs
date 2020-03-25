@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using Core.Enums;
 
-namespace Core {
+namespace Core.SoftwareComponents {
 	public class FileManager : Software, IFileManager {
 		public IList<File> Files { get; }
 		public IMemory Storage { get; }

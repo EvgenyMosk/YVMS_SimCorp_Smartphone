@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Core.Enums;
+using Core.HardwareComponents;
 
-using OS = Core.OperatingSystem;
+using OS = Core.SoftwareComponents.OperatingSystem;
 
 namespace Core {
 	public class MobilePhone : IMobilePhone {
@@ -127,7 +128,7 @@ namespace Core {
 			switch (presetPhone) {
 				case PresetsPhones.MicrosoftLumia640XL:
 					/// TODO: Move to separate methods
-					chipset = Core.Chipset.CreateChipset(PresetsChipsets.Snapdragon400);
+					chipset = Core.HardwareComponents.Chipset.CreateChipset(PresetsChipsets.Snapdragon400);
 
 					// Create information about memory
 					string model = "eMMC";
@@ -165,7 +166,7 @@ namespace Core {
 			if (mobilePhone == null) {
 				throw new ArgumentNullException(nameof(mobilePhone));
 			}
-			mobilePhone.OperatingSystem = new OperatingSystem(model, manufacturer, yearOfProduction, version, size);
+			mobilePhone.OperatingSystem = new Core.SoftwareComponents.OperatingSystem(model, manufacturer, yearOfProduction, version, size);
 		}
 	}
 }

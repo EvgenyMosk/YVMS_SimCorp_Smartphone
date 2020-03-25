@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Core;
+using Core.HardwareComponents;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

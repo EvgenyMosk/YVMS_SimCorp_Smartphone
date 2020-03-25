@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Core.Test {
 	public class FakeMobilePhone : IMobilePhone {
 		public PhoneBootState PhoneBootState { get; set; }
-		public OperatingSystem OperatingSystem { get; set; }
+		public Core.SoftwareComponents.OperatingSystem OperatingSystem { get; set; }
 		public IChipset Chipset { get; set; }
 		public IAudioOutputDevice AudioOutputDevice { get; set; }
 		public string Model { get; set; }

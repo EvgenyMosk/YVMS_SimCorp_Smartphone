@@ -1,4 +1,4 @@
-﻿namespace Core {
+﻿namespace Core.HardwareComponents {
 	public class CPU : ProcessingUnit {
 		public int Cores { get; }
 		public int Lithography { get; } // Nanometers

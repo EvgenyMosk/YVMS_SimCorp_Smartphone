@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Core.Enums;
+using Core.HardwareComponents;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -18,7 +18,7 @@ namespace PhonePlayerBusinessLogic.Test {
 
 		private class FakeMobilePhone : IMobilePhone {
 			public PhoneBootState PhoneBootState { get; set; }
-			public Core.OperatingSystem OperatingSystem { get; set; }
+			public Core.SoftwareComponents.OperatingSystem OperatingSystem { get; set; }
 			public IChipset Chipset { get; set; }
 			public IAudioOutputDevice AudioOutputDevice { get; set; }
 			public IMemory InternalStorage { get; set; }

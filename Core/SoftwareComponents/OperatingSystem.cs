@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Core.Enums;
 
-namespace Core {
+namespace Core.SoftwareComponents {
 	public class OperatingSystem : Software, IOperatingSystem {
 		public IFileManager FileManager { get; set; }
 		public IList<Software> InstalledApplications { get; set; }

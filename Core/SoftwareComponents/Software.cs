@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core {
+namespace Core.SoftwareComponents {
 	public abstract class Software : ICommonDescription {
 		public int Size { get; set; }
 		public string Model { get; }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core {
+namespace Core.HardwareComponents {
 	public abstract class ProcessingUnit : ICommonDescription {
 		public string Model { get; }
 		public double FrequencyMax { get; protected set; }

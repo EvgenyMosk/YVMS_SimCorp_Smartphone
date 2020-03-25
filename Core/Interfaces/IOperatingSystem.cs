@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using Core.Enums;
+using Core.SoftwareComponents;
 
 namespace Core {
 	public interface IOperatingSystem {

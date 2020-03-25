@@ -2,7 +2,7 @@
 
 using Core.Enums;
 
-namespace Core {
+namespace Core.HardwareComponents {
 	public class Chipset : IChipset {
 		public string Model { get; }
 		public string Manufacturer { get; }

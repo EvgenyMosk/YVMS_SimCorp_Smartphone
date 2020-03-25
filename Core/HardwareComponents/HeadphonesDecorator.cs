@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core {
+namespace Core.HardwareComponents {
 	public abstract class HeadphonesDecorator : IAudioOutputDevice {
 		protected readonly IAudioOutputDevice _audioOutputDevice;
 		public IOutput Output { get; set; }

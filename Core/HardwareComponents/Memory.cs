@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Core {
+namespace Core.HardwareComponents {
 	public class Memory : ICommonDescription, IMemory {
 		public string Manufacturer { get; set; }
 		public string Model { get; set; }
