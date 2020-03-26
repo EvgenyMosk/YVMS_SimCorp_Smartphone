@@ -29,7 +29,7 @@
 			this.textBoxAudioFile = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.buttonPlay = new System.Windows.Forms.Button();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.comboBoxDeviceToPlay = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.visualConsole = new System.Windows.Forms.RichTextBox();
 			this.groupBox1.SuspendLayout();
@@ -42,7 +42,7 @@
 			this.groupBox1.Controls.Add(this.textBoxAudioFile);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.buttonPlay);
-			this.groupBox1.Controls.Add(this.comboBox1);
+			this.groupBox1.Controls.Add(this.comboBoxDeviceToPlay);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -100,13 +100,14 @@
 			this.buttonPlay.UseVisualStyleBackColor = true;
 			this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
 			// 
-			// comboBox1
+			// comboBoxDeviceToPlay
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(88, 21);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(259, 28);
-			this.comboBox1.TabIndex = 1;
+			this.comboBoxDeviceToPlay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxDeviceToPlay.FormattingEnabled = true;
+			this.comboBoxDeviceToPlay.Location = new System.Drawing.Point(88, 21);
+			this.comboBoxDeviceToPlay.Name = "comboBoxDeviceToPlay";
+			this.comboBoxDeviceToPlay.Size = new System.Drawing.Size(259, 28);
+			this.comboBoxDeviceToPlay.TabIndex = 1;
 			// 
 			// label1
 			// 
@@ -148,7 +149,7 @@
 		#endregion
 
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox comboBoxDeviceToPlay;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button buttonPlay;
 		private System.Windows.Forms.Button buttonStop;

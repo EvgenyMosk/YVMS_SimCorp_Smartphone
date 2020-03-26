@@ -22,10 +22,10 @@ namespace GUI {
 		public PlaybackControl() {
 			InitializeComponent();
 
-			InitComboBox_Helper(comboBox1);
+			InitComboBox_Helper(comboBoxDeviceToPlay);
 			Output = new RichTextBoxWriter(visualConsole); // visualConsole => RichTextBox
 			IMobilePhone mobilePhone = MobilePhone.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
-			IAudioOutputDevice audioOutputDevice = SelectOutputDevice(comboBox1.SelectedItem);
+			IAudioOutputDevice audioOutputDevice = SelectOutputDevice(comboBoxDeviceToPlay.SelectedItem);
 			phoneControl = new PhoneControl(mobilePhone, audioOutputDevice, Output);
 		}
 
@@ -39,7 +39,7 @@ namespace GUI {
 				MessageBox.Show("Unfortunatelly, nothing can be done due to no phone present!");
 				return;
 			}
-			IAudioOutputDevice outputDevice = SelectOutputDevice(comboBox1.SelectedItem);
+			IAudioOutputDevice outputDevice = SelectOutputDevice(comboBoxDeviceToPlay.SelectedItem);
 			phoneControl.mobilePhone.AudioOutputDevice = outputDevice;
 
 			string audioFile = textBoxAudioFile.Text;
