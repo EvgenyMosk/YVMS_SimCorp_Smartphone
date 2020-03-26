@@ -78,50 +78,51 @@ namespace PhonePlayerBusinessLogic.Test {
 		}
 		[TestMethod]
 		public void PlayAudio_AudioDeviceNull_NotNullString_ExpectAudioDevicePlayNotCalled() {
-			//string audioFile = "audioFile";
-			//string expectedResult = "IAudioOutputDevice_PlayFile";
-			//string actualResult;
+			string audioFile = "audioFile";
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//using (StringWriter stringWriter = new StringWriter()) {
-			//	Console.SetOut(stringWriter);
+			using (StringWriter stringWriter = new StringWriter()) {
+				Console.SetOut(stringWriter);
 
-			//	PhoneControlUnderTest.PlayAudio(audioFile);
-			//	actualResult = stringWriter.ToString().Trim();
-			//}
+				PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+				PhoneControlUnderTest.PlayAudio(audioFile);
+				actualResult = stringWriter.ToString().Trim();
+			}
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
 		[TestMethod]
 		public void PlayAudio_AudioDeviceNotNull_NullString_ExpectAudioDevicePlayNotCalled() {
-			//string audioFile = "audioFile";
-			//string expectedResult = "IAudioOutputDevice_PlayFile";
-			//string actualResult;
+			string audioFile = string.Empty;
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//using (StringWriter stringWriter = new StringWriter()) {
-			//	Console.SetOut(stringWriter);
+			using (StringWriter stringWriter = new StringWriter()) {
+				Console.SetOut(stringWriter);
 
-			//	PhoneControlUnderTest.PlayAudio(audioFile);
-			//	actualResult = stringWriter.ToString().Trim();
-			//}
+				PhoneControlUnderTest.PlayAudio(audioFile);
+				actualResult = stringWriter.ToString().Trim();
+			}
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
 		[TestMethod]
 		public void PlayAudio_AudioDeviceNull_NullString_ExpectAudioDevicePlayNotCalled() {
-			//string audioFile = "audioFile";
-			//string expectedResult = "IAudioOutputDevice_PlayFile";
-			//string actualResult;
+			string audioFile = string.Empty;
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//using (StringWriter stringWriter = new StringWriter()) {
-			//	Console.SetOut(stringWriter);
+			using (StringWriter stringWriter = new StringWriter()) {
+				Console.SetOut(stringWriter);
 
-			//	PhoneControlUnderTest.PlayAudio(audioFile);
-			//	actualResult = stringWriter.ToString().Trim();
-			//}
+				PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+				PhoneControlUnderTest.PlayAudio(audioFile);
+				actualResult = stringWriter.ToString().Trim();
+			}
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
-
 		[TestMethod]
 		public void PlayAudioAndReturnString_AudioDeviceNotNull_NotNullString_ExpectAudioDevicePlayFileAndReturnStringCalled() {
 			string audioFile = "audioFile";
@@ -134,35 +135,36 @@ namespace PhonePlayerBusinessLogic.Test {
 		}
 		[TestMethod]
 		public void PlayAudioAndReturnString_AudioDeviceNull_NotNullString_ExpectAudioDevicePlayFileAndReturnStringNotCalled() {
-			//string audioFile = "audioFile";
-			//string expectedResult = "IAudioOutputDevice_PlayFileAndReturnString";
-			//string actualResult;
+			string audioFile = "audioFile";
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
+			PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+			actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
 		[TestMethod]
 		public void PlayAudioAndReturnString_AudioDeviceNotNull_NullString_ExpectAudioDevicePlayFileAndReturnStringNotCalled() {
-			string audioFile = "audioFile";
-			//string expectedResult = "IAudioOutputDevice_PlayFileAndReturnString";
-			//string actualResult;
+			string audioFile = string.Empty;
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
+			actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
 		[TestMethod]
 		public void PlayAudioAndReturnString_AudioDeviceNull_NullString_ExpectAudioDevicePlayFileAndReturnStringNotCalled() {
-			string audioFile = "audioFile";
-			//string expectedResult = "IAudioOutputDevice_PlayFileAndReturnString";
-			//string actualResult;
+			string audioFile = string.Empty;
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
+			PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+			actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
-
 		[TestMethod]
 		public void StopPlayingAudio_AudioDeviceNotNull_ExpectAudioDeviceStopPlayingAudioCalled() {
 			string expectedResult = "IAudioOutputDevice_StopPlayingAudio";
@@ -179,17 +181,18 @@ namespace PhonePlayerBusinessLogic.Test {
 		}
 		[TestMethod]
 		public void StopPlayingAudio_AudioDeviceNull_ExpectAudioDeviceStopPlayingAudioNotCalled() {
-			//string expectedResult = "IAudioOutputDevice_StopPlayingAudio";
-			//string actualResult;
+			string expectedResult = string.Empty;
+			string actualResult;
 
-			//using (StringWriter stringWriter = new StringWriter()) {
-			//	Console.SetOut(stringWriter);
+			using (StringWriter stringWriter = new StringWriter()) {
+				Console.SetOut(stringWriter);
 
-			//	PhoneControlUnderTest.StopPlayingAudio();
-			//	actualResult = stringWriter.ToString().Trim();
-			//}
+				PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+				PhoneControlUnderTest.StopPlayingAudio();
+				actualResult = stringWriter.ToString().Trim();
+			}
 
-			//Assert.AreEqual(expectedResult, actualResult);
+			Assert.AreEqual(expectedResult, actualResult);
 		}
 	}
 }
