@@ -32,6 +32,7 @@
 			this.comboBoxDeviceToPlay = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.visualConsole = new System.Windows.Forms.RichTextBox();
+			this.buttonNotificationsFormLaunch = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -120,18 +121,30 @@
 			// 
 			// visualConsole
 			// 
-			this.visualConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.visualConsole.Dock = System.Windows.Forms.DockStyle.Top;
 			this.visualConsole.Location = new System.Drawing.Point(0, 131);
 			this.visualConsole.Name = "visualConsole";
-			this.visualConsole.Size = new System.Drawing.Size(359, 480);
+			this.visualConsole.Size = new System.Drawing.Size(359, 441);
 			this.visualConsole.TabIndex = 1;
 			this.visualConsole.Text = "";
+			// 
+			// buttonNotificationsFormLaunch
+			// 
+			this.buttonNotificationsFormLaunch.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.buttonNotificationsFormLaunch.Location = new System.Drawing.Point(0, 572);
+			this.buttonNotificationsFormLaunch.Name = "buttonNotificationsFormLaunch";
+			this.buttonNotificationsFormLaunch.Size = new System.Drawing.Size(359, 39);
+			this.buttonNotificationsFormLaunch.TabIndex = 7;
+			this.buttonNotificationsFormLaunch.Text = "Notifications panel";
+			this.buttonNotificationsFormLaunch.UseVisualStyleBackColor = true;
+			this.buttonNotificationsFormLaunch.Click += new System.EventHandler(this.buttonNotificationsFormLaunch_Click);
 			// 
 			// PlaybackControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(359, 611);
+			this.Controls.Add(this.buttonNotificationsFormLaunch);
 			this.Controls.Add(this.visualConsole);
 			this.Controls.Add(this.groupBox1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -157,6 +170,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.RichTextBox visualConsole;
+		private System.Windows.Forms.Button buttonNotificationsFormLaunch;
 	}
 }
 

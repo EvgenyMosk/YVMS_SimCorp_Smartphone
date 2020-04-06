@@ -45,16 +45,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RichTextBoxWriter.cs" />
-    <Compile Include="PlaybackControl.cs">
+    <Compile Include="Forms\NotificationsPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlaybackControl.Designer.cs">
+    <Compile Include="Forms\NotificationsPanel.Designer.cs">
+      <DependentUpon>NotificationsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RichTextBoxWriter.cs" />
+    <Compile Include="Forms\PlaybackControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlaybackControl.Designer.cs">
       <DependentUpon>PlaybackControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PlaybackControl.resx">
+    <EmbeddedResource Include="Forms\NotificationsPanel.resx">
+      <DependentUpon>NotificationsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlaybackControl.resx">
       <DependentUpon>PlaybackControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

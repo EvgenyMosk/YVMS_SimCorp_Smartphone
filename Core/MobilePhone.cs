@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Core.Enums;
 using Core.HardwareComponents;
+using Core.SoftwareComponents;
 
 using OS = Core.SoftwareComponents.OperatingSystem;
 
@@ -20,19 +21,47 @@ namespace Core {
 		#region Software components
 		public OS OperatingSystem { get; set; }
 		public PhoneBootState PhoneBootState { get; set; }
+		public NotificationService NotificationService { get; set; }
+		public IOutput NotificationsOutput { get; set; }
 		#endregion
 		#region Hardware Components
 		public IChipset Chipset { get; set; }
 		public IAudioOutputDevice AudioOutputDevice { get; set; }
 		public IMemory InternalStorage { get; set; }
 		#endregion
-		public MobilePhone(string model, string manufacturer, IChipset chipset, int? yearOfProduction, string version) {
+		public MobilePhone(string model, string manufacturer, IChipset chipset, int? yearOfProduction, string version, IOutput output) {
 			Model = model;
 			Manufacturer = manufacturer;
 			Chipset = chipset;
 			YearOfProduction = yearOfProduction;
 			Version = version;
+			NotificationsOutput = output;
 		}
+		public void EnableNotifications(IOutput notificationsOutput) {
+			if (notificationsOutput == null) {
+				throw new ArgumentNullException(nameof(notificationsOutput));
+			}
+			if (NotificationService == null) {
+				NotificationService = new NotificationService();
+			}
+			NotificationsOutput = notificationsOutput;
+
+			NotificationService.MessageReceived += NotifyAboutReceivedMessage;
+		}
+		public void DisableNotifications() {
+			NotificationService.MessageReceived -= NotifyAboutReceivedMessage;
+			NotificationsOutput = null;
+		}
+		public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
+			if (NotificationsOutput == null) {
+				return;
+			}
+
+			string data = $"New Notification: {e.Message}" + Environment.NewLine;
+
+			NotificationsOutput.Output(data);
+		}
+
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
 			if (secondsButtonBeingHold <= 0) {
 				throw new ArgumentException("Button cannot be hold for ZERO or NEGATIVE number of seconds");
@@ -145,7 +174,7 @@ namespace Core {
 					yearOfProduction = 2015;
 					version = "v.1.2";
 
-					mobilePhone = new MobilePhone(model, manufacturer, chipset, yearOfProduction, version);
+					mobilePhone = new MobilePhone(model, manufacturer, chipset, yearOfProduction, version, null);
 
 					// Create information about OS
 					model = "Windows 10 Mobile";
@@ -168,5 +197,7 @@ namespace Core {
 			}
 			mobilePhone.OperatingSystem = new Core.SoftwareComponents.OperatingSystem(model, manufacturer, yearOfProduction, version, size);
 		}
+
+
 	}
 }

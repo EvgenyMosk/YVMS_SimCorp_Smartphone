@@ -9,7 +9,7 @@ using Core;
 namespace PhonePlayerBusinessLogic {
     public class PhoneControl {
         public IMobilePhone mobilePhone { get; set; }
-        public PhoneControl(IMobilePhone mobilePhone, IAudioOutputDevice audioOutputDevice, IOutput output) {
+        public PhoneControl(IMobilePhone mobilePhone, IAudioOutputDevice audioOutputDevice, IOutput audioDeviceOutput) {
             if (mobilePhone == null) {
                 throw new ArgumentNullException(nameof(mobilePhone));
             }
@@ -18,7 +18,7 @@ namespace PhonePlayerBusinessLogic {
             this.mobilePhone.AudioOutputDevice = audioOutputDevice;
 
             if (mobilePhone.AudioOutputDevice != null) {
-                this.mobilePhone.AudioOutputDevice.Output = output;
+                this.mobilePhone.AudioOutputDevice.Output = audioDeviceOutput;
             }
         }
         public virtual void PlayAudio(string audioFile) {
@@ -38,6 +38,12 @@ namespace PhonePlayerBusinessLogic {
                 return;
             }
             mobilePhone.AudioOutputDevice.StopPlayingAudio();
+        }
+        public virtual void EnableNotifications(IOutput notificationsOutput) {
+            mobilePhone.EnableNotifications(notificationsOutput);
+        }
+        public virtual void DisableNotifications() {
+            mobilePhone.DisableNotifications();
         }
     }
 }

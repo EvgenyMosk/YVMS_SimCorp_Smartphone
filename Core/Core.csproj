@@ -65,6 +65,7 @@
     <Compile Include="Interfaces\IOutput.cs" />
     <Compile Include="HardwareComponents\Memory.cs" />
     <Compile Include="MobilePhone.cs" />
+    <Compile Include="SoftwareComponents\NotificationArgs.cs" />
     <Compile Include="SoftwareComponents\NotificationService.cs" />
     <Compile Include="SoftwareComponents\OperatingSystem.cs" />
     <Compile Include="HardwareComponents\ProcessingUnit.cs" />

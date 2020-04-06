@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Core;
@@ -13,39 +14,48 @@ using static System.Console;
 
 namespace YVMS_SC.ConsoleApp {
 	public class Program {
-
 		private static void Main(string[] args) {
 			IMobilePhone mobilePhone = MobilePhone.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 			IOutput output = new ConsoleWriter();
 
-			int userChoiceMain;
-			string userChoiceForFile;
-			string audioFile = "Judas Priest - Metal messiah.mp3";
 
-			do {
-				Clear();
-				PrintMainMenu();
 
-				int.TryParse(ReadLine(), out userChoiceMain);
+			mobilePhone.EnableNotifications(output);
 
-				if (userChoiceMain == 0) {
-					return;
-				}
+			for (int i = 0; i < 10; i++) {
+				Thread.Sleep(1000);
+				mobilePhone.NotificationService.ReceiveMessage("Test text.");
+			}
 
-				mobilePhone.AudioOutputDevice = SelectAudioDevice(userChoiceMain, output);
 
-				WriteLine("Would you like to choose another song to play? (Y / N)");
-				userChoiceForFile = ReadLine();
+			//int userChoiceMain;
+			//string userChoiceForFile;
+			//string audioFile = "Judas Priest - Metal messiah.mp3";
 
-				audioFile = LetUserChangeAudioFile(userChoiceForFile, audioFile);
+			//do {
+			//	Clear();
+			//	PrintMainMenu();
 
-				WriteLine();
-				mobilePhone.AudioOutputDevice.PlayFile(audioFile);
-				PrintDeviceUsed(mobilePhone);
-				WriteLine("\nPress any key to continue...");
-				ReadKey();
+			//	int.TryParse(ReadLine(), out userChoiceMain);
 
-			} while (userChoiceMain != 0);
+			//	if (userChoiceMain == 0) {
+			//		return;
+			//	}
+
+			//	mobilePhone.AudioOutputDevice = SelectAudioDevice(userChoiceMain, output);
+
+			//	WriteLine("Would you like to choose another song to play? (Y / N)");
+			//	userChoiceForFile = ReadLine();
+
+			//	audioFile = LetUserChangeAudioFile(userChoiceForFile, audioFile);
+
+			//	WriteLine();
+			//	mobilePhone.AudioOutputDevice.PlayFile(audioFile);
+			//	PrintDeviceUsed(mobilePhone);
+			//	WriteLine("\nPress any key to continue...");
+			//	ReadKey();
+
+			//} while (userChoiceMain != 0);
 
 
 			ReadLine();

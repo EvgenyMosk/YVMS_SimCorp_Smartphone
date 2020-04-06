@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 using Core;
 using Core.Enums;
+using Core.SoftwareComponents;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using PhonePlayerBusinessLogic;
 
 namespace PhonePlayerBusinessLogic.Test {
 	[TestClass]
@@ -27,6 +26,25 @@ namespace PhonePlayerBusinessLogic.Test {
 			public string Manufacturer { get; set; }
 			public int? YearOfProduction { get; set; }
 			public string Version { get; set; }
+			public NotificationService NotificationService { get; set; }
+			public IOutput Output { get; set; }
+			public IOutput NotificationsOutput { get; set; }
+
+			public void DisableNotifications() {
+				throw new NotImplementedException();
+			}
+
+			public void EnableNotifications() {
+				throw new NotImplementedException();
+			}
+
+			public void EnableNotifications(IOutput notificationsOutput) {
+				throw new NotImplementedException();
+			}
+
+			public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
+				throw new NotImplementedException();
+			}
 		}
 		private class FakeHeadphones : IAudioOutputDevice {
 			public IOutput Output { get; set; }

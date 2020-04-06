@@ -15,8 +15,7 @@ namespace GUI {
 		}
 
 		public void Output(object data) {
-			StringBuilder textToAppend = new StringBuilder();
-			RichTextBox.AppendText("Current file: " + data.ToString());
+			RichTextBox.AppendText(data.ToString());
 			RichTextBox.ScrollToCaret();
 		}
 

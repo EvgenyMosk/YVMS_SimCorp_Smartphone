@@ -8,7 +8,11 @@ namespace Core {
 		// Software
 		PhoneBootState PhoneBootState { get; set; }
 		OperatingSystem OperatingSystem { get; set; }
-
+		NotificationService NotificationService { get; set; }
+		IOutput NotificationsOutput { get; set; }
+		void EnableNotifications(IOutput notificationsOutput);
+		void DisableNotifications();
+		void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e);
 		// Hardware
 		IChipset Chipset { get; set; }
 		IAudioOutputDevice AudioOutputDevice { get; set; }
