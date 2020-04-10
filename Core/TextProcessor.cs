@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core {
-	public static class DescriptionFormatter {
+	public static class TextProcessor {
 		/// <summary>
 		/// Creates a unified description for all classes that implement's ICommonDescription
 		/// </summary>
@@ -68,23 +68,18 @@ namespace Core {
 		private static int GenerateLength_Helper(Random random, int min, int max) {
 			return random.Next(min, max);
 		}
+
 		public static string GenerateRandomString(int length, Random random) {
 			if (length <= 0 || random == null) {
 				return "";
 			}
-			//https://www.educative.io/edpresso/how-to-generate-a-random-string-in-c-sharp
-			StringBuilder word = new StringBuilder();
-			char letter;
 
-			for (int i = 0; i < length; i++) {
-				double flt = random.NextDouble();
-				int shift = Convert.ToInt32(Math.Floor(25 * flt));
-				letter = Convert.ToChar(shift + 65);
-				word.Append(letter);
-			}
+			const string chars = " ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz ,.() 0123456789 ";
 
-			return word.ToString();
+			return new string(Enumerable.Repeat(chars, length)
+			  .Select(s => s[random.Next(s.Length)]).ToArray());
 		}
+
 		public static string GenerateRandomVersion(int length, Random random) {
 			if (length <= 0) {
 				return "";
@@ -100,6 +95,37 @@ namespace Core {
 			}
 
 			return version.ToString();
+		}
+
+		public static string FormatByDefault(string text) {
+			if (string.IsNullOrEmpty(text)) {
+				return string.Empty;
+			}
+			return text;
+		}
+		public static string FormatWithDateAtStart(string text) {
+			if (string.IsNullOrEmpty(text)) {
+				return string.Empty;
+			}
+			return $"[{DateTime.Now.ToShortTimeString()}] {text}";
+		}
+		public static string FormatWithDateAtEnd(string text) {
+			if (string.IsNullOrEmpty(text)) {
+				return string.Empty;
+			}
+			return $"{text} [{DateTime.Now.ToShortTimeString()}]";
+		}
+		public static string FormatWithUppercase(string text) {
+			if (string.IsNullOrEmpty(text)) {
+				return string.Empty;
+			}
+			return text.ToUpper();
+		}
+		public static string FormatWithLowercase(string text) {
+			if (string.IsNullOrEmpty(text)) {
+				return string.Empty;
+			}
+			return text.ToLower();
 		}
 	}
 }

@@ -31,10 +31,10 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
 			this.groupBoxFilters = new System.Windows.Forms.GroupBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.timerNotifications = new System.Windows.Forms.Timer(this.components);
 			this.groupBoxFilters.SuspendLayout();
@@ -44,7 +44,7 @@
 			// 
 			this.richTxtBxNotificationsLog.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.richTxtBxNotificationsLog.Location = new System.Drawing.Point(0, 182);
-			this.richTxtBxNotificationsLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.richTxtBxNotificationsLog.Margin = new System.Windows.Forms.Padding(4);
 			this.richTxtBxNotificationsLog.Name = "richTxtBxNotificationsLog";
 			this.richTxtBxNotificationsLog.Size = new System.Drawing.Size(609, 527);
 			this.richTxtBxNotificationsLog.TabIndex = 0;
@@ -61,17 +61,18 @@
             "All in uppercase",
             "All in lowercase"});
 			this.comboBoxFormattingStyle.Location = new System.Drawing.Point(13, 32);
-			this.comboBoxFormattingStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.comboBoxFormattingStyle.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBoxFormattingStyle.Name = "comboBoxFormattingStyle";
 			this.comboBoxFormattingStyle.Size = new System.Drawing.Size(245, 27);
 			this.comboBoxFormattingStyle.TabIndex = 1;
+			this.comboBoxFormattingStyle.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormattingStyle_SelectedIndexChanged);
 			// 
 			// comboBoxSender
 			// 
 			this.comboBoxSender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxSender.FormattingEnabled = true;
 			this.comboBoxSender.Location = new System.Drawing.Point(85, 26);
-			this.comboBoxSender.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.comboBoxSender.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBoxSender.Name = "comboBoxSender";
 			this.comboBoxSender.Size = new System.Drawing.Size(245, 27);
 			this.comboBoxSender.TabIndex = 2;
@@ -79,7 +80,7 @@
 			// datePickerFromDate
 			// 
 			this.datePickerFromDate.Location = new System.Drawing.Point(85, 95);
-			this.datePickerFromDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.datePickerFromDate.Margin = new System.Windows.Forms.Padding(4);
 			this.datePickerFromDate.Name = "datePickerFromDate";
 			this.datePickerFromDate.Size = new System.Drawing.Size(245, 26);
 			this.datePickerFromDate.TabIndex = 3;
@@ -88,7 +89,7 @@
 			// textBox1
 			// 
 			this.textBox1.Location = new System.Drawing.Point(85, 61);
-			this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.textBox1.Margin = new System.Windows.Forms.Padding(4);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(245, 26);
 			this.textBox1.TabIndex = 4;
@@ -96,7 +97,7 @@
 			// dateTimePicker2
 			// 
 			this.dateTimePicker2.Location = new System.Drawing.Point(85, 129);
-			this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
 			this.dateTimePicker2.Name = "dateTimePicker2";
 			this.dateTimePicker2.Size = new System.Drawing.Size(245, 26);
 			this.dateTimePicker2.TabIndex = 5;
@@ -120,23 +121,14 @@
 			this.groupBoxFilters.Text = "Message filters";
 			this.groupBoxFilters.Visible = false;
 			// 
-			// label1
+			// label4
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 29);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(52, 19);
-			this.label1.TabIndex = 6;
-			this.label1.Text = "Sender";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 64);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(35, 19);
-			this.label2.TabIndex = 7;
-			this.label2.Text = "Text";
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(6, 135);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(55, 19);
+			this.label4.TabIndex = 9;
+			this.label4.Text = "To date";
 			// 
 			// label3
 			// 
@@ -147,14 +139,23 @@
 			this.label3.TabIndex = 8;
 			this.label3.Text = "From date";
 			// 
-			// label4
+			// label2
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(6, 135);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(55, 19);
-			this.label4.TabIndex = 9;
-			this.label4.Text = "To date";
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(6, 64);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(35, 19);
+			this.label2.TabIndex = 7;
+			this.label2.Text = "Text";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(6, 29);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(52, 19);
+			this.label1.TabIndex = 6;
+			this.label1.Text = "Sender";
 			// 
 			// label5
 			// 
@@ -181,7 +182,7 @@
 			this.Controls.Add(this.richTxtBxNotificationsLog);
 			this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.MaximizeBox = false;
 			this.Name = "NotificationsPanel";
 			this.Text = "Notifications Panel";

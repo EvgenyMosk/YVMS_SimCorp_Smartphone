@@ -58,7 +58,7 @@ namespace Core.HardwareComponents {
 
 		public override string ToString() {
 			string description;
-			description = DescriptionFormatter.CreateDescription(this);
+			description = TextProcessor.CreateDescription(this);
 			return description;
 		}
 	}

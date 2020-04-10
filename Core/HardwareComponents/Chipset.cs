@@ -28,7 +28,7 @@ namespace Core.HardwareComponents {
 		}
 
 		public override string ToString() {
-			return DescriptionFormatter.CreateDescription(this);
+			return TextProcessor.CreateDescription(this);
 		}
 		public static IChipset CreateChipset(PresetsChipsets presetChipset) {
 			int cpu_cores = 4;

@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="ChipsetTest.cs" />
     <Compile Include="ConsoleWriterTest.cs" />
-    <Compile Include="DescriptionFormatterTest.cs" />
+    <Compile Include="TextProcessorTest.cs" />
     <Compile Include="FileManagerTest.cs" />
     <Compile Include="HeadphonesTest.cs" />
     <Compile Include="MobilePhoneTest.cs" />

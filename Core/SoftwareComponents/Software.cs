@@ -17,7 +17,7 @@ namespace Core.SoftwareComponents {
 		}
 
 		public override string ToString() {
-			return DescriptionFormatter.CreateDescription(this);
+			return TextProcessor.CreateDescription(this);
 		}
 	}
 }

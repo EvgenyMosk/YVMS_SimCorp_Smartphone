@@ -18,45 +18,34 @@ namespace YVMS_SC.ConsoleApp {
 			IMobilePhone mobilePhone = MobilePhone.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 			IOutput output = new ConsoleWriter();
 
+			int userChoiceMain;
+			string userChoiceForFile;
+			string audioFile = "Judas Priest - Metal messiah.mp3";
 
+			do {
+				Clear();
+				PrintMainMenu();
 
-			mobilePhone.EnableNotifications(output);
+				int.TryParse(ReadLine(), out userChoiceMain);
 
-			for (int i = 0; i < 10; i++) {
-				Thread.Sleep(1000);
-				mobilePhone.NotificationService.ReceiveMessage("Test text.");
-			}
+				if (userChoiceMain == 0) {
+					return;
+				}
 
+				mobilePhone.AudioOutputDevice = SelectAudioDevice(userChoiceMain, output);
 
-			//int userChoiceMain;
-			//string userChoiceForFile;
-			//string audioFile = "Judas Priest - Metal messiah.mp3";
+				WriteLine("Would you like to choose another song to play? (Y / N)");
+				userChoiceForFile = ReadLine();
 
-			//do {
-			//	Clear();
-			//	PrintMainMenu();
+				audioFile = LetUserChangeAudioFile(userChoiceForFile, audioFile);
 
-			//	int.TryParse(ReadLine(), out userChoiceMain);
+				WriteLine();
+				mobilePhone.AudioOutputDevice.PlayFile(audioFile);
+				PrintDeviceUsed(mobilePhone);
+				WriteLine("\nPress any key to continue...");
+				ReadKey();
 
-			//	if (userChoiceMain == 0) {
-			//		return;
-			//	}
-
-			//	mobilePhone.AudioOutputDevice = SelectAudioDevice(userChoiceMain, output);
-
-			//	WriteLine("Would you like to choose another song to play? (Y / N)");
-			//	userChoiceForFile = ReadLine();
-
-			//	audioFile = LetUserChangeAudioFile(userChoiceForFile, audioFile);
-
-			//	WriteLine();
-			//	mobilePhone.AudioOutputDevice.PlayFile(audioFile);
-			//	PrintDeviceUsed(mobilePhone);
-			//	WriteLine("\nPress any key to continue...");
-			//	ReadKey();
-
-			//} while (userChoiceMain != 0);
-
+			} while (userChoiceMain != 0);
 
 			ReadLine();
 		}

@@ -9,13 +9,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Core.Test {
 	[TestClass]
-	public class DescriptionFormatterTest {
+	public class TextProcessorTest {
 		public class FakeObject : ICommonDescription {
 			public string Model { get; set; }
 			public string Manufacturer { get; set; }
 			public int? YearOfProduction { get; set; }
 			public string Version { get; set; }
 		}
+		#region CreateDescription tests
 		[TestMethod]
 		public void CreateDescription_ModelManufYearVer_ExpectFullDescription() {
 			string model = "TheModelThatWasSet";
@@ -29,7 +30,7 @@ namespace Core.Test {
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
+			string actualDescription = TextProcessor.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -40,7 +41,6 @@ namespace Core.Test {
 			Assert.IsTrue(isYearPresent);
 			Assert.IsTrue(isVersionPresent);
 		}
-
 		[TestMethod]
 		public void CreateDescription_ModelYearVer_ExpectDescrWithoutManuf() {
 			string model = "TheModelThatWasSet";
@@ -53,7 +53,7 @@ namespace Core.Test {
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
+			string actualDescription = TextProcessor.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -76,7 +76,7 @@ namespace Core.Test {
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
+			string actualDescription = TextProcessor.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -99,7 +99,7 @@ namespace Core.Test {
 				Version = version
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
+			string actualDescription = TextProcessor.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -122,7 +122,7 @@ namespace Core.Test {
 				YearOfProduction = yearOfProduction,
 			};
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
+			string actualDescription = TextProcessor.CreateDescription(testObject);
 			bool isModelPresent = actualDescription.Contains(model);
 			bool isManufacturerPresent = actualDescription.Contains(manufacturer);
 			bool isYearPresent = actualDescription.Contains(yearOfProduction.ToString());
@@ -147,9 +147,116 @@ namespace Core.Test {
 			};
 			string expectedDescription = "";
 
-			string actualDescription = DescriptionFormatter.CreateDescription(testObject);
+			string actualDescription = TextProcessor.CreateDescription(testObject);
 
 			Assert.AreEqual(expectedDescription, actualDescription);
 		}
+		#endregion End of CreateDescription
+		#region FormatByDefault, FormatWithDateAtStart, FormatWithDateAtEnd, FormatWithUppercase, FormatWithLowercase tests
+		[TestMethod]
+		public void FormatByDefault_NullString_ExpectBlank() {
+			string text = null;
+			string expectedResult = string.Empty;
+			string actualResult;
+
+			actualResult = TextProcessor.FormatByDefault(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatByDefault_NotNullString_ExpectSameString() {
+			string text = "Test text.";
+			string expectedResult = text;
+			string actualResult;
+
+			actualResult = TextProcessor.FormatByDefault(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithDateAtStart_NullString_ExpectEmptyString() {
+			string text = null;
+			string expectedResult = string.Empty;
+			string actualResult;
+
+			actualResult = TextProcessor.FormatWithDateAtStart(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithDateAtStart_NotNullString_ExpectStringWithDateAtStart() {
+			string text = "Test text.";
+			string expectedResult = text;
+			string actualResult;
+			string currentDateTime = DateTime.Now.ToShortTimeString();
+
+			actualResult = TextProcessor.FormatWithDateAtStart(text);
+
+			expectedResult = "[" + currentDateTime + "] " + expectedResult;
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithDateAtEnd_NullString_ExpectEmptyString() {
+			string text = null;
+			string expectedResult = string.Empty;
+			string actualResult;
+
+			actualResult = TextProcessor.FormatWithDateAtEnd(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithDateAtEnd_NotNullString_ExpectStringWithDateAtEnd() {
+			string text = "Test text.";
+			string expectedResult = text;
+			string actualResult;
+			string currentDateTime = DateTime.Now.ToShortTimeString();
+
+			actualResult = TextProcessor.FormatWithDateAtEnd(text);
+
+			expectedResult = expectedResult + " [" + currentDateTime + "]";
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithUppercase_NullString_ExpectEmptyString() {
+			string text = null;
+			string expectedResult = string.Empty;
+			string actualResult;
+
+			actualResult = TextProcessor.FormatWithUppercase(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithUppercase_NotNullString_ExpectStringWithAllLettersInUppercase() {
+			string text = "Test text.";
+			string expectedResult = "TEST TEXT.";
+			string actualResult;
+
+			actualResult = TextProcessor.FormatWithUppercase(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithLowercase_NullString_ExpectEmptyString() {
+			string text = null;
+			string expectedResult = string.Empty;
+			string actualResult;
+
+			actualResult = TextProcessor.FormatWithLowercase(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		[TestMethod]
+		public void FormatWithLowercase_NotNullString_ExpectStringWithAllLettersInLowercase() {
+			string text = "Test text.";
+			string expectedResult = "test text.";
+			string actualResult;
+
+			actualResult = TextProcessor.FormatWithLowercase(text);
+
+			Assert.AreEqual(expectedResult, actualResult);
+		}
+		#endregion End of Format.. tests
 	}
 }

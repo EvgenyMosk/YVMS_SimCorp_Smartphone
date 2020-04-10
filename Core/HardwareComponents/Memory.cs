@@ -20,7 +20,7 @@ namespace Core.HardwareComponents {
 		}
 
 		public override string ToString() {
-			return DescriptionFormatter.CreateDescription(this);
+			return TextProcessor.CreateDescription(this);
 		}
 	}
 }

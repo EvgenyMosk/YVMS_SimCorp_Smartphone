@@ -57,7 +57,7 @@ namespace Core {
 				return;
 			}
 
-			string data = $"New Notification: {e.Message}" + Environment.NewLine;
+			string data = $"{e.Message}" + Environment.NewLine;
 
 			NotificationsOutput.Output(data);
 		}
