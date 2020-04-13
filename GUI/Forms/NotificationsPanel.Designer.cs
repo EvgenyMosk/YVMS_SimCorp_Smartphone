@@ -37,16 +37,19 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.timerNotifications = new System.Windows.Forms.Timer(this.components);
+			this.listViewNorifications = new System.Windows.Forms.ListView();
+			this.From = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Message = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Received = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.groupBoxFilters.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// richTxtBxNotificationsLog
 			// 
-			this.richTxtBxNotificationsLog.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.richTxtBxNotificationsLog.Location = new System.Drawing.Point(0, 182);
 			this.richTxtBxNotificationsLog.Margin = new System.Windows.Forms.Padding(4);
 			this.richTxtBxNotificationsLog.Name = "richTxtBxNotificationsLog";
-			this.richTxtBxNotificationsLog.Size = new System.Drawing.Size(609, 527);
+			this.richTxtBxNotificationsLog.Size = new System.Drawing.Size(605, 149);
 			this.richTxtBxNotificationsLog.TabIndex = 0;
 			this.richTxtBxNotificationsLog.Text = "";
 			// 
@@ -171,11 +174,43 @@
 			this.timerNotifications.Interval = 2500;
 			this.timerNotifications.Tick += new System.EventHandler(this.timerNotifications_Tick);
 			// 
+			// listViewNorifications
+			// 
+			this.listViewNorifications.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.From,
+            this.Message,
+            this.Received});
+			this.listViewNorifications.Location = new System.Drawing.Point(18, 338);
+			this.listViewNorifications.Name = "listViewNorifications";
+			this.listViewNorifications.Size = new System.Drawing.Size(577, 359);
+			this.listViewNorifications.TabIndex = 12;
+			this.listViewNorifications.TileSize = new System.Drawing.Size(550, 85);
+			this.listViewNorifications.UseCompatibleStateImageBehavior = false;
+			this.listViewNorifications.View = System.Windows.Forms.View.Tile;
+			// 
+			// From
+			// 
+			this.From.Text = "From";
+			this.From.Width = 100;
+			// 
+			// Message
+			// 
+			this.Message.Text = "Norification text";
+			this.Message.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.Message.Width = 300;
+			// 
+			// Received
+			// 
+			this.Received.Text = "Date received";
+			this.Received.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.Received.Width = 200;
+			// 
 			// NotificationsPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(609, 709);
+			this.Controls.Add(this.listViewNorifications);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.groupBoxFilters);
 			this.Controls.Add(this.comboBoxFormattingStyle);
@@ -209,5 +244,9 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Timer timerNotifications;
+		private System.Windows.Forms.ListView listViewNorifications;
+		private System.Windows.Forms.ColumnHeader From;
+		private System.Windows.Forms.ColumnHeader Message;
+		private System.Windows.Forms.ColumnHeader Received;
 	}
 }

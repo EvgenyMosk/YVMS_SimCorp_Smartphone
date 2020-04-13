@@ -48,9 +48,11 @@
     <Compile Include="Enums\PresetsChipsets.cs" />
     <Compile Include="Enums\PresetsPhones.cs" />
     <Compile Include="HardwareComponents\HeadphonesWireless.cs" />
+    <Compile Include="Interfaces\IMessage.cs" />
     <Compile Include="SoftwareComponents\FileManager.cs" />
     <Compile Include="HardwareComponents\Chipset.cs" />
     <Compile Include="HardwareComponents\CPU.cs" />
+    <Compile Include="SoftwareComponents\NotificationMessage.cs" />
     <Compile Include="TextProcessor.cs" />
     <Compile Include="Enums\PhoneBootState.cs" />
     <Compile Include="File.cs" />

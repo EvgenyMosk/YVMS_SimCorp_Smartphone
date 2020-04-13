@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Core;
+using Core.SoftwareComponents;
 
 using PhonePlayerBusinessLogic;
 
@@ -31,9 +32,16 @@ namespace GUI {
 			PhoneControl.EnableNotifications(output);
 
 			Random = new Random();
-			timerNotifications.Enabled = true;
+			//timerNotifications.Enabled = true;
 
 			Formatter = TextProcessor.FormatByDefault;
+
+
+
+
+
+			listViewNorifications.Items.Add(new ListViewItem(new[] { "Telegram/Rafikkk", "Excuse me, plesase.", new DateTime(1945, 05, 09).ToLongDateString() }));//new NotificationMessage("Telegram/Rafikkk", "Excuse me, plesase.", DateTime.Now));
+			listViewNorifications.Items.Add(new ListViewItem(new[] { "Telegram/vdSAU", "Gyyyyyyyyyyyyyyyy", DateTime.Now.ToLongTimeString() }));
 		}
 
 		private void timerNotifications_Tick(object sender, EventArgs e) {
