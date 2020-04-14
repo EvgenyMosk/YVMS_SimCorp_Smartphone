@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Core;
 using Core.HardwareComponents;
+using Core.Interfaces;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,10 +17,9 @@ namespace Core.Test {
 		public Headphones Headphones { get; set; }
 
 		public class FakeOutput : IOutput {
-			public void Output(object data) {
-				Console.WriteLine(data.ToString());
+			public void Output(IMessage message) {
+				Console.WriteLine(message.Sender + "\n" + message.Body);
 			}
-
 			public string OutputAsString(object data) {
 				return data.ToString();
 			}
@@ -91,8 +91,10 @@ namespace Core.Test {
 		}
 		[TestMethod]
 		public void PlayFile_OutputNotNull_StrinngWithSomeSymbols_ExpectOutputToConsole() {
+			string sender = "System";
 			string audioFile = "Metallica - Unforgiven.flac";
-			string expectedResult = audioFile;
+
+			string expectedResult = sender + "\n" + audioFile;
 			string expectedAudioFileInHeadphones = audioFile;
 			string actualResult;
 			string actualAudioFileInHeadphones;
@@ -109,9 +111,10 @@ namespace Core.Test {
 			Assert.AreEqual(expectedAudioFileInHeadphones, actualAudioFileInHeadphones);
 		}
 		[TestMethod]
-		public void PlayFile_OutputNotNull_EmptyStrinng_ExpectNoOutputToConsole() {
+		public void PlayFile_OutputNotNull_EmptyString_ExpectNoOutputToConsole() {
+			string sender = string.Empty;
 			string audioFile = string.Empty;
-			string expectedResult = "";
+			string expectedResult = "System";
 			string expectedAudioFileInHeadphones = audioFile;
 			string actualResult;
 			string actualAudioFileInHeadphones;

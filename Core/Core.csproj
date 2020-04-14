@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="Writers\ConsoleWriter.cs" />
     <Compile Include="DescriptionContainer.cs" />
     <Compile Include="Enums\OperationResult.cs" />
     <Compile Include="Enums\PresetsChipsets.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="SoftwareComponents\Software.cs" />
     <Compile Include="Interfaces\IWirelessConnectionModule.cs" />
     <Compile Include="HardwareComponents\HeadphonesDecorator.cs" />
+    <Compile Include="Writers\ListViewWriter.cs" />
+    <Compile Include="Writers\RichTextBoxWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Core;
 using Core.SoftwareComponents;
+using Core.Writers;
 
 using PhonePlayerBusinessLogic;
 
@@ -28,29 +29,23 @@ namespace GUI {
 			comboBoxFormattingStyle.SelectedIndex = 0;
 
 			PhoneControl = phoneControl;
-			IOutput output = new RichTextBoxWriter(richTxtBxNotificationsLog);
+			IOutput output = new ListViewWriter(listViewNorifications);
 			PhoneControl.EnableNotifications(output);
 
 			Random = new Random();
-			//timerNotifications.Enabled = true;
+			timerNotifications.Enabled = true;
 
 			Formatter = TextProcessor.FormatByDefault;
-
-
-
-
-
-			listViewNorifications.Items.Add(new ListViewItem(new[] { "Telegram/Rafikkk", "Excuse me, plesase.", new DateTime(1945, 05, 09).ToLongDateString() }));//new NotificationMessage("Telegram/Rafikkk", "Excuse me, plesase.", DateTime.Now));
-			listViewNorifications.Items.Add(new ListViewItem(new[] { "Telegram/vdSAU", "Gyyyyyyyyyyyyyyyy", DateTime.Now.ToLongTimeString() }));
 		}
 
 		private void timerNotifications_Tick(object sender, EventArgs e) {
-			int messageLength = Random.Next(50);
-			string message = TextProcessor.GenerateRandomString(messageLength, Random);
+			int senderNameLength = Random.Next(15);
+			int messageLength = Random.Next(100);
+			string senderName = TextProcessor.GenerateRandomString(senderNameLength, Random);
+			string messageBody = TextProcessor.GenerateRandomString(messageLength, Random);
+			messageBody = Formatter(messageBody);
 
-			message = Formatter(message);
-
-			PhoneControl.mobilePhone.NotificationService.ReceiveMessage(message);
+			PhoneControl.mobilePhone.NotificationService.ReceiveMessage(senderName, messageBody);
 		}
 
 		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {

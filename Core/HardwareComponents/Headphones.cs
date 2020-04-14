@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Core.Interfaces;
+using Core.SoftwareComponents;
+
 namespace Core.HardwareComponents {
 	public class Headphones : IAudioOutputDevice {
 		protected int vAudioVolumeLevelUpperThreshold;
@@ -40,7 +43,8 @@ namespace Core.HardwareComponents {
 		public void PlayFile(string audioFile) {
 			AudioFile = audioFile;
 			if (Output != null) {
-				Output.Output(AudioFile);
+				IMessage message = new NotificationMessage("System", audioFile);
+				Output.Output(message);
 			}
 		}
 		public string PlayFileAndReturnString(string audioFile) {

@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Core;
+using Core.Interfaces;
+using Core.SoftwareComponents;
+using Core.Writers;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,7 +22,7 @@ namespace Core.Test {
 		}
 		[TestMethod]
 		public void Output_DataIsNull_ExpectNoOutputToConsole() {
-			object data = null;
+			IMessage data = null;
 			string expectedOutput = string.Empty;
 			string actualOutput;
 
@@ -34,14 +37,18 @@ namespace Core.Test {
 		}
 		[TestMethod]
 		public void Output_DataIsNotNull_ExpectDataOutputToConsole() {
-			string data = "SimCorp";
-			string expectedOutput = data;
+			string sender = "SimCorp";
+			string body = "Message body";
+			DateTime receivedTime = new DateTime(2000, 01, 01);
+			string receivedTimeStr = receivedTime.ToShortTimeString();
+			IMessage message = new NotificationMessage(sender, body, receivedTime);
+			string expectedOutput = sender + "\r\n" + body + "\r\n" + receivedTimeStr;
 			string actualOutput;
 
 			using (StringWriter sw = new StringWriter()) {
 				Console.SetOut(sw);
 
-				ConsoleWriter.Output(data);
+				ConsoleWriter.Output(message);
 				actualOutput = sw.ToString().Trim();
 			}
 

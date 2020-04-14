@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Core.Enums;
 using Core.HardwareComponents;
+using Core.Interfaces;
 using Core.SoftwareComponents;
 
 using OS = Core.SoftwareComponents.OperatingSystem;
@@ -59,7 +60,8 @@ namespace Core {
 
 			string data = $"{e}" + Environment.NewLine;
 
-			NotificationsOutput.Output(data);
+			IMessage message = new NotificationMessage(e.Sender, e.MessageBody, e.ReceivedTime);
+			NotificationsOutput.Output(message);
 		}
 
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {

@@ -51,7 +51,6 @@
     <Compile Include="Forms\NotificationsPanel.Designer.cs">
       <DependentUpon>NotificationsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="RichTextBoxWriter.cs" />
     <Compile Include="Forms\PlaybackControl.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Core;
+using Core.Interfaces;
 
-namespace GUI {
+namespace Core.Writers {
 	public class RichTextBoxWriter : IOutput {
-		private RichTextBox RichTextBox { get; set; }
+		private RichTextBox richTextBox;
 		public RichTextBoxWriter(RichTextBox richTextBox) {
-			RichTextBox = richTextBox;
+			this.richTextBox = richTextBox;
 		}
 
-		public void Output(object data) {
-			RichTextBox.AppendText(data.ToString());
-			RichTextBox.ScrollToCaret();
+		public void Output(IMessage message) {
+			if (message == null) {
+				return;
+			}
+			richTextBox.AppendText(message.ToString());
+			richTextBox.ScrollToCaret();
 		}
 
 		public string OutputAsString(object data) {
