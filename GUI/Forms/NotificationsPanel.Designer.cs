@@ -24,7 +24,6 @@
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			this.richTxtBxNotificationsLog = new System.Windows.Forms.RichTextBox();
 			this.comboBoxFormattingStyle = new System.Windows.Forms.ComboBox();
 			this.comboBoxSender = new System.Windows.Forms.ComboBox();
 			this.datePickerFromDate = new System.Windows.Forms.DateTimePicker();
@@ -43,15 +42,6 @@
 			this.Received = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.groupBoxFilters.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// richTxtBxNotificationsLog
-			// 
-			this.richTxtBxNotificationsLog.Location = new System.Drawing.Point(0, 182);
-			this.richTxtBxNotificationsLog.Margin = new System.Windows.Forms.Padding(4);
-			this.richTxtBxNotificationsLog.Name = "richTxtBxNotificationsLog";
-			this.richTxtBxNotificationsLog.Size = new System.Drawing.Size(605, 149);
-			this.richTxtBxNotificationsLog.TabIndex = 0;
-			this.richTxtBxNotificationsLog.Text = "";
 			// 
 			// comboBoxFormattingStyle
 			// 
@@ -180,9 +170,11 @@
             this.From,
             this.Message,
             this.Received});
-			this.listViewNorifications.Location = new System.Drawing.Point(18, 338);
+			this.listViewNorifications.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.listViewNorifications.HideSelection = false;
+			this.listViewNorifications.Location = new System.Drawing.Point(0, 180);
 			this.listViewNorifications.Name = "listViewNorifications";
-			this.listViewNorifications.Size = new System.Drawing.Size(577, 359);
+			this.listViewNorifications.Size = new System.Drawing.Size(609, 529);
 			this.listViewNorifications.TabIndex = 12;
 			this.listViewNorifications.TileSize = new System.Drawing.Size(550, 85);
 			this.listViewNorifications.UseCompatibleStateImageBehavior = false;
@@ -214,7 +206,6 @@
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.groupBoxFilters);
 			this.Controls.Add(this.comboBoxFormattingStyle);
-			this.Controls.Add(this.richTxtBxNotificationsLog);
 			this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(4);
@@ -230,8 +221,6 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.RichTextBox richTxtBxNotificationsLog;
 		private System.Windows.Forms.ComboBox comboBoxFormattingStyle;
 		private System.Windows.Forms.ComboBox comboBoxSender;
 		private System.Windows.Forms.DateTimePicker datePickerFromDate;
