@@ -35,11 +35,13 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.timerNotifications = new System.Windows.Forms.Timer(this.components);
+			this.timerNotifications_SimCorp = new System.Windows.Forms.Timer(this.components);
 			this.listViewNorifications = new System.Windows.Forms.ListView();
 			this.From = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Message = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Received = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.timerNotifications_Microsoft = new System.Windows.Forms.Timer(this.components);
+			this.timerNotifications_System = new System.Windows.Forms.Timer(this.components);
 			this.groupBoxFilters.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -159,10 +161,10 @@
 			this.label5.TabIndex = 10;
 			this.label5.Text = "Select formatting style";
 			// 
-			// timerNotifications
+			// timerNotifications_SimCorp
 			// 
-			this.timerNotifications.Interval = 2500;
-			this.timerNotifications.Tick += new System.EventHandler(this.timerNotifications_Tick);
+			this.timerNotifications_SimCorp.Interval = 3333;
+			this.timerNotifications_SimCorp.Tick += new System.EventHandler(this.timerNotifications_SimCorp_Tick);
 			// 
 			// listViewNorifications
 			// 
@@ -171,12 +173,13 @@
             this.Message,
             this.Received});
 			this.listViewNorifications.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.listViewNorifications.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.listViewNorifications.HideSelection = false;
 			this.listViewNorifications.Location = new System.Drawing.Point(0, 180);
 			this.listViewNorifications.Name = "listViewNorifications";
 			this.listViewNorifications.Size = new System.Drawing.Size(609, 529);
 			this.listViewNorifications.TabIndex = 12;
-			this.listViewNorifications.TileSize = new System.Drawing.Size(550, 85);
+			this.listViewNorifications.TileSize = new System.Drawing.Size(550, 50);
 			this.listViewNorifications.UseCompatibleStateImageBehavior = false;
 			this.listViewNorifications.View = System.Windows.Forms.View.Tile;
 			// 
@@ -196,6 +199,16 @@
 			this.Received.Text = "Date received";
 			this.Received.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.Received.Width = 200;
+			// 
+			// timerNotifications_Microsoft
+			// 
+			this.timerNotifications_Microsoft.Interval = 5000;
+			this.timerNotifications_Microsoft.Tick += new System.EventHandler(this.timeNotifications_Microsoft_Tick);
+			// 
+			// timerNotifications_System
+			// 
+			this.timerNotifications_System.Interval = 7500;
+			this.timerNotifications_System.Tick += new System.EventHandler(this.timerNotifications_System_Tick);
 			// 
 			// NotificationsPanel
 			// 
@@ -232,10 +245,12 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Timer timerNotifications;
+		private System.Windows.Forms.Timer timerNotifications_SimCorp;
 		private System.Windows.Forms.ListView listViewNorifications;
 		private System.Windows.Forms.ColumnHeader From;
 		private System.Windows.Forms.ColumnHeader Message;
 		private System.Windows.Forms.ColumnHeader Received;
+		private System.Windows.Forms.Timer timerNotifications_Microsoft;
+		private System.Windows.Forms.Timer timerNotifications_System;
 	}
 }

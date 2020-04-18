@@ -33,23 +33,24 @@ namespace GUI {
 			PhoneControl.EnableNotifications(output);
 
 			Random = new Random();
-			timerNotifications.Enabled = true;
+			SwitchOnOffTimes(true); // Turn on timers
 
 			Formatter = TextProcessor.FormatByDefault;
 		}
 
-		private void timerNotifications_Tick(object sender, EventArgs e) {
-			int senderNameLength = Random.Next(15);
-			int messageLength = Random.Next(100);
-			string senderName = TextProcessor.GenerateRandomString(senderNameLength, Random);
-			string messageBody = TextProcessor.GenerateRandomString(messageLength, Random);
-			messageBody = Formatter(messageBody);
-
-			PhoneControl.mobilePhone.NotificationService.ReceiveMessage(senderName, messageBody);
+		private void SwitchOnOffTimes(bool turnOn) {
+			if (turnOn) {
+				timerNotifications_SimCorp.Enabled = true;
+				timerNotifications_Microsoft.Enabled = true;
+				timerNotifications_System.Enabled = true;
+			} else {
+				timerNotifications_SimCorp.Enabled = false;
+				timerNotifications_Microsoft.Enabled = false;
+				timerNotifications_System.Enabled = false;
+			}
 		}
-
 		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
-			timerNotifications.Enabled = false;
+			SwitchOnOffTimes(false); // Turn off timers
 			PhoneControl.DisableNotifications();
 		}
 
@@ -78,6 +79,39 @@ namespace GUI {
 					throw new ArgumentException("Given argument is not supported!", nameof(indexSelected));
 			}
 		}
+
+		#region Timers ticks events
+		private void timerNotifications_SimCorp_Tick(object sender, EventArgs e) {
+			string senderName = "SimCorp Ltd.";
+			int messageLength = Random.Next(100);
+			string messageBody = TextProcessor.GenerateRandomString(messageLength, Random);
+			messageBody = Formatter(messageBody);
+
+			SendMessageToSmartphone(senderName, messageBody);
+		}
+		private void timeNotifications_Microsoft_Tick(object sender, EventArgs e) {
+			string senderName = "Microsoft Corporation";
+			int messageLength = Random.Next(100);
+			string messageBody = TextProcessor.GenerateRandomString(messageLength, Random);
+			messageBody = Formatter(messageBody);
+
+			SendMessageToSmartphone(senderName, messageBody);
+		}
+		private void timerNotifications_System_Tick(object sender, EventArgs e) {
+			string senderName = "System Notification Service";
+			int messageLength = Random.Next(100);
+			string messageBody = TextProcessor.GenerateRandomString(messageLength, Random);
+			messageBody = Formatter(messageBody);
+
+			SendMessageToSmartphone(senderName, messageBody);
+		}
+
+		private void SendMessageToSmartphone(string senderName, string messageBody) {
+			PhoneControl.mobilePhone.NotificationService.ReceiveMessage(senderName, messageBody);
+		}
+		#endregion
+
+
 
 	}
 }

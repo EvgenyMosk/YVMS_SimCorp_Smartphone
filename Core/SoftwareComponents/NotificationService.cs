@@ -9,6 +9,7 @@ using Core.Interfaces;
 namespace Core.SoftwareComponents {
 	public class NotificationService {
 		public event EventHandler<NotificationEventArgs> MessageReceived;
+
 		public void ReceiveMessage(string message) {
 			OnMessageReceived(message);
 		}
