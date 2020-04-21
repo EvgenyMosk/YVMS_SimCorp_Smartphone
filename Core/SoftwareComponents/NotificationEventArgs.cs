@@ -10,8 +10,9 @@ namespace Core.SoftwareComponents {
 	public class NotificationEventArgs : EventArgs {
 		private readonly IMessage notificationMessage;
 		public string Sender { get { return notificationMessage.Sender; } }
-		public string MessageBody { get { return notificationMessage.Body; } }
+		public string Body { get { return notificationMessage.Body; } }
 		public DateTime ReceivedTime { get { return notificationMessage.ReceivedTime; } }
+
 		public NotificationEventArgs(string sender, string messageBody)
 			: this(sender, messageBody, DateTime.Now) { }
 		public NotificationEventArgs(string sender, string messageBody, DateTime receivedTime) {
@@ -19,6 +20,9 @@ namespace Core.SoftwareComponents {
 		}
 		public NotificationEventArgs(IMessage message) {
 			notificationMessage = message;
+		}
+		public IMessage GetMessage() {
+			return notificationMessage;
 		}
 	}
 }

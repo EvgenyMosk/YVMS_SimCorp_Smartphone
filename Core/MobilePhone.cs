@@ -22,7 +22,8 @@ namespace Core {
 		#region Software components
 		public OS OperatingSystem { get; set; }
 		public PhoneBootState PhoneBootState { get; set; }
-		public NotificationService NotificationService { get; set; }
+		internal NotificationService NotificationService { get; set; }
+		public MessagesStorage MessagesStorage { get; set; }
 		public IOutput NotificationsOutput { get; set; }
 		#endregion
 		#region Hardware Components
@@ -37,33 +38,22 @@ namespace Core {
 			YearOfProduction = yearOfProduction;
 			Version = version;
 			NotificationsOutput = output;
-		}
-		public void EnableNotifications(IOutput notificationsOutput) {
-			if (notificationsOutput == null) {
-				throw new ArgumentNullException(nameof(notificationsOutput));
-			}
-			if (NotificationService == null) {
-				NotificationService = new NotificationService();
-			}
-			NotificationsOutput = notificationsOutput;
-
-			NotificationService.MessageReceived += NotifyAboutReceivedMessage;
-		}
-		public void DisableNotifications() {
-			NotificationService.MessageReceived -= NotifyAboutReceivedMessage;
-			NotificationsOutput = null;
+			MessagesStorage = new MessagesStorage(new List<IMessage>());
+			NotificationService = new NotificationService(MessagesStorage);
 		}
 		public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
 			if (NotificationsOutput == null) {
 				return;
 			}
 
-			string data = $"{e}" + Environment.NewLine;
-
-			IMessage message = new NotificationMessage(e.Sender, e.MessageBody, e.ReceivedTime);
-			NotificationsOutput.Output(message);
+			IMessage message = new NotificationMessage(e.Sender, e.Body, e.ReceivedTime);
+			//NotificationsOutput.Output(message);
+			//NotificationsOutput.Output(e);
 		}
 
+		public void ReceiveMessage(string senderName, string messageBody) {
+			NotificationService.ReceiveMessage(senderName, messageBody);
+		}
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
 			if (secondsButtonBeingHold <= 0) {
 				throw new ArgumentException("Button cannot be hold for ZERO or NEGATIVE number of seconds");
@@ -155,6 +145,7 @@ namespace Core {
 			IMobilePhone mobilePhone;
 			IChipset chipset;
 			IMemory internalStorage;
+			MessagesStorage messagesStorage;
 
 			switch (presetPhone) {
 				case PresetsPhones.MicrosoftLumia640XL:
@@ -176,7 +167,9 @@ namespace Core {
 					yearOfProduction = 2015;
 					version = "v.1.2";
 
-					mobilePhone = new MobilePhone(model, manufacturer, chipset, yearOfProduction, version, null);
+					mobilePhone = new MobilePhone(model, manufacturer, chipset, yearOfProduction, version, null) {
+						InternalStorage = internalStorage
+					};
 
 					// Create information about OS
 					model = "Windows 10 Mobile";
@@ -199,7 +192,5 @@ namespace Core {
 			}
 			mobilePhone.OperatingSystem = new Core.SoftwareComponents.OperatingSystem(model, manufacturer, yearOfProduction, version, size);
 		}
-
-
 	}
 }

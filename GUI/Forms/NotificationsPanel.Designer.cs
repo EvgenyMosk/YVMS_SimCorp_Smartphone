@@ -28,20 +28,20 @@
 			this.comboBoxSender = new System.Windows.Forms.ComboBox();
 			this.datePickerFromDate = new System.Windows.Forms.DateTimePicker();
 			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+			this.datePickerToDate = new System.Windows.Forms.DateTimePicker();
 			this.groupBoxFilters = new System.Windows.Forms.GroupBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.timerNotifications_SimCorp = new System.Windows.Forms.Timer(this.components);
-			this.listViewNorifications = new System.Windows.Forms.ListView();
+			this.timerNotifications = new System.Windows.Forms.Timer(this.components);
+			this.listViewNotifications = new System.Windows.Forms.ListView();
 			this.From = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Message = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Received = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.timerNotifications_Microsoft = new System.Windows.Forms.Timer(this.components);
-			this.timerNotifications_System = new System.Windows.Forms.Timer(this.components);
+			this.buttonRefresh = new System.Windows.Forms.Button();
+			this.checkBoxApplyFilters = new System.Windows.Forms.CheckBox();
 			this.groupBoxFilters.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -71,6 +71,7 @@
 			this.comboBoxSender.Name = "comboBoxSender";
 			this.comboBoxSender.Size = new System.Drawing.Size(245, 27);
 			this.comboBoxSender.TabIndex = 2;
+			this.comboBoxSender.SelectedIndexChanged += new System.EventHandler(this.comboBoxSender_SelectedIndexChanged);
 			// 
 			// datePickerFromDate
 			// 
@@ -79,7 +80,8 @@
 			this.datePickerFromDate.Name = "datePickerFromDate";
 			this.datePickerFromDate.Size = new System.Drawing.Size(245, 26);
 			this.datePickerFromDate.TabIndex = 3;
-			this.datePickerFromDate.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+			this.datePickerFromDate.Value = new System.DateTime(2020, 4, 21, 18, 50, 57, 0);
+			this.datePickerFromDate.ValueChanged += new System.EventHandler(this.datePickerFromDate_ValueChanged);
 			// 
 			// textBox1
 			// 
@@ -88,15 +90,17 @@
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(245, 26);
 			this.textBox1.TabIndex = 4;
+			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
 			// 
-			// dateTimePicker2
+			// datePickerToDate
 			// 
-			this.dateTimePicker2.Location = new System.Drawing.Point(85, 129);
-			this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
-			this.dateTimePicker2.Name = "dateTimePicker2";
-			this.dateTimePicker2.Size = new System.Drawing.Size(245, 26);
-			this.dateTimePicker2.TabIndex = 5;
-			this.dateTimePicker2.Value = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+			this.datePickerToDate.Location = new System.Drawing.Point(85, 129);
+			this.datePickerToDate.Margin = new System.Windows.Forms.Padding(4);
+			this.datePickerToDate.Name = "datePickerToDate";
+			this.datePickerToDate.Size = new System.Drawing.Size(245, 26);
+			this.datePickerToDate.TabIndex = 5;
+			this.datePickerToDate.Value = new System.DateTime(2020, 4, 21, 0, 0, 0, 0);
+			this.datePickerToDate.ValueChanged += new System.EventHandler(this.datePickerToDate_ValueChanged);
 			// 
 			// groupBoxFilters
 			// 
@@ -105,16 +109,16 @@
 			this.groupBoxFilters.Controls.Add(this.label2);
 			this.groupBoxFilters.Controls.Add(this.label1);
 			this.groupBoxFilters.Controls.Add(this.comboBoxSender);
-			this.groupBoxFilters.Controls.Add(this.dateTimePicker2);
+			this.groupBoxFilters.Controls.Add(this.datePickerToDate);
 			this.groupBoxFilters.Controls.Add(this.textBox1);
 			this.groupBoxFilters.Controls.Add(this.datePickerFromDate);
+			this.groupBoxFilters.Enabled = false;
 			this.groupBoxFilters.Location = new System.Drawing.Point(265, 9);
 			this.groupBoxFilters.Name = "groupBoxFilters";
 			this.groupBoxFilters.Size = new System.Drawing.Size(340, 165);
 			this.groupBoxFilters.TabIndex = 6;
 			this.groupBoxFilters.TabStop = false;
 			this.groupBoxFilters.Text = "Message filters";
-			this.groupBoxFilters.Visible = false;
 			// 
 			// label4
 			// 
@@ -161,27 +165,27 @@
 			this.label5.TabIndex = 10;
 			this.label5.Text = "Select formatting style";
 			// 
-			// timerNotifications_SimCorp
+			// timerNotifications
 			// 
-			this.timerNotifications_SimCorp.Interval = 3333;
-			this.timerNotifications_SimCorp.Tick += new System.EventHandler(this.timerNotifications_SimCorp_Tick);
+			this.timerNotifications.Interval = 3333;
+			this.timerNotifications.Tick += new System.EventHandler(this.timerNotifications_Tick);
 			// 
-			// listViewNorifications
+			// listViewNotifications
 			// 
-			this.listViewNorifications.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.listViewNotifications.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.From,
             this.Message,
             this.Received});
-			this.listViewNorifications.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.listViewNorifications.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.listViewNorifications.HideSelection = false;
-			this.listViewNorifications.Location = new System.Drawing.Point(0, 180);
-			this.listViewNorifications.Name = "listViewNorifications";
-			this.listViewNorifications.Size = new System.Drawing.Size(609, 529);
-			this.listViewNorifications.TabIndex = 12;
-			this.listViewNorifications.TileSize = new System.Drawing.Size(550, 50);
-			this.listViewNorifications.UseCompatibleStateImageBehavior = false;
-			this.listViewNorifications.View = System.Windows.Forms.View.Tile;
+			this.listViewNotifications.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.listViewNotifications.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.listViewNotifications.HideSelection = false;
+			this.listViewNotifications.Location = new System.Drawing.Point(0, 180);
+			this.listViewNotifications.Name = "listViewNotifications";
+			this.listViewNotifications.Size = new System.Drawing.Size(609, 529);
+			this.listViewNotifications.TabIndex = 12;
+			this.listViewNotifications.TileSize = new System.Drawing.Size(550, 50);
+			this.listViewNotifications.UseCompatibleStateImageBehavior = false;
+			this.listViewNotifications.View = System.Windows.Forms.View.Tile;
 			// 
 			// From
 			// 
@@ -200,22 +204,35 @@
 			this.Received.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.Received.Width = 200;
 			// 
-			// timerNotifications_Microsoft
+			// buttonRefresh
 			// 
-			this.timerNotifications_Microsoft.Interval = 5000;
-			this.timerNotifications_Microsoft.Tick += new System.EventHandler(this.timeNotifications_Microsoft_Tick);
+			this.buttonRefresh.Location = new System.Drawing.Point(13, 140);
+			this.buttonRefresh.Name = "buttonRefresh";
+			this.buttonRefresh.Size = new System.Drawing.Size(245, 26);
+			this.buttonRefresh.TabIndex = 13;
+			this.buttonRefresh.Text = "Refresh list";
+			this.buttonRefresh.UseVisualStyleBackColor = true;
+			this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
 			// 
-			// timerNotifications_System
+			// checkBoxApplyFilters
 			// 
-			this.timerNotifications_System.Interval = 7500;
-			this.timerNotifications_System.Tick += new System.EventHandler(this.timerNotifications_System_Tick);
+			this.checkBoxApplyFilters.AutoSize = true;
+			this.checkBoxApplyFilters.Location = new System.Drawing.Point(12, 73);
+			this.checkBoxApplyFilters.Name = "checkBoxApplyFilters";
+			this.checkBoxApplyFilters.Size = new System.Drawing.Size(156, 23);
+			this.checkBoxApplyFilters.TabIndex = 14;
+			this.checkBoxApplyFilters.Text = "Apply message filters";
+			this.checkBoxApplyFilters.UseVisualStyleBackColor = true;
+			this.checkBoxApplyFilters.CheckedChanged += new System.EventHandler(this.checkBoxApplyFilters_CheckedChanged);
 			// 
 			// NotificationsPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(609, 709);
-			this.Controls.Add(this.listViewNorifications);
+			this.Controls.Add(this.checkBoxApplyFilters);
+			this.Controls.Add(this.buttonRefresh);
+			this.Controls.Add(this.listViewNotifications);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.groupBoxFilters);
 			this.Controls.Add(this.comboBoxFormattingStyle);
@@ -238,19 +255,19 @@
 		private System.Windows.Forms.ComboBox comboBoxSender;
 		private System.Windows.Forms.DateTimePicker datePickerFromDate;
 		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.DateTimePicker dateTimePicker2;
+		private System.Windows.Forms.DateTimePicker datePickerToDate;
 		private System.Windows.Forms.GroupBox groupBoxFilters;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Timer timerNotifications_SimCorp;
-		private System.Windows.Forms.ListView listViewNorifications;
+		private System.Windows.Forms.Timer timerNotifications;
+		private System.Windows.Forms.ListView listViewNotifications;
 		private System.Windows.Forms.ColumnHeader From;
 		private System.Windows.Forms.ColumnHeader Message;
 		private System.Windows.Forms.ColumnHeader Received;
-		private System.Windows.Forms.Timer timerNotifications_Microsoft;
-		private System.Windows.Forms.Timer timerNotifications_System;
+		private System.Windows.Forms.Button buttonRefresh;
+		private System.Windows.Forms.CheckBox checkBoxApplyFilters;
 	}
 }

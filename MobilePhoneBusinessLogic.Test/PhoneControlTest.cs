@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Core;
 using Core.Enums;
+using Core.Interfaces;
 using Core.SoftwareComponents;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,23 +27,20 @@ namespace PhonePlayerBusinessLogic.Test {
 			public string Manufacturer { get; set; }
 			public int? YearOfProduction { get; set; }
 			public string Version { get; set; }
-			public NotificationService NotificationService { get; set; }
 			public IOutput Output { get; set; }
 			public IOutput NotificationsOutput { get; set; }
+			public MessagesStorage MessagesStorage { get; set; }
 
 			public void DisableNotifications() {
 				throw new NotImplementedException();
 			}
-
 			public void EnableNotifications() {
 				throw new NotImplementedException();
 			}
-
-			public void EnableNotifications(IOutput notificationsOutput) {
+			public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
 				throw new NotImplementedException();
 			}
-
-			public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
+			public void ReceiveMessage(string senderName, string messageBody) {
 				throw new NotImplementedException();
 			}
 		}
@@ -54,19 +52,15 @@ namespace PhonePlayerBusinessLogic.Test {
 			public string Manufacturer { get; set; }
 			public int? YearOfProduction { get; set; }
 			public string Version { get; set; }
-
 			public void ChangeVolume(int delta) {
 				Console.WriteLine("IAudioOutputDevice_ChangeVolume");
 			}
-
 			public void PlayFile(string audioFile) {
 				Console.WriteLine("IAudioOutputDevice_PlayFile");
 			}
-
 			public string PlayFileAndReturnString(string audioFile) {
 				return "IAudioOutputDevice_PlayFileAndReturnString";
 			}
-
 			public void StopPlayingAudio() {
 				Console.WriteLine("IAudioOutputDevice_StopPlayingAudio");
 			}
@@ -103,7 +97,7 @@ namespace PhonePlayerBusinessLogic.Test {
 			using (StringWriter stringWriter = new StringWriter()) {
 				Console.SetOut(stringWriter);
 
-				PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+				PhoneControlUnderTest.MobilePhone.AudioOutputDevice = null;
 				PhoneControlUnderTest.PlayAudio(audioFile);
 				actualResult = stringWriter.ToString().Trim();
 			}
@@ -134,7 +128,7 @@ namespace PhonePlayerBusinessLogic.Test {
 			using (StringWriter stringWriter = new StringWriter()) {
 				Console.SetOut(stringWriter);
 
-				PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+				PhoneControlUnderTest.MobilePhone.AudioOutputDevice = null;
 				PhoneControlUnderTest.PlayAudio(audioFile);
 				actualResult = stringWriter.ToString().Trim();
 			}
@@ -157,7 +151,7 @@ namespace PhonePlayerBusinessLogic.Test {
 			string expectedResult = string.Empty;
 			string actualResult;
 
-			PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+			PhoneControlUnderTest.MobilePhone.AudioOutputDevice = null;
 			actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
 
 			Assert.AreEqual(expectedResult, actualResult);
@@ -178,7 +172,7 @@ namespace PhonePlayerBusinessLogic.Test {
 			string expectedResult = string.Empty;
 			string actualResult;
 
-			PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+			PhoneControlUnderTest.MobilePhone.AudioOutputDevice = null;
 			actualResult = PhoneControlUnderTest.PlayAudioAndReturnString(audioFile);
 
 			Assert.AreEqual(expectedResult, actualResult);
@@ -205,7 +199,7 @@ namespace PhonePlayerBusinessLogic.Test {
 			using (StringWriter stringWriter = new StringWriter()) {
 				Console.SetOut(stringWriter);
 
-				PhoneControlUnderTest.mobilePhone.AudioOutputDevice = null;
+				PhoneControlUnderTest.MobilePhone.AudioOutputDevice = null;
 				PhoneControlUnderTest.StopPlayingAudio();
 				actualResult = stringWriter.ToString().Trim();
 			}

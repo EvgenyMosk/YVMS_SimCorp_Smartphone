@@ -36,16 +36,16 @@ namespace GUI {
 		}
 
 		private void buttonPlay_Click(object sender, EventArgs e) {
-			if (PhoneControl == null || PhoneControl.mobilePhone == null) {
+			if (PhoneControl == null || PhoneControl.MobilePhone == null) {
 				MessageBox.Show("Unfortunatelly, nothing can be done due to no phone present!");
 				return;
 			}
 			IAudioOutputDevice outputDevice = SelectOutputDevice(comboBoxDeviceToPlay.SelectedItem);
-			PhoneControl.mobilePhone.AudioOutputDevice = outputDevice;
+			PhoneControl.MobilePhone.AudioOutputDevice = outputDevice;
 
 			string audioFile = textBoxAudioFile.Text;
 
-			PrintToImaginaryConsole(PhoneControl.mobilePhone.AudioOutputDevice, audioFile);
+			PrintToImaginaryConsole(PhoneControl.MobilePhone.AudioOutputDevice, audioFile);
 		}
 
 		private IAudioOutputDevice SelectOutputDevice(object selectedItem) {
@@ -74,9 +74,9 @@ namespace GUI {
 			}
 
 			visualConsole.AppendText("=======================\n");
-			visualConsole.AppendText("Sound can be heard through:\n" + PhoneControl.mobilePhone.AudioOutputDevice.ToString());
+			visualConsole.AppendText("Sound can be heard through:\n" + PhoneControl.MobilePhone.AudioOutputDevice.ToString());
 
-			PhoneControl.mobilePhone.AudioOutputDevice.PlayFile(audioFile);
+			PhoneControl.MobilePhone.AudioOutputDevice.PlayFile(audioFile);
 		}
 		private string PickFile() {
 			OpenFileDialog openFileDialog1 = new OpenFileDialog {
@@ -105,12 +105,12 @@ namespace GUI {
 
 		private void buttonStop_Click(object sender, EventArgs e) {
 			if (PhoneControl == null
-				|| PhoneControl.mobilePhone == null
-				|| PhoneControl.mobilePhone.AudioOutputDevice == null) {
+				|| PhoneControl.MobilePhone == null
+				|| PhoneControl.MobilePhone.AudioOutputDevice == null) {
 				MessageBox.Show("No device that can be used for output found!");
 				return;
 			}
-			PrintToImaginaryConsole(PhoneControl.mobilePhone.AudioOutputDevice, string.Empty);
+			PrintToImaginaryConsole(PhoneControl.MobilePhone.AudioOutputDevice, string.Empty);
 			textBoxAudioFile.Text = string.Empty;
 		}
 

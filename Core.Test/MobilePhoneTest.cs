@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Core.Enums;
+using Core.Interfaces;
 using Core.SoftwareComponents;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,9 +18,9 @@ namespace Core.Test {
 		public int? YearOfProduction { get; set; }
 		public string Version { get; set; }
 		public IMemory InternalStorage { get; set; }
-		public NotificationService NotificationService { get; set; }
 		public IOutput Output { get; set; }
 		public IOutput NotificationsOutput { get; set; }
+		public MessagesStorage MessagesStorage { get; set; }
 
 		public void DisableNotifications() {
 			throw new NotImplementedException();
@@ -33,7 +34,15 @@ namespace Core.Test {
 			throw new NotImplementedException();
 		}
 
+		public void EnableNotifications(IOutput notificationsOutput, IList<IMessage> messagesStorage) {
+			throw new NotImplementedException();
+		}
+
 		public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		public void ReceiveMessage(string senderName, string messageBody) {
 			throw new NotImplementedException();
 		}
 	}

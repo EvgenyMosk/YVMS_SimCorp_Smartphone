@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Core;
 using Core.Interfaces;
 
 namespace Core.Writers {
@@ -21,7 +20,6 @@ namespace Core.Writers {
 				listView.Items.Add(viewItem);
 			}
 		}
-
 		public string OutputAsString(object data) {
 			throw new NotImplementedException();
 		}

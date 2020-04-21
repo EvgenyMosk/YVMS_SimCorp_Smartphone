@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessagesCollection.cs" />
     <Compile Include="Writers\ConsoleWriter.cs" />
     <Compile Include="DescriptionContainer.cs" />
     <Compile Include="Enums\OperationResult.cs" />
@@ -69,7 +68,7 @@
     <Compile Include="Interfaces\IOutput.cs" />
     <Compile Include="HardwareComponents\Memory.cs" />
     <Compile Include="MobilePhone.cs" />
-    <Compile Include="SoftwareComponents\NotificationArgs.cs" />
+    <Compile Include="SoftwareComponents\NotificationEventArgs.cs" />
     <Compile Include="SoftwareComponents\NotificationService.cs" />
     <Compile Include="SoftwareComponents\OperatingSystem.cs" />
     <Compile Include="HardwareComponents\ProcessingUnit.cs" />
@@ -78,7 +77,9 @@
     <Compile Include="Interfaces\IWirelessConnectionModule.cs" />
     <Compile Include="HardwareComponents\HeadphonesDecorator.cs" />
     <Compile Include="Writers\ListViewWriter.cs" />
+    <Compile Include="MessagesStorage.cs" />
     <Compile Include="Writers\RichTextBoxWriter.cs" />
+    <Compile Include="Writers\StorageWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
