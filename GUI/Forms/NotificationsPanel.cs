@@ -47,6 +47,8 @@ namespace GUI {
 			SwitchOnOffTimers(true); // Turn on timers
 
 			Formatter = TextProcessor.FormatByDefault;
+
+			PhoneControl.PrintAllMessages();
 		}
 
 		private void SwitchOnOffTimers(bool turnOn) {
