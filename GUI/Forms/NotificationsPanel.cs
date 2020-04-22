@@ -97,14 +97,6 @@ namespace GUI {
 
 			SendMessageToSmartphone(senderName, messageBody);
 		}
-		private void timerNotifications_System_Tick(object sender, EventArgs e) {
-			string senderName = "System Notification Service";
-
-			string messageBody = GetRandomMessage();
-			messageBody = Formatter(messageBody);
-
-			SendMessageToSmartphone(senderName, messageBody);
-		}
 		#endregion
 		private string GetRandomSender() {
 			int senderIndex = Random.Next(_messagesSenders.Length);
