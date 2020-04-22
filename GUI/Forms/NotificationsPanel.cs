@@ -30,6 +30,8 @@ namespace GUI {
 		".NET Core 3.3.3.81 available for download!",
 		"Login to your account from new device."};
 		private static readonly string[] _messagesSenders = { "SimCorp Ltd.", "Microsoft Corporation", "System Notification Service" };
+		private delegate void ApplyFilters();
+		private ApplyFilters applyFilters;
 
 		public NotificationsPanel(PhoneControl phoneControl) {
 			if (phoneControl == null) {
@@ -135,16 +137,24 @@ namespace GUI {
 		}
 
 		private void comboBoxSender_SelectedIndexChanged(object sender, EventArgs e) {
+			//ApplyFilters = FilterBySender();
 			PhoneControl.PrintMessagesFromCertainSender(comboBoxSender.Text);
 		}
 		private void textBox1_TextChanged(object sender, EventArgs e) {
+			//ApplyFilters = FilterByText();
 			PhoneControl.PrintMessagesContainsCertainText(textBox1.Text);
 		}
 		private void datePickerFromDate_ValueChanged(object sender, EventArgs e) {
+			//ApplyFilters = FilterByDate();
 			PhoneControl.PrintMessagesBetweenCertainDates(datePickerFromDate.Value, datePickerToDate.Value);
 		}
 		private void datePickerToDate_ValueChanged(object sender, EventArgs e) {
+			//ApplyFilters = FilterByDate();
 			PhoneControl.PrintMessagesBetweenCertainDates(datePickerFromDate.Value, datePickerToDate.Value);
+		}
+
+		private void RefreshMessageList() {
+			applyFilters?.Invoke();
 		}
 	}
 }
