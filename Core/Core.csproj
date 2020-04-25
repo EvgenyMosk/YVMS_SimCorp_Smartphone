@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SoftwareComponents\SendersListChangedArgs.cs" />
     <Compile Include="Writers\ConsoleWriter.cs" />
     <Compile Include="DescriptionContainer.cs" />
     <Compile Include="Enums\OperationResult.cs" />

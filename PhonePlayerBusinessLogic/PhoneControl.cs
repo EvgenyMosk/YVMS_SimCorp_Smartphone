@@ -14,6 +14,7 @@ namespace PhonePlayerBusinessLogic {
 		public IMobilePhone MobilePhone { get; set; }
 		protected ListView _listView;
 		public bool FiltersActive { get; set; }
+
 		public PhoneControl(IMobilePhone mobilePhone, IAudioOutputDevice audioOutputDevice, IOutput audioDeviceOutput) {
 			if (mobilePhone == null) {
 				throw new ArgumentNullException(nameof(mobilePhone));

@@ -24,11 +24,11 @@ namespace GUI {
 		private static readonly string[] _messagesTexts = { "Payment successful! See details at: https://privatbank.ua/payments/mypayments",
 			"Your order arrived at destination country!",
 			"Update available!",
-		"You missed 3 calls from +3809987654321",
-		"Money transfer successful!",
-		"New video from Metallica Official Channel, watch now: you.tu/jsdka",
-		".NET Core 3.3.3.81 available for download!",
-		"Login to your account from new device."};
+			"You missed 3 calls from +3809987654321",
+			"Money transfer successful!",
+			"New video from Metallica Official Channel, watch now: you.tu/jsdka",
+			".NET Core 3.3.3.81 available for download!",
+			"Login to your account from new device."};
 		private static readonly string[] _messagesSenders = { "SimCorp Ltd.", "Microsoft Corporation", "System Notification Service" };
 		private delegate void ApplyFilters();
 		private ApplyFilters applyFilters;
@@ -113,8 +113,7 @@ namespace GUI {
 		}
 
 		private void buttonRefresh_Click(object sender, EventArgs e) {
-			PhoneControl.ClearListView();
-			PhoneControl.PrintAllMessages();
+			RefreshMessageList();
 		}
 
 		private void checkBoxApplyFilters_CheckedChanged(object sender, EventArgs e) {
@@ -122,8 +121,10 @@ namespace GUI {
 				PhoneControl.DisableNotifications();
 				SwitchOnOffFilters(true);
 			} else {
+				applyFilters = null;
 				PhoneControl.EnableNotifications(listViewNotifications);
 				SwitchOnOffFilters(false);
+				RefreshMessageList();
 			}
 		}
 		private void SwitchOnOffFilters(bool switchOn) {
@@ -137,24 +138,36 @@ namespace GUI {
 		}
 
 		private void comboBoxSender_SelectedIndexChanged(object sender, EventArgs e) {
-			//ApplyFilters = FilterBySender();
-			PhoneControl.PrintMessagesFromCertainSender(comboBoxSender.Text);
+			applyFilters = FilterBySender;
 		}
 		private void textBox1_TextChanged(object sender, EventArgs e) {
-			//ApplyFilters = FilterByText();
-			PhoneControl.PrintMessagesContainsCertainText(textBox1.Text);
+			applyFilters = FilterByText;
 		}
 		private void datePickerFromDate_ValueChanged(object sender, EventArgs e) {
-			//ApplyFilters = FilterByDate();
-			PhoneControl.PrintMessagesBetweenCertainDates(datePickerFromDate.Value, datePickerToDate.Value);
+			applyFilters = FilterByDate;
 		}
 		private void datePickerToDate_ValueChanged(object sender, EventArgs e) {
-			//ApplyFilters = FilterByDate();
-			PhoneControl.PrintMessagesBetweenCertainDates(datePickerFromDate.Value, datePickerToDate.Value);
+			applyFilters = FilterByDate;
 		}
 
 		private void RefreshMessageList() {
-			applyFilters?.Invoke();
+			PhoneControl.ClearListView();
+
+			if (applyFilters != null) {
+				applyFilters.Invoke();
+			} else {
+				PhoneControl.PrintAllMessages();
+			}
+		}
+
+		private void FilterBySender() {
+			PhoneControl.PrintMessagesFromCertainSender(comboBoxSender.Text);
+		}
+		private void FilterByText() {
+			PhoneControl.PrintMessagesContainsCertainText(textBox1.Text);
+		}
+		private void FilterByDate() {
+			PhoneControl.PrintMessagesBetweenCertainDates(datePickerFromDate.Value, datePickerToDate.Value);
 		}
 	}
 }
