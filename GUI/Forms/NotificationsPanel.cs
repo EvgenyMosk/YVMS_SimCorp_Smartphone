@@ -17,42 +17,34 @@ using PhonePlayerBusinessLogic;
 
 namespace GUI {
 	public partial class NotificationsPanel : Form {
-		private readonly PhoneControl PhoneControl;
-		private readonly Random Random;
-		private delegate string MessageFormatDelegate(string text);
-		private MessageFormatDelegate Formatter;
-		private static readonly string[] _messagesTexts = { "Payment successful! See details at: https://privatbank.ua/payments/mypayments",
-			"Your order arrived at destination country!",
-			"Update available!",
-			"You missed 3 calls from +3809987654321",
-			"Money transfer successful!",
-			"New video from Metallica Official Channel, watch now: you.tu/jsdka",
-			".NET Core 3.3.3.81 available for download!",
-			"Login to your account from new device."};
-		private static readonly string[] _messagesSenders = { "SimCorp Ltd.", "Microsoft Corporation", "System Notification Service" };
-		private delegate void ApplyFilters();
-		private ApplyFilters applyFilters;
-
 		public NotificationsPanel(PhoneControl phoneControl) {
 			if (phoneControl == null) {
 				throw new ArgumentNullException(nameof(phoneControl));
 			}
 			InitializeComponent();
-
+			_random = new Random();
+			_phoneControl = phoneControl;
+			_formatter = TextProcessor.FormatByDefault;
+			AddDefaultMessagesToStorage(_phoneControl.MobilePhone.MessagesStorage);
 			comboBoxFormattingStyle.SelectedIndex = 0;
 
-			PhoneControl = phoneControl;
+			EnableUpdatingSendersList();
+			EnableNotificationsOfNewMessages();
 
-			PhoneControl.EnableNotifications(listViewNotifications);
-
-			Random = new Random();
 			SwitchOnOffTimers(true); // Turn on timers
 
-			Formatter = TextProcessor.FormatByDefault;
-
-			PhoneControl.PrintAllMessages();
+			PrintAllMessages();
 		}
-
+		private void AddDefaultMessagesToStorage(MessagesStorage messagesStorage) {
+			int month = 1;
+			int year = 1950;
+			for (int day = 5; day < 28; day += 3) {
+				NotificationMessage message = new NotificationMessage("Microsoft Corporation", "Default Message", new DateTime(year, month, day));
+				messagesStorage.Add(message);
+				month++;
+				year += 7;
+			}
+		}
 		private void SwitchOnOffTimers(bool turnOn) {
 			if (turnOn) {
 				timerNotifications.Enabled = true;
@@ -60,31 +52,23 @@ namespace GUI {
 				timerNotifications.Enabled = false;
 			}
 		}
-		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
-			SwitchOnOffTimers(false); // Turn off timers
-			PhoneControl.DisableNotifications();
-		}
-
-		private void comboBoxFormattingStyle_SelectedIndexChanged(object sender, EventArgs e) {
-			SelectFormatter(comboBoxFormattingStyle.SelectedIndex);
-		}
 
 		private void SelectFormatter(int indexSelected) {
 			switch (indexSelected) {
 				case 0:
-					Formatter = TextProcessor.FormatByDefault;
+					_formatter = TextProcessor.FormatByDefault;
 					break;
 				case 1:
-					Formatter = TextProcessor.FormatWithDateAtStart;
+					_formatter = TextProcessor.FormatWithDateAtStart;
 					break;
 				case 2:
-					Formatter = TextProcessor.FormatWithDateAtEnd;
+					_formatter = TextProcessor.FormatWithDateAtEnd;
 					break;
 				case 3:
-					Formatter = TextProcessor.FormatWithUppercase;
+					_formatter = TextProcessor.FormatWithUppercase;
 					break;
 				case 4:
-					Formatter = TextProcessor.FormatWithLowercase;
+					_formatter = TextProcessor.FormatWithLowercase;
 					break;
 				default:
 					throw new ArgumentException("Given value is not supported!", nameof(indexSelected));
@@ -95,79 +79,74 @@ namespace GUI {
 		private void timerNotifications_Tick(object sender, EventArgs e) {
 			string senderName = GetRandomSender();
 			string messageBody = GetRandomMessage();
-			messageBody = Formatter(messageBody);
+			messageBody = _formatter(messageBody);
 
 			SendMessageToSmartphone(senderName, messageBody);
 		}
 		#endregion
-		private string GetRandomSender() {
-			int senderIndex = Random.Next(_messagesSenders.Length);
-			return _messagesSenders[senderIndex];
-		}
-		private string GetRandomMessage() {
-			int messageIndex = Random.Next(_messagesTexts.Length);
-			return _messagesTexts[messageIndex];
-		}
-		private void SendMessageToSmartphone(string senderName, string messageBody) {
-			PhoneControl.MobilePhone.ReceiveMessage(senderName, messageBody);
+		#region Form events
+		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
+			SwitchOnOffTimers(false); // Turn off timers
+			DisableNotificationsOfNewMessages();
+			DisableUpdatingSendersList();
 		}
 
+		private void comboBoxFormattingStyle_SelectedIndexChanged(object sender, EventArgs e) {
+			SelectFormatter(comboBoxFormattingStyle.SelectedIndex);
+		}
 		private void buttonRefresh_Click(object sender, EventArgs e) {
 			RefreshMessageList();
 		}
-
 		private void checkBoxApplyFilters_CheckedChanged(object sender, EventArgs e) {
 			if (checkBoxApplyFilters.Checked == true) {
-				PhoneControl.DisableNotifications();
-				SwitchOnOffFilters(true);
+				EnableDisableGroupBoxes(true);
 			} else {
-				applyFilters = null;
-				PhoneControl.EnableNotifications(listViewNotifications);
-				SwitchOnOffFilters(false);
-				RefreshMessageList();
+				EnableDisableGroupBoxes(false);
 			}
+			RefreshMessageList();
 		}
-		private void SwitchOnOffFilters(bool switchOn) {
-			if (switchOn) {
-				groupBoxFilters.Enabled = true;
-				PhoneControl.FiltersActive = true;
-			} else {
-				groupBoxFilters.Enabled = false;
-				PhoneControl.FiltersActive = false;
-			}
-		}
-
 		private void comboBoxSender_SelectedIndexChanged(object sender, EventArgs e) {
-			applyFilters = FilterBySender;
+			RefreshMessageList();
 		}
 		private void textBox1_TextChanged(object sender, EventArgs e) {
-			applyFilters = FilterByText;
+			RefreshMessageList();
 		}
 		private void datePickerFromDate_ValueChanged(object sender, EventArgs e) {
-			applyFilters = FilterByDate;
+			RefreshMessageList();
 		}
 		private void datePickerToDate_ValueChanged(object sender, EventArgs e) {
-			applyFilters = FilterByDate;
+			RefreshMessageList();
 		}
 
-		private void RefreshMessageList() {
-			PhoneControl.ClearListView();
-
-			if (applyFilters != null) {
-				applyFilters.Invoke();
+		private void checkBoxMsgSentBetweenDates_CheckedChanged(object sender, EventArgs e) {
+			if (checkBoxMsgSentBetweenDates.Checked == true) {
+				datePickerFromDate.Enabled = true;
+				datePickerToDate.Enabled = true;
 			} else {
-				PhoneControl.PrintAllMessages();
+				datePickerFromDate.Enabled = false;
+				datePickerToDate.Enabled = false;
 			}
 		}
-
-		private void FilterBySender() {
-			PhoneControl.PrintMessagesFromCertainSender(comboBoxSender.Text);
+		private void checkBoxMsgContainsText_CheckedChanged(object sender, EventArgs e) {
+			if (checkBoxMsgContainsText.Checked == true) {
+				textBoxMsgContainsText.Enabled = true;
+			} else {
+				textBoxMsgContainsText.Enabled = false;
+			}
 		}
-		private void FilterByText() {
-			PhoneControl.PrintMessagesContainsCertainText(textBox1.Text);
+		private void checkBoxUseSender_CheckedChanged(object sender, EventArgs e) {
+			if (checkBoxUseSender.Checked == true) {
+				comboBoxSender.Enabled = true;
+			} else {
+				comboBoxSender.Enabled = false;
+			}
 		}
-		private void FilterByDate() {
-			PhoneControl.PrintMessagesBetweenCertainDates(datePickerFromDate.Value, datePickerToDate.Value);
+		private void radioButtonAndOperator_CheckedChanged(object sender, EventArgs e) {
+			RefreshMessageList();
 		}
+		private void radioButtonOrOperator_CheckedChanged(object sender, EventArgs e) {
+			RefreshMessageList();
+		}
+		#endregion
 	}
 }

@@ -35,20 +35,8 @@ namespace Core {
 			} else {
 				_messagesStorage = new List<IMessage>();
 			}
-
-			AddDefaultMessages();
 		}
 
-		private void AddDefaultMessages() {
-			int month = 1;
-			int year = 1950;
-			for (int day = 5; day < 28; day += 3) {
-				NotificationMessage message = new NotificationMessage("Microsoft Corporation", "Default Message", new DateTime(year, month, day));
-				_messagesStorage.Add(message);
-				month++;
-				year += 7;
-			}
-		}
 		private void RaiseSendersListChangedEvent() {
 			IEnumerable<string> messagesSenders = GetMessagesSenders();
 			OnSendersListChanged(messagesSenders);
@@ -74,8 +62,47 @@ namespace Core {
 			return messages;
 		}
 		public IEnumerable<IMessage> GetMessagesBetweenDates(DateTime fromDate, DateTime toDate) {
+			if (fromDate > toDate) {
+				throw new ArgumentException($"{nameof(fromDate)} cannot be after {nameof(toDate)}!");
+			}
+
 			IEnumerable<IMessage> messages = _messagesStorage.Where(msgs => msgs.ReceivedTime >= fromDate && msgs.ReceivedTime <= toDate);
 			return messages;
+		}
+
+		public IEnumerable<IMessage> ApplyAND(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
+			IEnumerable<IMessage> messagesAfterAND = null;
+
+			if (msgsFilteredBySender.Count() != 0) {
+				messagesAfterAND = msgsFilteredBySender;
+			} else if (msgsFilteredByText.Count() != 0) {
+				messagesAfterAND = msgsFilteredByText;
+			} else {
+				messagesAfterAND = msgsFilteredByDate;
+			}
+
+			if (messagesAfterAND == null) {
+				throw new NullReferenceException("Cannot apply filters to null!");
+			}
+
+			if (msgsFilteredBySender.Count() != 0) {
+				messagesAfterAND = messagesAfterAND.Intersect(msgsFilteredBySender);
+			}
+			if (msgsFilteredByText.Count() != 0) {
+				messagesAfterAND = messagesAfterAND.Intersect(msgsFilteredByText);
+			}
+			if (msgsFilteredByDate.Count() != 0) {
+				messagesAfterAND = messagesAfterAND.Intersect(msgsFilteredByDate);
+			}
+
+			return messagesAfterAND;
+		}
+		public IEnumerable<IMessage> ApplyOR(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
+			if (msgsFilteredBySender == null || msgsFilteredByText == null || msgsFilteredByDate == null) {
+				throw new ArgumentNullException("None of the arguments can be null!");
+			}
+			IEnumerable<IMessage> messagesAfterOR = msgsFilteredBySender.Union(msgsFilteredByText).Union(msgsFilteredByDate).OrderBy(x => x.ReceivedTime);
+			return messagesAfterOR;
 		}
 		#endregion
 		#region IList implementation

@@ -27,13 +27,14 @@
 			this.comboBoxFormattingStyle = new System.Windows.Forms.ComboBox();
 			this.comboBoxSender = new System.Windows.Forms.ComboBox();
 			this.datePickerFromDate = new System.Windows.Forms.DateTimePicker();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.textBoxMsgContainsText = new System.Windows.Forms.TextBox();
 			this.datePickerToDate = new System.Windows.Forms.DateTimePicker();
 			this.groupBoxFilters = new System.Windows.Forms.GroupBox();
+			this.checkBoxMsgSentBetweenDates = new System.Windows.Forms.CheckBox();
+			this.checkBoxMsgContainsText = new System.Windows.Forms.CheckBox();
+			this.checkBoxUseSender = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.timerNotifications = new System.Windows.Forms.Timer(this.components);
 			this.listViewNotifications = new System.Windows.Forms.ListView();
@@ -42,7 +43,11 @@
 			this.Received = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.buttonRefresh = new System.Windows.Forms.Button();
 			this.checkBoxApplyFilters = new System.Windows.Forms.CheckBox();
+			this.radioButtonAndOperator = new System.Windows.Forms.RadioButton();
+			this.radioButtonOrOperator = new System.Windows.Forms.RadioButton();
+			this.groupBoxLogicalOperators = new System.Windows.Forms.GroupBox();
 			this.groupBoxFilters.SuspendLayout();
+			this.groupBoxLogicalOperators.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// comboBoxFormattingStyle
@@ -65,8 +70,9 @@
 			// comboBoxSender
 			// 
 			this.comboBoxSender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxSender.Enabled = false;
 			this.comboBoxSender.FormattingEnabled = true;
-			this.comboBoxSender.Location = new System.Drawing.Point(85, 26);
+			this.comboBoxSender.Location = new System.Drawing.Point(182, 23);
 			this.comboBoxSender.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBoxSender.Name = "comboBoxSender";
 			this.comboBoxSender.Size = new System.Drawing.Size(245, 27);
@@ -75,26 +81,29 @@
 			// 
 			// datePickerFromDate
 			// 
-			this.datePickerFromDate.Location = new System.Drawing.Point(85, 95);
+			this.datePickerFromDate.Enabled = false;
+			this.datePickerFromDate.Location = new System.Drawing.Point(182, 95);
 			this.datePickerFromDate.Margin = new System.Windows.Forms.Padding(4);
 			this.datePickerFromDate.Name = "datePickerFromDate";
 			this.datePickerFromDate.Size = new System.Drawing.Size(245, 26);
 			this.datePickerFromDate.TabIndex = 3;
-			this.datePickerFromDate.Value = new System.DateTime(2020, 4, 21, 18, 50, 57, 0);
+			this.datePickerFromDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
 			this.datePickerFromDate.ValueChanged += new System.EventHandler(this.datePickerFromDate_ValueChanged);
 			// 
-			// textBox1
+			// textBoxMsgContainsText
 			// 
-			this.textBox1.Location = new System.Drawing.Point(85, 61);
-			this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(245, 26);
-			this.textBox1.TabIndex = 4;
-			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+			this.textBoxMsgContainsText.Enabled = false;
+			this.textBoxMsgContainsText.Location = new System.Drawing.Point(182, 61);
+			this.textBoxMsgContainsText.Margin = new System.Windows.Forms.Padding(4);
+			this.textBoxMsgContainsText.Name = "textBoxMsgContainsText";
+			this.textBoxMsgContainsText.Size = new System.Drawing.Size(245, 26);
+			this.textBoxMsgContainsText.TabIndex = 4;
+			this.textBoxMsgContainsText.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
 			// 
 			// datePickerToDate
 			// 
-			this.datePickerToDate.Location = new System.Drawing.Point(85, 129);
+			this.datePickerToDate.Enabled = false;
+			this.datePickerToDate.Location = new System.Drawing.Point(182, 131);
 			this.datePickerToDate.Margin = new System.Windows.Forms.Padding(4);
 			this.datePickerToDate.Name = "datePickerToDate";
 			this.datePickerToDate.Size = new System.Drawing.Size(245, 26);
@@ -104,57 +113,73 @@
 			// 
 			// groupBoxFilters
 			// 
+			this.groupBoxFilters.Controls.Add(this.checkBoxMsgSentBetweenDates);
+			this.groupBoxFilters.Controls.Add(this.checkBoxMsgContainsText);
+			this.groupBoxFilters.Controls.Add(this.checkBoxUseSender);
 			this.groupBoxFilters.Controls.Add(this.label4);
 			this.groupBoxFilters.Controls.Add(this.label3);
-			this.groupBoxFilters.Controls.Add(this.label2);
-			this.groupBoxFilters.Controls.Add(this.label1);
 			this.groupBoxFilters.Controls.Add(this.comboBoxSender);
 			this.groupBoxFilters.Controls.Add(this.datePickerToDate);
-			this.groupBoxFilters.Controls.Add(this.textBox1);
+			this.groupBoxFilters.Controls.Add(this.textBoxMsgContainsText);
 			this.groupBoxFilters.Controls.Add(this.datePickerFromDate);
 			this.groupBoxFilters.Enabled = false;
 			this.groupBoxFilters.Location = new System.Drawing.Point(265, 9);
 			this.groupBoxFilters.Name = "groupBoxFilters";
-			this.groupBoxFilters.Size = new System.Drawing.Size(340, 165);
+			this.groupBoxFilters.Size = new System.Drawing.Size(434, 166);
 			this.groupBoxFilters.TabIndex = 6;
 			this.groupBoxFilters.TabStop = false;
 			this.groupBoxFilters.Text = "Message filters";
 			// 
+			// checkBoxMsgSentBetweenDates
+			// 
+			this.checkBoxMsgSentBetweenDates.AutoSize = true;
+			this.checkBoxMsgSentBetweenDates.Location = new System.Drawing.Point(6, 113);
+			this.checkBoxMsgSentBetweenDates.Name = "checkBoxMsgSentBetweenDates";
+			this.checkBoxMsgSentBetweenDates.Size = new System.Drawing.Size(110, 23);
+			this.checkBoxMsgSentBetweenDates.TabIndex = 17;
+			this.checkBoxMsgSentBetweenDates.Text = "Sent between";
+			this.checkBoxMsgSentBetweenDates.UseVisualStyleBackColor = true;
+			this.checkBoxMsgSentBetweenDates.CheckedChanged += new System.EventHandler(this.checkBoxMsgSentBetweenDates_CheckedChanged);
+			// 
+			// checkBoxMsgContainsText
+			// 
+			this.checkBoxMsgContainsText.AutoSize = true;
+			this.checkBoxMsgContainsText.Location = new System.Drawing.Point(6, 63);
+			this.checkBoxMsgContainsText.Name = "checkBoxMsgContainsText";
+			this.checkBoxMsgContainsText.Size = new System.Drawing.Size(141, 23);
+			this.checkBoxMsgContainsText.TabIndex = 16;
+			this.checkBoxMsgContainsText.Text = "Messages contains";
+			this.checkBoxMsgContainsText.UseVisualStyleBackColor = true;
+			this.checkBoxMsgContainsText.CheckedChanged += new System.EventHandler(this.checkBoxMsgContainsText_CheckedChanged);
+			// 
+			// checkBoxUseSender
+			// 
+			this.checkBoxUseSender.AutoSize = true;
+			this.checkBoxUseSender.Location = new System.Drawing.Point(6, 25);
+			this.checkBoxUseSender.Name = "checkBoxUseSender";
+			this.checkBoxUseSender.Size = new System.Drawing.Size(135, 23);
+			this.checkBoxUseSender.TabIndex = 15;
+			this.checkBoxUseSender.Text = "Messages sent by";
+			this.checkBoxUseSender.UseVisualStyleBackColor = true;
+			this.checkBoxUseSender.CheckedChanged += new System.EventHandler(this.checkBoxUseSender_CheckedChanged);
+			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(6, 135);
+			this.label4.Location = new System.Drawing.Point(119, 135);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(55, 19);
+			this.label4.Size = new System.Drawing.Size(58, 19);
 			this.label4.TabIndex = 9;
-			this.label4.Text = "To date";
+			this.label4.Text = "Date #2";
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(6, 101);
+			this.label3.Location = new System.Drawing.Point(119, 101);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(72, 19);
+			this.label3.Size = new System.Drawing.Size(58, 19);
 			this.label3.TabIndex = 8;
-			this.label3.Text = "From date";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 64);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(35, 19);
-			this.label2.TabIndex = 7;
-			this.label2.Text = "Text";
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 29);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(52, 19);
-			this.label1.TabIndex = 6;
-			this.label1.Text = "Sender";
+			this.label3.Text = "Date #1";
 			// 
 			// label5
 			// 
@@ -179,9 +204,9 @@
 			this.listViewNotifications.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.listViewNotifications.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.listViewNotifications.HideSelection = false;
-			this.listViewNotifications.Location = new System.Drawing.Point(0, 180);
+			this.listViewNotifications.Location = new System.Drawing.Point(0, 181);
 			this.listViewNotifications.Name = "listViewNotifications";
-			this.listViewNotifications.Size = new System.Drawing.Size(609, 529);
+			this.listViewNotifications.Size = new System.Drawing.Size(706, 528);
 			this.listViewNotifications.TabIndex = 12;
 			this.listViewNotifications.TileSize = new System.Drawing.Size(550, 50);
 			this.listViewNotifications.UseCompatibleStateImageBehavior = false;
@@ -206,7 +231,7 @@
 			// 
 			// buttonRefresh
 			// 
-			this.buttonRefresh.Location = new System.Drawing.Point(13, 140);
+			this.buttonRefresh.Location = new System.Drawing.Point(13, 149);
 			this.buttonRefresh.Name = "buttonRefresh";
 			this.buttonRefresh.Size = new System.Drawing.Size(245, 26);
 			this.buttonRefresh.TabIndex = 13;
@@ -217,7 +242,7 @@
 			// checkBoxApplyFilters
 			// 
 			this.checkBoxApplyFilters.AutoSize = true;
-			this.checkBoxApplyFilters.Location = new System.Drawing.Point(12, 73);
+			this.checkBoxApplyFilters.Location = new System.Drawing.Point(18, 66);
 			this.checkBoxApplyFilters.Name = "checkBoxApplyFilters";
 			this.checkBoxApplyFilters.Size = new System.Drawing.Size(156, 23);
 			this.checkBoxApplyFilters.TabIndex = 14;
@@ -225,11 +250,48 @@
 			this.checkBoxApplyFilters.UseVisualStyleBackColor = true;
 			this.checkBoxApplyFilters.CheckedChanged += new System.EventHandler(this.checkBoxApplyFilters_CheckedChanged);
 			// 
+			// radioButtonAndOperator
+			// 
+			this.radioButtonAndOperator.AutoSize = true;
+			this.radioButtonAndOperator.Checked = true;
+			this.radioButtonAndOperator.Location = new System.Drawing.Point(6, 21);
+			this.radioButtonAndOperator.Name = "radioButtonAndOperator";
+			this.radioButtonAndOperator.Size = new System.Drawing.Size(145, 23);
+			this.radioButtonAndOperator.TabIndex = 15;
+			this.radioButtonAndOperator.TabStop = true;
+			this.radioButtonAndOperator.Text = "Use AND for filters";
+			this.radioButtonAndOperator.UseVisualStyleBackColor = true;
+			this.radioButtonAndOperator.CheckedChanged += new System.EventHandler(this.radioButtonAndOperator_CheckedChanged);
+			// 
+			// radioButtonOrOperator
+			// 
+			this.radioButtonOrOperator.AutoSize = true;
+			this.radioButtonOrOperator.Location = new System.Drawing.Point(157, 21);
+			this.radioButtonOrOperator.Name = "radioButtonOrOperator";
+			this.radioButtonOrOperator.Size = new System.Drawing.Size(77, 23);
+			this.radioButtonOrOperator.TabIndex = 16;
+			this.radioButtonOrOperator.Text = "Use OR";
+			this.radioButtonOrOperator.UseVisualStyleBackColor = true;
+			this.radioButtonOrOperator.CheckedChanged += new System.EventHandler(this.radioButtonOrOperator_CheckedChanged);
+			// 
+			// groupBoxLogicalOperators
+			// 
+			this.groupBoxLogicalOperators.Controls.Add(this.radioButtonAndOperator);
+			this.groupBoxLogicalOperators.Controls.Add(this.radioButtonOrOperator);
+			this.groupBoxLogicalOperators.Enabled = false;
+			this.groupBoxLogicalOperators.Location = new System.Drawing.Point(13, 91);
+			this.groupBoxLogicalOperators.Name = "groupBoxLogicalOperators";
+			this.groupBoxLogicalOperators.Size = new System.Drawing.Size(245, 54);
+			this.groupBoxLogicalOperators.TabIndex = 17;
+			this.groupBoxLogicalOperators.TabStop = false;
+			this.groupBoxLogicalOperators.Text = "Logical operators";
+			// 
 			// NotificationsPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(609, 709);
+			this.ClientSize = new System.Drawing.Size(706, 709);
+			this.Controls.Add(this.groupBoxLogicalOperators);
 			this.Controls.Add(this.checkBoxApplyFilters);
 			this.Controls.Add(this.buttonRefresh);
 			this.Controls.Add(this.listViewNotifications);
@@ -245,6 +307,8 @@
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NotificationsPanel_FormClosed);
 			this.groupBoxFilters.ResumeLayout(false);
 			this.groupBoxFilters.PerformLayout();
+			this.groupBoxLogicalOperators.ResumeLayout(false);
+			this.groupBoxLogicalOperators.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -254,13 +318,11 @@
 		private System.Windows.Forms.ComboBox comboBoxFormattingStyle;
 		private System.Windows.Forms.ComboBox comboBoxSender;
 		private System.Windows.Forms.DateTimePicker datePickerFromDate;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox textBoxMsgContainsText;
 		private System.Windows.Forms.DateTimePicker datePickerToDate;
 		private System.Windows.Forms.GroupBox groupBoxFilters;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Timer timerNotifications;
 		private System.Windows.Forms.ListView listViewNotifications;
@@ -269,5 +331,11 @@
 		private System.Windows.Forms.ColumnHeader Received;
 		private System.Windows.Forms.Button buttonRefresh;
 		private System.Windows.Forms.CheckBox checkBoxApplyFilters;
+		private System.Windows.Forms.CheckBox checkBoxUseSender;
+		private System.Windows.Forms.CheckBox checkBoxMsgSentBetweenDates;
+		private System.Windows.Forms.CheckBox checkBoxMsgContainsText;
+		private System.Windows.Forms.RadioButton radioButtonAndOperator;
+		private System.Windows.Forms.RadioButton radioButtonOrOperator;
+		private System.Windows.Forms.GroupBox groupBoxLogicalOperators;
 	}
 }

@@ -18,5 +18,14 @@ namespace Core.SoftwareComponents {
 			Body = body;
 			ReceivedTime = receivedTime;
 		}
+
+		public bool Equals(IMessage other) {
+			if (other is null) {
+				return false;
+			}
+			return Sender == other.Sender
+				&& Body == other.Body
+				&& ReceivedTime == other.ReceivedTime;
+		}
 	}
 }

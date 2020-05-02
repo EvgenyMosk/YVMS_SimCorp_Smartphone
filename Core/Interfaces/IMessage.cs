@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces {
-	public interface IMessage {
+	public interface IMessage : IEquatable<IMessage> {
 		string Sender { get; set; }
 		string Body { get; set; }
 		DateTime ReceivedTime { get; set; }

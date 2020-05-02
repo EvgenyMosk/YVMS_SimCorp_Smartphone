@@ -51,6 +51,9 @@
     <Compile Include="Forms\NotificationsPanel.Designer.cs">
       <DependentUpon>NotificationsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NotificationsPanel.CustomMethods.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\PlaybackControl.cs">
       <SubType>Form</SubType>
     </Compile>

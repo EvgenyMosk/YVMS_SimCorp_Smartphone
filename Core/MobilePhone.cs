@@ -145,7 +145,6 @@ namespace Core {
 			IMobilePhone mobilePhone;
 			IChipset chipset;
 			IMemory internalStorage;
-			MessagesStorage messagesStorage;
 
 			switch (presetPhone) {
 				case PresetsPhones.MicrosoftLumia640XL:
