@@ -27,5 +27,12 @@ namespace Core.SoftwareComponents {
 				&& Body == other.Body
 				&& ReceivedTime == other.ReceivedTime;
 		}
+		public int CompareTo(IMessage other) {
+			if (Equals(other)) {
+				return 0;
+			} else {
+				return -1;
+			}
+		}
 	}
 }

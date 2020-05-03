@@ -204,57 +204,71 @@ namespace Core.Test {
 		}
 		[TestMethod()]
 		public void ApplyAND_AllListsContainsDifferentMessages_ExpectNoMessages() {
-			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+			List<IMessage> messagesPool = new List<IMessage> {
 				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
 				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05))
-			};
-			List<IMessage> messagesFilteredByText = new List<IMessage> {
-				new FakeMessage("Sender #21","Body #21", new DateTime(2021,02,01)),
-				new FakeMessage("Sender #22","Body #22", new DateTime(2022,02,02)),
-				new FakeMessage("Sender #23","Body #23", new DateTime(2023,02,03))
-			};
-			List<IMessage> messagesFilteredByDate = new List<IMessage> {
-				new FakeMessage("Sender #31","Body #31", new DateTime(2031,03,03)),
-				new FakeMessage("Sender #32","Body #32", new DateTime(2032,03,03)),
-				new FakeMessage("Sender #33","Body #33", new DateTime(2033,03,03))
-			};
-			List<IMessage> expectedMessages = new List<IMessage>();
-			List<IMessage> actualMessages = new List<IMessage>();
-
-			actualMessages = MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
-
-			Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
-		}
-		[TestMethod()]
-		public void ApplyAND_AllListsContainsSomeMessages_ExpectThreeMessagesPresentInAllLists() {
-			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
-				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
-				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05))
-			};
-			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage> {
-				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
-				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06))
-			};
-			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
 				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
 				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
 				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
 				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06)),
 				new FakeMessage("Sender #4","Body #7", new DateTime(2007,07,07))
 			};
-			IEnumerable<IMessage> expectedMessages = new List<IMessage> {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[5],
+				messagesPool[6],
+			};
+			IEnumerable<IMessage> expectedMessages = new List<IMessage>();
+			IEnumerable<IMessage> actualMessages = new List<IMessage>();
+
+			actualMessages = MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
+
+			Assert.AreEqual(expectedMessages.Count(), actualMessages.Count());
+		}
+		[TestMethod()]
+		public void ApplyAND_AllListsContainsSomeMessages_ExpectThreeMessagesPresentInAllLists() {
+			List<IMessage> messagesPool = new List<IMessage> {
+				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
+				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
 				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
 				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
 				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06)),
+				new FakeMessage("Sender #4","Body #7", new DateTime(2007,07,07))
+			};
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[1],
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
+				messagesPool[5],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
+				messagesPool[5],
+				messagesPool[6],
+			};
+			IEnumerable<IMessage> expectedMessages = new List<IMessage> {
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
 			};
 			IEnumerable<IMessage> actualMessages = new List<IMessage>();
 
