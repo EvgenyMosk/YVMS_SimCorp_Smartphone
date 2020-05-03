@@ -70,7 +70,7 @@ namespace Core {
 			return messages;
 		}
 
-		public IEnumerable<IMessage> ApplyAND(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
+		public static IEnumerable<IMessage> ApplyAND(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
 			IEnumerable<IMessage> messagesAfterAND = null;
 
 			if (msgsFilteredBySender.Count() != 0) {
@@ -79,10 +79,6 @@ namespace Core {
 				messagesAfterAND = msgsFilteredByText;
 			} else {
 				messagesAfterAND = msgsFilteredByDate;
-			}
-
-			if (messagesAfterAND == null) {
-				throw new NullReferenceException("Cannot apply filters to null!");
 			}
 
 			if (msgsFilteredBySender.Count() != 0) {
@@ -97,7 +93,7 @@ namespace Core {
 
 			return messagesAfterAND;
 		}
-		public IEnumerable<IMessage> ApplyOR(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
+		public static IEnumerable<IMessage> ApplyOR(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
 			if (msgsFilteredBySender == null || msgsFilteredByText == null || msgsFilteredByDate == null) {
 				throw new ArgumentNullException("None of the arguments can be null!");
 			}

@@ -101,9 +101,9 @@ namespace GUI {
 			}
 
 			if (radioButtonAndOperator.Checked) {
-				filteredMessages = _phoneControl.MobilePhone.MessagesStorage.ApplyAND(msgsFilteredBySender, msgsFilteredByText, msgsFilteredByDate);
+				filteredMessages = MessagesStorage.ApplyAND(msgsFilteredBySender, msgsFilteredByText, msgsFilteredByDate);
 			} else if (radioButtonOrOperator.Checked) {
-				filteredMessages = _phoneControl.MobilePhone.MessagesStorage.ApplyOR(msgsFilteredBySender, msgsFilteredByText, msgsFilteredByDate);
+				filteredMessages = MessagesStorage.ApplyOR(msgsFilteredBySender, msgsFilteredByText, msgsFilteredByDate);
 			} else {
 				throw new NotSupportedException("Either OR or AND operator must be used!");
 			}

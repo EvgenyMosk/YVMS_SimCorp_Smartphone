@@ -23,13 +23,16 @@ namespace Core.Test {
 				ReceivedTime = receivedTime;
 			}
 			public bool Equals(IMessage other) {
-				return Sender == other.Sender && Body == other.Body && ReceivedTime == other.ReceivedTime;
+				if (other is null) {
+					return false;
+				}
+				return Sender == other.Sender
+					&& Body == other.Body
+					&& ReceivedTime == other.ReceivedTime;
 			}
 		}
 		#endregion
 		private MessagesStorage messagesStorageUnderTest1;
-		private MessagesStorage messagesStorageUnderTest2;
-		private MessagesStorage messagesStorageUnderTest3;
 		[TestInitialize]
 		public void SetUp() {
 			List<IMessage> messages1 = new List<IMessage> {
@@ -37,26 +40,9 @@ namespace Core.Test {
 				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
 				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
 				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05))
 			};
-			List<IMessage> messages2 = new List<IMessage> {
-				new FakeMessage("Sender #3","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #4","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #4","Body #5", new DateTime(2005,05,05)),
-				new FakeMessage("Sender #5","Body #6", new DateTime(2006,06,06)),
-				new FakeMessage("Sender #5","Body #7", new DateTime(2007,07,07)),
-			};
-			List<IMessage> messages3 = new List<IMessage> {
-				new FakeMessage("Sender #6","Body #5", new DateTime(2005,05,05)),
-				new FakeMessage("Sender #6","Body #6", new DateTime(2006,06,06)),
-				new FakeMessage("Sender #7","Body #7", new DateTime(2007,07,07)),
-				new FakeMessage("Sender #7","Body #8", new DateTime(2008,08,08)),
-				new FakeMessage("Sender #8","Body #9", new DateTime(2009,09,09)),
-			};
-
 			messagesStorageUnderTest1 = new MessagesStorage(messages1);
-			messagesStorageUnderTest2 = new MessagesStorage(messages2);
-			messagesStorageUnderTest3 = new MessagesStorage(messages3);
 		}
 
 		[TestMethod()]
@@ -69,7 +55,7 @@ namespace Core.Test {
 			Assert.AreEqual(expectedCount, actualCount);
 		}
 		[TestMethod()]
-		public void GetMessagesSenders_ExpectThreeSEnders() {
+		public void GetMessagesSenders_ExpectThreeSenders() {
 			List<string> expectedSenders = new List<string> {
 				"Sender #1","Sender #2","Sender #3"
 			};
@@ -83,7 +69,17 @@ namespace Core.Test {
 			}
 		}
 		[TestMethod()]
-		public void GetMessagesFromCertainSender_ExpectTwoMessages() {
+		public void GetMessagesFromCertainSender_SenderThatIsNotPresentInMessages_ExpectNoMessages() {
+			List<IMessage> expectedMessages = new List<IMessage>();
+			List<IMessage> actualMessages = new List<IMessage>();
+			string targetSender = "Sender #123";
+
+			actualMessages = messagesStorageUnderTest1.GetMessagesFromCertainSender(targetSender).ToList();
+
+			Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
+		}
+		[TestMethod()]
+		public void GetMessagesFromCertainSender_SenderThatIsPresentTwoTimesInMessages_ExpectTwoMessages() {
 			List<IMessage> expectedMessages = new List<IMessage> {
 				new FakeMessage("Sender #2", "Body #3", new DateTime(2003, 03, 03)),
 				new FakeMessage("Sender #2", "Body #4", new DateTime(2004, 04, 04))
@@ -122,7 +118,7 @@ namespace Core.Test {
 			Assert.IsTrue(actualMessages.Contains(expectedMessages.First()));
 		}
 		[TestMethod()]
-		public void GetMessagesContainsCertainText_TextThatPresentInAllFiveMessage_ExpectOneMessage() {
+		public void GetMessagesContainsCertainText_TextThatPresentInAllFiveMessage_ExpectAllFiveMessage() {
 			List<IMessage> expectedMessages = new List<IMessage> {
 				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
 				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
@@ -140,44 +136,35 @@ namespace Core.Test {
 				Assert.IsTrue(actualMessages.Contains(message));
 			}
 		}
-		//[TestMethod()]
-		//public void GetMessagesBetweenDates_1stDateEarlierThanAllMsgs2ndLaterThanAllMsgs_ExpectAllFiveMessages() {
-		//	List<IMessage> expectedMessages = new List<IMessage> {
-		//		new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
-		//		new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-		//		new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-		//		new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-		//		new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
-		//	};
-		//	List<IMessage> actualMessages = new List<IMessage>();
-		//	string targetText = "Body";
+		[TestMethod()]
+		public void GetMessagesBetweenDates_BothDatesAreEarlierThanAllDates_ExpectNoMessages() {
+			List<IMessage> expectedMessages = new List<IMessage>();
+			List<IMessage> actualMessages = new List<IMessage>();
+			DateTime targetFromDate = new DateTime(1900, 01, 01);
+			DateTime targetToDate = new DateTime(1999, 01, 01);
 
-		//	actualMessages = messagesStorageUnderTest1.GetMessagesContainsCertainText(targetText).ToList();
+			actualMessages = messagesStorageUnderTest1.GetMessagesBetweenDates(targetFromDate, targetToDate).ToList();
 
-		//	Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
-		//	foreach (IMessage message in expectedMessages) {
-		//		Assert.IsTrue(actualMessages.Contains(message));
-		//	}
-		//}
-		//[TestMethod()]
-		//public void GetMessagesBetweenDates_1stDateEarlierThanAllMsgs2ndLaterThanAllMsgs_ExpectAllFiveMessages() {
-		//	List<IMessage> expectedMessages = new List<IMessage> {
-		//		new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
-		//		new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-		//		new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-		//		new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-		//		new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
-		//	};
-		//	List<IMessage> actualMessages = new List<IMessage>();
-		//	string targetText = "Body";
+			Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
+		}
+		[TestMethod()]
+		public void GetMessagesBetweenDates_DatesToGet3Messages_ExpectAllFiveMessages() {
+			List<IMessage> expectedMessages = new List<IMessage> {
+				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
+				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
+				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+			};
+			List<IMessage> actualMessages = new List<IMessage>();
+			DateTime targetFromDate = new DateTime(2002, 02, 02);
+			DateTime targetToDate = new DateTime(2004, 04, 04);
 
-		//	actualMessages = messagesStorageUnderTest1.GetMessagesContainsCertainText(targetText).ToList();
+			actualMessages = messagesStorageUnderTest1.GetMessagesBetweenDates(targetFromDate, targetToDate).ToList();
 
-		//	Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
-		//	foreach (IMessage message in expectedMessages) {
-		//		Assert.IsTrue(actualMessages.Contains(message));
-		//	}
-		//}
+			Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
+			foreach (IMessage message in expectedMessages) {
+				Assert.IsTrue(actualMessages.Contains(message));
+			}
+		}
 		[TestMethod()]
 		public void GetMessagesBetweenDates_1stDateEarlierThanAllMsgs2ndLaterThanAllMsgs_ExpectAllFiveMessages() {
 			List<IMessage> expectedMessages = new List<IMessage> {
@@ -197,6 +184,83 @@ namespace Core.Test {
 			foreach (IMessage message in expectedMessages) {
 				Assert.IsTrue(actualMessages.Contains(message));
 			}
+		}
+		[TestMethod()]
+		public void GetMessagesBetweenDates_1stDateLaterThan2ndDate_ExpectArgumentException() {
+			List<IMessage> expectedMessages = new List<IMessage>();
+			List<IMessage> actualMessages = new List<IMessage>();
+			DateTime targetFromDate = new DateTime(2100, 01, 01);
+			DateTime targetToDate = new DateTime(1900, 01, 01);
+
+			bool exceptionThrown = false;
+
+			try {
+				actualMessages = messagesStorageUnderTest1.GetMessagesBetweenDates(targetFromDate, targetToDate).ToList();
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod()]
+		public void ApplyAND_AllListsContainsDifferentMessages_ExpectNoMessages() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
+				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
+				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
+				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05))
+			};
+			List<IMessage> messagesFilteredByText = new List<IMessage> {
+				new FakeMessage("Sender #21","Body #21", new DateTime(2021,02,01)),
+				new FakeMessage("Sender #22","Body #22", new DateTime(2022,02,02)),
+				new FakeMessage("Sender #23","Body #23", new DateTime(2023,02,03))
+			};
+			List<IMessage> messagesFilteredByDate = new List<IMessage> {
+				new FakeMessage("Sender #31","Body #31", new DateTime(2031,03,03)),
+				new FakeMessage("Sender #32","Body #32", new DateTime(2032,03,03)),
+				new FakeMessage("Sender #33","Body #33", new DateTime(2033,03,03))
+			};
+			List<IMessage> expectedMessages = new List<IMessage>();
+			List<IMessage> actualMessages = new List<IMessage>();
+
+			actualMessages = MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
+
+			Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
+		}
+		[TestMethod()]
+		public void ApplyAND_AllListsContainsSomeMessages_ExpectThreeMessagesPresentInAllLists() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
+				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
+				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
+				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05))
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage> {
+				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
+				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
+				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06))
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
+				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06)),
+				new FakeMessage("Sender #4","Body #7", new DateTime(2007,07,07))
+			};
+			IEnumerable<IMessage> expectedMessages = new List<IMessage> {
+				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
+				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+			};
+			IEnumerable<IMessage> actualMessages = new List<IMessage>();
+
+			actualMessages = MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
+
+			Assert.AreEqual(expectedMessages.Count(), actualMessages.Count());
 		}
 	}
 }

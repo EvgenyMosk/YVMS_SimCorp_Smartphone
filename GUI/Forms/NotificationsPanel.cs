@@ -75,7 +75,6 @@ namespace GUI {
 			}
 		}
 
-		#region Timers ticks events
 		private void timerNotifications_Tick(object sender, EventArgs e) {
 			string senderName = GetRandomSender();
 			string messageBody = GetRandomMessage();
@@ -83,7 +82,6 @@ namespace GUI {
 
 			SendMessageToSmartphone(senderName, messageBody);
 		}
-		#endregion
 		#region Form events
 		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
 			SwitchOnOffTimers(false); // Turn off timers
