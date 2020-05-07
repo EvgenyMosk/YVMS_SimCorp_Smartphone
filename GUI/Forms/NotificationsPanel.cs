@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,6 +32,9 @@ namespace GUI {
 			EnableUpdatingSendersList();
 			EnableNotificationsOfNewMessages();
 
+			////_messageGeneratingThread = Task.Factory.StartNew(GenerateNewMessagesInBackground);
+			//_messageGeneratingThread = new Thread(GenerateNewMessagesInBackground);
+			//_messageGeneratingThread.Start();
 			SwitchOnOffTimers(true); // Turn on timers
 
 			PrintAllMessages();
@@ -84,6 +88,7 @@ namespace GUI {
 		}
 		#region Form events
 		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
+			//_messageGeneratingThread.Abort();
 			SwitchOnOffTimers(false); // Turn off timers
 			DisableNotificationsOfNewMessages();
 			DisableUpdatingSendersList();

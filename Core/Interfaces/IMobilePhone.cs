@@ -19,6 +19,8 @@ namespace Core {
 		IChipset Chipset { get; set; }
 		IAudioOutputDevice AudioOutputDevice { get; set; }
 		IMemory InternalStorage { get; set; }
+		IBattery Battery { get; set; }
+
 		void ReceiveMessage(string senderName, string messageBody);
 	}
 }

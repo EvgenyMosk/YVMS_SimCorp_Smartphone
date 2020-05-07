@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardwareComponents\Battery.cs" />
+    <Compile Include="Interfaces\IBattery.cs" />
     <Compile Include="SoftwareComponents\SendersListChangedArgs.cs" />
     <Compile Include="Writers\ConsoleWriter.cs" />
     <Compile Include="DescriptionContainer.cs" />

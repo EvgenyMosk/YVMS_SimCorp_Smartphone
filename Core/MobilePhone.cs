@@ -30,6 +30,7 @@ namespace Core {
 		public IChipset Chipset { get; set; }
 		public IAudioOutputDevice AudioOutputDevice { get; set; }
 		public IMemory InternalStorage { get; set; }
+		public IBattery Battery { get; set; }
 		#endregion
 		public MobilePhone(string model, string manufacturer, IChipset chipset, int? yearOfProduction, string version, IOutput output) {
 			Model = model;
@@ -145,6 +146,7 @@ namespace Core {
 			IMobilePhone mobilePhone;
 			IChipset chipset;
 			IMemory internalStorage;
+			IBattery battery;
 
 			switch (presetPhone) {
 				case PresetsPhones.MicrosoftLumia640XL:
@@ -169,6 +171,17 @@ namespace Core {
 					mobilePhone = new MobilePhone(model, manufacturer, chipset, yearOfProduction, version, null) {
 						InternalStorage = internalStorage
 					};
+
+					// Create information about Battery
+					model = "Lumia 640XL Battery";
+					manufacturer = "Energizer";
+					yearOfProduction = 2015;
+					version = "v.1.0";
+					int maximumCapacity = 3000;
+					int currentCapacity = maximumCapacity;
+
+					battery = new Battery(maximumCapacity, currentCapacity, model, manufacturer, yearOfProduction, version);
+					mobilePhone.Battery = battery;
 
 					// Create information about OS
 					model = "Windows 10 Mobile";

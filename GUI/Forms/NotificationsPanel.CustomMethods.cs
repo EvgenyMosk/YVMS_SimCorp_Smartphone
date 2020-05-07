@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace GUI {
 			"System Notification Service" };
 		private delegate string MessageFormatDelegate(string text);
 		private MessageFormatDelegate _formatter;
+		private Thread _messageGeneratingThread;
 
 		public string GetSelectedSender() {
 			return comboBoxSender.Text;
@@ -52,6 +54,20 @@ namespace GUI {
 		private string GetRandomMessage() {
 			int messageIndex = _random.Next(_messagesTexts.Length);
 			return _messagesTexts[messageIndex];
+		}
+
+		private void GenerateNewMessagesInBackground() {
+			while (true) {
+				GenerateNewMessage();
+				Thread.Sleep(3333);
+			}
+		}
+		private void GenerateNewMessage() {
+			string senderName = GetRandomSender();
+			string messageBody = GetRandomMessage();
+			messageBody = _formatter(messageBody);
+
+			SendMessageToSmartphone(senderName, messageBody);
 		}
 		private void SendMessageToSmartphone(string senderName, string messageBody) {
 			_phoneControl.MobilePhone.ReceiveMessage(senderName, messageBody);

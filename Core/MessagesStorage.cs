@@ -71,6 +71,10 @@ namespace Core {
 		}
 
 		public static IEnumerable<IMessage> ApplyAND(IEnumerable<IMessage> msgsFilteredBySender, IEnumerable<IMessage> msgsFilteredByText, IEnumerable<IMessage> msgsFilteredByDate) {
+			if (msgsFilteredBySender == null || msgsFilteredByText == null || msgsFilteredByDate == null) {
+				throw new ArgumentNullException("None of the arguments can be null!");
+			}
+
 			IEnumerable<IMessage> messagesAfterAND = null;
 
 			if (msgsFilteredBySender.Count() != 0) {

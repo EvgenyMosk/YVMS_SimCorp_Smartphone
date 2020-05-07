@@ -33,14 +33,23 @@ namespace Core.Test {
 		}
 		#endregion
 		private MessagesStorage messagesStorageUnderTest1;
-		[TestInitialize]
-		public void SetUp() {
-			List<IMessage> messages1 = new List<IMessage> {
+		private List<IMessage> messagesPool = new List<IMessage> {
 				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
 				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
 				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
 				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05))
+				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06)),
+				new FakeMessage("Sender #4","Body #7", new DateTime(2007,07,07))
+			};
+		[TestInitialize]
+		public void SetUp() {
+			List<IMessage> messages1 = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
 			};
 			messagesStorageUnderTest1 = new MessagesStorage(messages1);
 		}
@@ -148,11 +157,11 @@ namespace Core.Test {
 			Assert.AreEqual(expectedMessages.Count, actualMessages.Count);
 		}
 		[TestMethod()]
-		public void GetMessagesBetweenDates_DatesToGet3Messages_ExpectAllFiveMessages() {
+		public void GetMessagesBetweenDates_DatesToGet3Messages_ExpectThreeMessages() {
 			List<IMessage> expectedMessages = new List<IMessage> {
-				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
+				messagesPool[1],
+				messagesPool[2],
+				messagesPool[3],
 			};
 			List<IMessage> actualMessages = new List<IMessage>();
 			DateTime targetFromDate = new DateTime(2002, 02, 02);
@@ -168,11 +177,11 @@ namespace Core.Test {
 		[TestMethod()]
 		public void GetMessagesBetweenDates_1stDateEarlierThanAllMsgs2ndLaterThanAllMsgs_ExpectAllFiveMessages() {
 			List<IMessage> expectedMessages = new List<IMessage> {
-				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
-				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
 			};
 			List<IMessage> actualMessages = new List<IMessage>();
 			DateTime targetFromDate = new DateTime(1900, 01, 01);
@@ -204,15 +213,6 @@ namespace Core.Test {
 		}
 		[TestMethod()]
 		public void ApplyAND_AllListsContainsDifferentMessages_ExpectNoMessages() {
-			List<IMessage> messagesPool = new List<IMessage> {
-				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
-				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
-				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06)),
-				new FakeMessage("Sender #4","Body #7", new DateTime(2007,07,07))
-			};
 			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
 				messagesPool[0],
 				messagesPool[1],
@@ -234,16 +234,7 @@ namespace Core.Test {
 			Assert.AreEqual(expectedMessages.Count(), actualMessages.Count());
 		}
 		[TestMethod()]
-		public void ApplyAND_AllListsContainsSomeMessages_ExpectThreeMessagesPresentInAllLists() {
-			List<IMessage> messagesPool = new List<IMessage> {
-				new FakeMessage("Sender #1","Body #1", new DateTime(2001,01,01)),
-				new FakeMessage("Sender #1","Body #2", new DateTime(2002,02,02)),
-				new FakeMessage("Sender #2","Body #3", new DateTime(2003,03,03)),
-				new FakeMessage("Sender #2","Body #4", new DateTime(2004,04,04)),
-				new FakeMessage("Sender #3","Body #5", new DateTime(2005,05,05)),
-				new FakeMessage("Sender #3","Body #6", new DateTime(2006,06,06)),
-				new FakeMessage("Sender #4","Body #7", new DateTime(2007,07,07))
-			};
+		public void ApplyAND_AllListsContainsSomeMessages_ExpectThreeMessagesPresentInResult() {
 			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
 				messagesPool[0],
 				messagesPool[1],
@@ -275,6 +266,208 @@ namespace Core.Test {
 			actualMessages = MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
 
 			Assert.AreEqual(expectedMessages.Count(), actualMessages.Count());
+		}
+		[TestMethod()]
+		public void ApplyAND_FirstListIsNull_ExpectArgumentNullException() {
+			IEnumerable<IMessage> messagesFilteredBySender = null;
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			bool exceptionThrown = false;
+
+			try {
+				MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate);
+			} catch (ArgumentNullException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod()]
+		public void ApplyAND_SecondListIsNull_ExpectArgumentNullException() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = null;
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			bool exceptionThrown = false;
+
+			try {
+				MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate);
+			} catch (ArgumentNullException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod()]
+		public void ApplyAND_ThirdListIsNull_ExpectArgumentNullException() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = null;
+			bool exceptionThrown = false;
+
+			try {
+				MessagesStorage.ApplyAND(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate);
+			} catch (ArgumentNullException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod()]
+		public void ApplyOR_AllListsContainsUniqueMessages_ExpectAllMessagesPresentInResult() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[3],
+				messagesPool[4],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[5],
+				messagesPool[6],
+			};
+			IEnumerable<IMessage> expectedMessages = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+				messagesPool[3],
+				messagesPool[4],
+				messagesPool[5],
+				messagesPool[6],
+			};
+			IEnumerable<IMessage> actualMessages = new List<IMessage>();
+
+			actualMessages = MessagesStorage.ApplyOR(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
+
+			Assert.AreEqual(expectedMessages.Count(), actualMessages.Count());
+			foreach (IMessage message in expectedMessages) {
+				Assert.IsTrue(messagesPool.Contains(message));
+			}
+		}
+		[TestMethod()]
+		public void ApplyOR_AllListsContainsSameMessages_ExpectAllMessagesPresentInResult() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> expectedMessages = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> actualMessages = new List<IMessage>();
+
+			actualMessages = MessagesStorage.ApplyOR(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate).ToList();
+
+			Assert.AreEqual(expectedMessages.Count(), actualMessages.Count());
+			foreach (IMessage message in expectedMessages) {
+				Assert.IsTrue(messagesPool.Contains(message));
+			}
+		}
+		[TestMethod()]
+		public void ApplyOR_FirstListIsNull_ExpectArgumentNullException() {
+			IEnumerable<IMessage> messagesFilteredBySender = null;
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			bool exceptionThrown = false;
+
+			try {
+				MessagesStorage.ApplyOR(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate);
+			} catch (ArgumentNullException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod()]
+		public void ApplyOR_SecondListIsNull_ExpectArgumentNullException() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = null;
+			IEnumerable<IMessage> messagesFilteredByDate = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			bool exceptionThrown = false;
+
+			try {
+				MessagesStorage.ApplyOR(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate);
+			} catch (ArgumentNullException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod()]
+		public void ApplyOR_ThirdListIsNull_ExpectArgumentNullException() {
+			IEnumerable<IMessage> messagesFilteredBySender = new List<IMessage> {
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByText = new List<IMessage>{
+				messagesPool[0],
+				messagesPool[1],
+				messagesPool[2],
+			};
+			IEnumerable<IMessage> messagesFilteredByDate = null;
+			bool exceptionThrown = false;
+
+			try {
+				MessagesStorage.ApplyOR(messagesFilteredBySender, messagesFilteredByText, messagesFilteredByDate);
+			} catch (ArgumentNullException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
 		}
 	}
 }
