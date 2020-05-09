@@ -31,11 +31,25 @@ namespace GUI {
 
 			EnableUpdatingSendersList();
 			EnableNotificationsOfNewMessages();
+			EnablePhoneBatteryUpdateObProgBar();
+
+
+			//====================================================//
+			//                                                    //
+			//   MOVE TO TASK METHOD AND CANCEL AT FORM CLOSING   //
+			//                                                    //
+			//====================================================//
+			Task.Run(() => {
+				while (_phoneControl.MobilePhone.Battery.CurrentChargePercentage > 0) {
+					_phoneControl.ChangeCurrentBatteryCapacity(-10);
+					Thread.Sleep(1000);
+				}
+			});
 
 			////_messageGeneratingThread = Task.Factory.StartNew(GenerateNewMessagesInBackground);
-			//_messageGeneratingThread = new Thread(GenerateNewMessagesInBackground);
-			//_messageGeneratingThread.Start();
-			SwitchOnOffTimers(true); // Turn on timers
+			_messageGeneratingThread = new Thread(GenerateNewMessagesInBackground);
+			_messageGeneratingThread.Start();
+			//SwitchOnOffTimers(true); // Turn on timers
 
 			PrintAllMessages();
 		}
@@ -88,10 +102,11 @@ namespace GUI {
 		}
 		#region Form events
 		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
-			//_messageGeneratingThread.Abort();
-			SwitchOnOffTimers(false); // Turn off timers
+			_messageGeneratingThread.Abort();
+			//SwitchOnOffTimers(false); // Turn off timers
 			DisableNotificationsOfNewMessages();
 			DisableUpdatingSendersList();
+			DisablePhoneBatteryUpdateOnProgBar();
 		}
 
 		private void comboBoxFormattingStyle_SelectedIndexChanged(object sender, EventArgs e) {
@@ -151,5 +166,9 @@ namespace GUI {
 			RefreshMessageList();
 		}
 		#endregion
+
+		private void buttonChargePhone_Click(object sender, EventArgs e) {
+
+		}
 	}
 }

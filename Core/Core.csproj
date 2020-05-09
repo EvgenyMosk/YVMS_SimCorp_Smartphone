@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HardwareComponents\Battery.cs" />
+    <Compile Include="HardwareComponents\CurrBatCapacityChngdEventArgs.cs" />
     <Compile Include="Interfaces\IBattery.cs" />
     <Compile Include="SoftwareComponents\SendersListChangedArgs.cs" />
     <Compile Include="Writers\ConsoleWriter.cs" />

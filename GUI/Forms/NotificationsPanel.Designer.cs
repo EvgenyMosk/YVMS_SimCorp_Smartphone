@@ -46,6 +46,9 @@
 			this.radioButtonAndOperator = new System.Windows.Forms.RadioButton();
 			this.radioButtonOrOperator = new System.Windows.Forms.RadioButton();
 			this.groupBoxLogicalOperators = new System.Windows.Forms.GroupBox();
+			this.labelBatteryPercentage = new System.Windows.Forms.Label();
+			this.progressBarBatteryPercentage = new System.Windows.Forms.ProgressBar();
+			this.buttonChargePhone = new System.Windows.Forms.Button();
 			this.groupBoxFilters.SuspendLayout();
 			this.groupBoxLogicalOperators.SuspendLayout();
 			this.SuspendLayout();
@@ -60,7 +63,7 @@
             "Date at the end",
             "All in uppercase",
             "All in lowercase"});
-			this.comboBoxFormattingStyle.Location = new System.Drawing.Point(13, 32);
+			this.comboBoxFormattingStyle.Location = new System.Drawing.Point(13, 57);
 			this.comboBoxFormattingStyle.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBoxFormattingStyle.Name = "comboBoxFormattingStyle";
 			this.comboBoxFormattingStyle.Size = new System.Drawing.Size(245, 27);
@@ -123,7 +126,7 @@
 			this.groupBoxFilters.Controls.Add(this.textBoxMsgContainsText);
 			this.groupBoxFilters.Controls.Add(this.datePickerFromDate);
 			this.groupBoxFilters.Enabled = false;
-			this.groupBoxFilters.Location = new System.Drawing.Point(265, 9);
+			this.groupBoxFilters.Location = new System.Drawing.Point(265, 34);
 			this.groupBoxFilters.Name = "groupBoxFilters";
 			this.groupBoxFilters.Size = new System.Drawing.Size(434, 166);
 			this.groupBoxFilters.TabIndex = 6;
@@ -184,7 +187,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(14, 9);
+			this.label5.Location = new System.Drawing.Point(14, 34);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(141, 19);
 			this.label5.TabIndex = 10;
@@ -204,9 +207,9 @@
 			this.listViewNotifications.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.listViewNotifications.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.listViewNotifications.HideSelection = false;
-			this.listViewNotifications.Location = new System.Drawing.Point(0, 181);
+			this.listViewNotifications.Location = new System.Drawing.Point(0, 206);
 			this.listViewNotifications.Name = "listViewNotifications";
-			this.listViewNotifications.Size = new System.Drawing.Size(706, 528);
+			this.listViewNotifications.Size = new System.Drawing.Size(706, 475);
 			this.listViewNotifications.TabIndex = 12;
 			this.listViewNotifications.TileSize = new System.Drawing.Size(550, 50);
 			this.listViewNotifications.UseCompatibleStateImageBehavior = false;
@@ -231,7 +234,7 @@
 			// 
 			// buttonRefresh
 			// 
-			this.buttonRefresh.Location = new System.Drawing.Point(13, 149);
+			this.buttonRefresh.Location = new System.Drawing.Point(13, 174);
 			this.buttonRefresh.Name = "buttonRefresh";
 			this.buttonRefresh.Size = new System.Drawing.Size(245, 26);
 			this.buttonRefresh.TabIndex = 13;
@@ -242,7 +245,7 @@
 			// checkBoxApplyFilters
 			// 
 			this.checkBoxApplyFilters.AutoSize = true;
-			this.checkBoxApplyFilters.Location = new System.Drawing.Point(18, 66);
+			this.checkBoxApplyFilters.Location = new System.Drawing.Point(18, 91);
 			this.checkBoxApplyFilters.Name = "checkBoxApplyFilters";
 			this.checkBoxApplyFilters.Size = new System.Drawing.Size(156, 23);
 			this.checkBoxApplyFilters.TabIndex = 14;
@@ -279,18 +282,52 @@
 			this.groupBoxLogicalOperators.Controls.Add(this.radioButtonAndOperator);
 			this.groupBoxLogicalOperators.Controls.Add(this.radioButtonOrOperator);
 			this.groupBoxLogicalOperators.Enabled = false;
-			this.groupBoxLogicalOperators.Location = new System.Drawing.Point(13, 91);
+			this.groupBoxLogicalOperators.Location = new System.Drawing.Point(13, 116);
 			this.groupBoxLogicalOperators.Name = "groupBoxLogicalOperators";
 			this.groupBoxLogicalOperators.Size = new System.Drawing.Size(245, 54);
 			this.groupBoxLogicalOperators.TabIndex = 17;
 			this.groupBoxLogicalOperators.TabStop = false;
 			this.groupBoxLogicalOperators.Text = "Logical operators";
 			// 
+			// labelBatteryPercentage
+			// 
+			this.labelBatteryPercentage.AutoSize = true;
+			this.labelBatteryPercentage.Location = new System.Drawing.Point(12, 9);
+			this.labelBatteryPercentage.Name = "labelBatteryPercentage";
+			this.labelBatteryPercentage.Size = new System.Drawing.Size(123, 19);
+			this.labelBatteryPercentage.TabIndex = 18;
+			this.labelBatteryPercentage.Text = "Battery percentage";
+			// 
+			// progressBarBatteryPercentage
+			// 
+			this.progressBarBatteryPercentage.ForeColor = System.Drawing.Color.MediumSlateBlue;
+			this.progressBarBatteryPercentage.Location = new System.Drawing.Point(141, 5);
+			this.progressBarBatteryPercentage.Name = "progressBarBatteryPercentage";
+			this.progressBarBatteryPercentage.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.progressBarBatteryPercentage.Size = new System.Drawing.Size(440, 26);
+			this.progressBarBatteryPercentage.Step = 1;
+			this.progressBarBatteryPercentage.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+			this.progressBarBatteryPercentage.TabIndex = 19;
+			this.progressBarBatteryPercentage.Value = 50;
+			// 
+			// buttonChargePhone
+			// 
+			this.buttonChargePhone.Location = new System.Drawing.Point(587, 5);
+			this.buttonChargePhone.Name = "buttonChargePhone";
+			this.buttonChargePhone.Size = new System.Drawing.Size(112, 26);
+			this.buttonChargePhone.TabIndex = 20;
+			this.buttonChargePhone.Text = "Charge Phone";
+			this.buttonChargePhone.UseVisualStyleBackColor = true;
+			this.buttonChargePhone.Click += new System.EventHandler(this.buttonChargePhone_Click);
+			// 
 			// NotificationsPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(706, 709);
+			this.ClientSize = new System.Drawing.Size(706, 681);
+			this.Controls.Add(this.buttonChargePhone);
+			this.Controls.Add(this.progressBarBatteryPercentage);
+			this.Controls.Add(this.labelBatteryPercentage);
 			this.Controls.Add(this.groupBoxLogicalOperators);
 			this.Controls.Add(this.checkBoxApplyFilters);
 			this.Controls.Add(this.buttonRefresh);
@@ -337,5 +374,8 @@
 		private System.Windows.Forms.RadioButton radioButtonAndOperator;
 		private System.Windows.Forms.RadioButton radioButtonOrOperator;
 		private System.Windows.Forms.GroupBox groupBoxLogicalOperators;
+		private System.Windows.Forms.Label labelBatteryPercentage;
+		private System.Windows.Forms.ProgressBar progressBarBatteryPercentage;
+		private System.Windows.Forms.Button buttonChargePhone;
 	}
 }

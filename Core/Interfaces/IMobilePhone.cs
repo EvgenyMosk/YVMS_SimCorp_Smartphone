@@ -11,9 +11,7 @@ namespace Core {
 		PhoneBootState PhoneBootState { get; set; }
 		OperatingSystem OperatingSystem { get; set; }
 		IOutput NotificationsOutput { get; set; }
-		//void EnableNotifications();//IOutput notificationsOutput);
-		//void DisableNotifications();
-		//void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e);
+
 		MessagesStorage MessagesStorage { get; set; }
 		// Hardware
 		IChipset Chipset { get; set; }

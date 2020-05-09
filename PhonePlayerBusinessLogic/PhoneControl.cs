@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Core;
+using Core.HardwareComponents;
 using Core.Interfaces;
 using Core.SoftwareComponents;
 
 namespace PhonePlayerBusinessLogic {
 	public class PhoneControl {
 		public IMobilePhone MobilePhone { get; set; }
-
 		public PhoneControl(IMobilePhone mobilePhone, IAudioOutputDevice audioOutputDevice, IOutput audioDeviceOutput) {
 			if (mobilePhone == null) {
 				throw new ArgumentNullException(nameof(mobilePhone));
@@ -42,6 +42,9 @@ namespace PhonePlayerBusinessLogic {
 				return;
 			}
 			MobilePhone.AudioOutputDevice.StopPlayingAudio();
+		}
+		public void ChangeCurrentBatteryCapacity(int delta) {
+			MobilePhone.Battery.ChangeCurrentCapacity(delta);
 		}
 	}
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Core;
+using Core.HardwareComponents;
 using Core.Interfaces;
 using Core.SoftwareComponents;
 
@@ -34,8 +35,16 @@ namespace GUI {
 		private MessageFormatDelegate _formatter;
 		private Thread _messageGeneratingThread;
 
+		#region GetSomething methods
+		// https://stackoverflow.com/questions/3117957/return-value-from-control-invokemethodinvoker-delegate-i-need
 		public string GetSelectedSender() {
-			return comboBoxSender.Text;
+			if (InvokeRequired) {
+				return (string)Invoke((Func<string>)delegate {
+					return comboBoxSender.Text;
+				});
+			} else {
+				return comboBoxSender.Text;
+			}
 		}
 		public string GetTextForFiltering() {
 			return textBoxMsgContainsText.Text;
@@ -55,6 +64,7 @@ namespace GUI {
 			int messageIndex = _random.Next(_messagesTexts.Length);
 			return _messagesTexts[messageIndex];
 		}
+		#endregion
 
 		private void GenerateNewMessagesInBackground() {
 			while (true) {
@@ -72,6 +82,17 @@ namespace GUI {
 		private void SendMessageToSmartphone(string senderName, string messageBody) {
 			_phoneControl.MobilePhone.ReceiveMessage(senderName, messageBody);
 		}
+
+		private void SetProgressBarValue(int value) {
+			if (InvokeRequired) {
+				Invoke(new MethodInvoker(() => SetProgressBarValue(value)));
+			} else if (progressBarBatteryPercentage != null) {
+				progressBarBatteryPercentage.Value = value;
+			}
+		}
+
+
+
 		#region Filtering
 		private void EnableDisableGroupBoxes(bool switchOn) {
 			if (groupBoxFilters == null) { return; }
@@ -130,10 +151,11 @@ namespace GUI {
 		#endregion
 		#region Output to ListView
 		public void ClearListView() {
-			if (listViewNotifications == null) {
-				return;
+			if (InvokeRequired) {
+				Invoke(new MethodInvoker(() => ClearListView()));
+			} else {
+				listViewNotifications.Items.Clear();
 			}
-			listViewNotifications.Items.Clear();
 		}
 
 		private void PrintMessagesToListView(IEnumerable<IMessage> messages) {
@@ -141,7 +163,7 @@ namespace GUI {
 				return;
 			}
 
-			foreach (IMessage message in messages) {
+			foreach (IMessage message in messages.ToList()) {
 				PrintMessageToListView(message);
 			}
 		}
@@ -150,9 +172,21 @@ namespace GUI {
 				return;
 			}
 
-			string messageDatereceived = message.ReceivedTime.ToShortDateString() + " " + message.ReceivedTime.ToShortTimeString();
-			ListViewItem viewItem = new ListViewItem(new[] { message.Sender, message.Body, messageDatereceived });
-			listViewNotifications.Items.Add(viewItem);
+			if (InvokeRequired) {
+				Invoke(new MethodInvoker(() => PrintMessageToListView(message)));
+			} else {
+				string messageDatereceived = ComposeMessageDate();
+				//AddToListView(messageDatereceived);
+				ListViewItem viewItem = new ListViewItem(new[] { message.Sender, message.Body, messageDatereceived });
+				listViewNotifications.Items.Add(viewItem);
+			}
+
+			string ComposeMessageDate() {
+				return message.ReceivedTime.ToShortDateString() + " " + message.ReceivedTime.ToShortTimeString();
+			}
+			void AddToListView(string messageDatereceived) {
+
+			}
 		}
 
 		public void PrintAllMessages() {
@@ -180,28 +214,32 @@ namespace GUI {
 			}
 			_phoneControl.MobilePhone.MessagesStorage.SendersListChanged += UpdateSendersList;
 		}
-		public virtual void DisableUpdatingSendersList() {
+		private void DisableUpdatingSendersList() {
 			_phoneControl.MobilePhone.MessagesStorage.SendersListChanged -= UpdateSendersList;
 		}
-		public virtual void UpdateSendersList(object sender, SendersListChangedArgs senders) {
-			string currentlySelectedSender = comboBoxSender.Text;
+		private void UpdateSendersList(object sender, SendersListChangedArgs senders) {
+			if (InvokeRequired) {
+				Invoke(new MethodInvoker(() => UpdateSendersList(sender, senders)));
+			} else {
+				string currentlySelectedSender = comboBoxSender.Text;
 
-			List<string> newSendersList = _phoneControl.MobilePhone.MessagesStorage.GetMessagesSenders().ToList();
+				List<string> newSendersList = _phoneControl.MobilePhone.MessagesStorage.GetMessagesSenders().ToList();
 
-			comboBoxSender.Items.Clear();
-			AddSendersToComboBox(newSendersList);
+				comboBoxSender.Items.Clear();
+				AddSendersToComboBox(newSendersList);
 
-			if (newSendersList.Contains(currentlySelectedSender)) {
-				comboBoxSender.SelectedItem = currentlySelectedSender;
-			}
+				if (newSendersList.Contains(currentlySelectedSender)) {
+					comboBoxSender.SelectedItem = currentlySelectedSender;
+				}
 
-			void AddSendersToComboBox(IList<string> sendersList) {
-				foreach (string newSender in sendersList) {
-					comboBoxSender.Items.Add(newSender);
+				void AddSendersToComboBox(IList<string> sendersList) {
+					foreach (string newSender in sendersList) {
+						comboBoxSender.Items.Add(newSender);
+					}
 				}
 			}
 		}
-		public virtual void EnableNotificationsOfNewMessages() {
+		private void EnableNotificationsOfNewMessages() {
 			if (listViewNotifications == null) {
 				throw new NullReferenceException(nameof(listViewNotifications));
 			}
@@ -211,12 +249,29 @@ namespace GUI {
 		public virtual void DisableNotificationsOfNewMessages() {
 			_phoneControl.MobilePhone.MessagesStorage.MessageReceived -= ShowNotificationOfNewMessages;
 		}
-		public void ShowNotificationOfNewMessages(object sender, NotificationEventArgs e) {
+		private void ShowNotificationOfNewMessages(object sender, NotificationEventArgs e) {
 			if (listViewNotifications == null || e == null) {
 				return;
 			}
 
 			RefreshMessageList();
+		}
+		private void EnablePhoneBatteryUpdateObProgBar() {
+			_phoneControl.MobilePhone.Battery.CurrentCapacityChanged += DisplayBatteryPercentage;
+		}
+		private void DisablePhoneBatteryUpdateOnProgBar() {
+			_phoneControl.MobilePhone.Battery.CurrentCapacityChanged -= DisplayBatteryPercentage;
+		}
+		private void DisplayBatteryPercentage(object sender, CurrBatCapacityChngdEventArgs e) {
+			if (progressBarBatteryPercentage == null || _phoneControl == null || _phoneControl.MobilePhone == null || _phoneControl.MobilePhone.Battery == null) {
+				return;
+			}
+
+			int currentBatteryChargePercentage = e.CurrentBatteryCapacity;
+
+			if (currentBatteryChargePercentage >= 0 && currentBatteryChargePercentage <= 100) {
+				SetProgressBarValue(currentBatteryChargePercentage);
+			}
 		}
 		#endregion
 	}

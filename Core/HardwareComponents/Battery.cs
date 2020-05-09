@@ -8,6 +8,7 @@ using Core.Interfaces;
 
 namespace Core.HardwareComponents {
 	public class Battery : IBattery {
+		public event EventHandler<CurrBatCapacityChngdEventArgs> CurrentCapacityChanged;
 		#region ICommonDescription implementation
 		public string Model { get; }
 		public string Manufacturer { get; }
@@ -75,6 +76,7 @@ namespace Core.HardwareComponents {
 				delta *= -1;
 				DecreaseCurrentCapacity(delta);
 			}
+			OnCurrentCapacityChanged();
 		}
 		private void IncreaseCurrentCapacity(int delta) {
 			if (delta < 0) {
@@ -99,6 +101,9 @@ namespace Core.HardwareComponents {
 			} else {
 				_currentCapacity = newCurrentCapacity;
 			}
+		}
+		protected void OnCurrentCapacityChanged() {
+			CurrentCapacityChanged?.Invoke(this, new CurrBatCapacityChngdEventArgs(CurrentChargePercentage));
 		}
 	}
 }
