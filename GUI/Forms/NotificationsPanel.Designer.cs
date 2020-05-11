@@ -23,7 +23,6 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.components = new System.ComponentModel.Container();
 			this.comboBoxFormattingStyle = new System.Windows.Forms.ComboBox();
 			this.comboBoxSender = new System.Windows.Forms.ComboBox();
 			this.datePickerFromDate = new System.Windows.Forms.DateTimePicker();
@@ -36,7 +35,6 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.timerNotifications = new System.Windows.Forms.Timer(this.components);
 			this.listViewNotifications = new System.Windows.Forms.ListView();
 			this.From = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Message = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -193,11 +191,6 @@
 			this.label5.TabIndex = 10;
 			this.label5.Text = "Select formatting style";
 			// 
-			// timerNotifications
-			// 
-			this.timerNotifications.Interval = 3333;
-			this.timerNotifications.Tick += new System.EventHandler(this.timerNotifications_Tick);
-			// 
 			// listViewNotifications
 			// 
 			this.listViewNotifications.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -308,7 +301,6 @@
 			this.progressBarBatteryPercentage.Step = 1;
 			this.progressBarBatteryPercentage.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
 			this.progressBarBatteryPercentage.TabIndex = 19;
-			this.progressBarBatteryPercentage.Value = 50;
 			// 
 			// buttonChargePhone
 			// 
@@ -341,7 +333,7 @@
 			this.MaximizeBox = false;
 			this.Name = "NotificationsPanel";
 			this.Text = "Notifications Panel";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NotificationsPanel_FormClosed);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NotificationsPanel_FormClosing);
 			this.groupBoxFilters.ResumeLayout(false);
 			this.groupBoxFilters.PerformLayout();
 			this.groupBoxLogicalOperators.ResumeLayout(false);
@@ -361,7 +353,6 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Timer timerNotifications;
 		private System.Windows.Forms.ListView listViewNotifications;
 		private System.Windows.Forms.ColumnHeader From;
 		private System.Windows.Forms.ColumnHeader Message;

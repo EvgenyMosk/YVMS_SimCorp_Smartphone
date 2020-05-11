@@ -48,8 +48,6 @@ namespace Core {
 			}
 
 			IMessage message = new NotificationMessage(e.Sender, e.Body, e.ReceivedTime);
-			//NotificationsOutput.Output(message);
-			//NotificationsOutput.Output(e);
 		}
 
 		public void ReceiveMessage(string senderName, string messageBody) {
@@ -202,7 +200,7 @@ namespace Core {
 			if (mobilePhone == null) {
 				throw new ArgumentNullException(nameof(mobilePhone));
 			}
-			mobilePhone.OperatingSystem = new Core.SoftwareComponents.OperatingSystem(model, manufacturer, yearOfProduction, version, size);
+			mobilePhone.OperatingSystem = new OS(model, manufacturer, yearOfProduction, version, size);
 		}
 	}
 }

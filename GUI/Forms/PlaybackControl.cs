@@ -28,6 +28,7 @@ namespace GUI {
 			IMobilePhone mobilePhone = MobilePhone.CreateMobilePhone(PresetsPhones.MicrosoftLumia640XL);
 			IAudioOutputDevice audioOutputDevice = SelectOutputDevice(comboBoxDeviceToPlay.SelectedItem);
 			PhoneControl = new PhoneControl(mobilePhone, audioOutputDevice, Output);
+			PhoneControl.SetBatteryRates(100, -20);
 		}
 
 		private void InitComboBox_Helper(ComboBox comboBox) {
@@ -114,8 +115,15 @@ namespace GUI {
 			textBoxAudioFile.Text = string.Empty;
 		}
 
-		private void buttonNotificationsFormLaunch_Click(object sender, EventArgs e) {
-			NotificationsPanel notificationsPanel = new NotificationsPanel(PhoneControl);
+		private void buttonNotificationsFormTaskLaunch_Click(object sender, EventArgs e) {
+			bool useThread = false;
+			NotificationsPanel notificationsPanel = new NotificationsPanel(PhoneControl, useThread);
+			notificationsPanel.ShowDialog();
+		}
+
+		private void buttonNotificationsFormThreadLaunch_Click(object sender, EventArgs e) {
+			bool useThread = true;
+			NotificationsPanel notificationsPanel = new NotificationsPanel(PhoneControl, useThread);
 			notificationsPanel.ShowDialog();
 		}
 	}

@@ -46,6 +46,9 @@
     <Compile Include="HardwareComponents\Battery.cs" />
     <Compile Include="HardwareComponents\CurrBatCapacityChngdEventArgs.cs" />
     <Compile Include="Interfaces\IBattery.cs" />
+    <Compile Include="Interfaces\IMessagesGenerator.cs" />
+    <Compile Include="SoftwareComponents\MessagesGenerator_Task.cs" />
+    <Compile Include="SoftwareComponents\MessagesGenerator_Thread.cs" />
     <Compile Include="SoftwareComponents\SendersListChangedArgs.cs" />
     <Compile Include="Writers\ConsoleWriter.cs" />
     <Compile Include="DescriptionContainer.cs" />

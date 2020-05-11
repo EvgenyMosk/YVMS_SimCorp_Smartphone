@@ -6,6 +6,59 @@ using System.Threading.Tasks;
 
 namespace Core {
 	public static class TextProcessor {
+		private static readonly string[] _messagesTexts = { "Payment successful! See details at: https://privatbank.ua/payments/mypayments",
+			"Your order arrived at destination country!",
+			"Update available!",
+			"You missed 3 calls from +3809987654321",
+			"Money transfer successful!",
+			"New video from Metallica Official Channel, watch now: you.tu/jsdka",
+			".NET Core 3.3.3.81 available for download!",
+			"Login to your account from new device."};
+		private static readonly string[] _messagesSenders = { "SimCorp Ltd.",
+			"Microsoft Corporation",
+			"System Notification Service" };
+		private static readonly Random _random = new Random();
+		private delegate string MessageFormatDelegate(string text);
+		private static MessageFormatDelegate _formatter = FormatByDefault;
+
+		public static string GetRandomSender() {
+			int senderIndex = _random.Next(_messagesSenders.Length);
+			return _messagesSenders[senderIndex];
+		}
+		public static string GetRandomMessage() {
+			int messageIndex = _random.Next(_messagesTexts.Length);
+			return _messagesTexts[messageIndex];
+		}
+
+		public static string GetFormattedText(string text) {
+			return _formatter(text);
+		}
+		public static string GetFormattedText(string text, int indexSelected) {
+			SelectFormatter(indexSelected);
+			return GetFormattedText(text);
+		}
+
+		public static void SelectFormatter(int indexSelected) {
+			switch (indexSelected) {
+				case 0:
+					_formatter = FormatByDefault;
+					break;
+				case 1:
+					_formatter = FormatWithDateAtStart;
+					break;
+				case 2:
+					_formatter = FormatWithDateAtEnd;
+					break;
+				case 3:
+					_formatter = FormatWithUppercase;
+					break;
+				case 4:
+					_formatter = FormatWithLowercase;
+					break;
+				default:
+					throw new ArgumentException("Given value is not supported!", nameof(indexSelected));
+			}
+		}
 		/// <summary>
 		/// Creates a unified description for all classes that implement's ICommonDescription
 		/// </summary>

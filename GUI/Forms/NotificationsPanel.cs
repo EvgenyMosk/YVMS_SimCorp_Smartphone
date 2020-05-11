@@ -10,48 +10,64 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Core;
-using Core.Interfaces;
 using Core.SoftwareComponents;
-using Core.Writers;
 
 using PhonePlayerBusinessLogic;
 
 namespace GUI {
 	public partial class NotificationsPanel : Form {
-		public NotificationsPanel(PhoneControl phoneControl) {
-			if (phoneControl == null) {
-				throw new ArgumentNullException(nameof(phoneControl));
-			}
+		public NotificationsPanel(PhoneControl phoneControl, bool useThread) {
+			ValidatePhoneControl();
+
 			InitializeComponent();
-			_random = new Random();
 			_phoneControl = phoneControl;
-			_formatter = TextProcessor.FormatByDefault;
-			AddDefaultMessagesToStorage(_phoneControl.MobilePhone.MessagesStorage);
+
+			if (_phoneControl.MobilePhone.MessagesStorage.Count == 0) {
+				AddDefaultMessagesToStorage(_phoneControl.MobilePhone.MessagesStorage);
+			}
+
 			comboBoxFormattingStyle.SelectedIndex = 0;
 
-			EnableUpdatingSendersList();
-			EnableNotificationsOfNewMessages();
-			EnablePhoneBatteryUpdateObProgBar();
+			progressBarBatteryPercentage.Value = _phoneControl.MobilePhone.Battery.CurrentChargePercentage;
 
-
-			//====================================================//
-			//                                                    //
-			//   MOVE TO TASK METHOD AND CANCEL AT FORM CLOSING   //
-			//                                                    //
-			//====================================================//
-			Task.Run(() => {
-				while (_phoneControl.MobilePhone.Battery.CurrentChargePercentage > 0) {
-					_phoneControl.ChangeCurrentBatteryCapacity(-10);
-					Thread.Sleep(1000);
-				}
-			});
-
-			////_messageGeneratingThread = Task.Factory.StartNew(GenerateNewMessagesInBackground);
-			_messageGeneratingThread = new Thread(GenerateNewMessagesInBackground);
-			_messageGeneratingThread.Start();
-			//SwitchOnOffTimers(true); // Turn on timers
+			EnableUpdates();
 
 			PrintAllMessages();
+
+			StartDischargingPhone();
+
+			int messagesGenerationInterval = 5000;
+			if (useThread) {
+				_messagesGenerator = new MessagesGenerator_Thread(phoneControl.MobilePhone, messagesGenerationInterval);
+			} else {
+				_messagesGenerator = new MessagesGenerator_Task(phoneControl.MobilePhone, messagesGenerationInterval);
+			}
+
+			_messagesGenerator.StartGeneratingNewMessages();
+
+			void ValidatePhoneControl() {
+				if (phoneControl == null) {
+					throw new ArgumentNullException(nameof(phoneControl));
+				}
+				if (phoneControl.MobilePhone == null) {
+					throw new ArgumentNullException(nameof(phoneControl), "Mobile Phone in PhoneControl cannot be null!");
+				}
+				if (phoneControl.MobilePhone.MessagesStorage == null) {
+					throw new ArgumentNullException(nameof(phoneControl), "Messages Storage in PhoneControl cannot be null!");
+				}
+				if (phoneControl.MobilePhone.Battery == null) {
+					throw new ArgumentNullException(nameof(phoneControl), "Battery in PhoneControl cannot be null!");
+				}
+			}
+			void EnableUpdates() {
+				EnableUpdatingSendersList();
+				EnableNotificationsOfNewMessages();
+				EnablePhoneBatteryUpdateOnProgBar();
+			}
+			void StartDischargingPhone() {
+				_phoneControl.ResetCharging();
+				_phoneControl.UnplugPhoneFromPowerSource();
+			}
 		}
 		private void AddDefaultMessagesToStorage(MessagesStorage messagesStorage) {
 			int month = 1;
@@ -63,54 +79,29 @@ namespace GUI {
 				year += 7;
 			}
 		}
-		private void SwitchOnOffTimers(bool turnOn) {
-			if (turnOn) {
-				timerNotifications.Enabled = true;
-			} else {
-				timerNotifications.Enabled = false;
-			}
-		}
 
-		private void SelectFormatter(int indexSelected) {
-			switch (indexSelected) {
-				case 0:
-					_formatter = TextProcessor.FormatByDefault;
-					break;
-				case 1:
-					_formatter = TextProcessor.FormatWithDateAtStart;
-					break;
-				case 2:
-					_formatter = TextProcessor.FormatWithDateAtEnd;
-					break;
-				case 3:
-					_formatter = TextProcessor.FormatWithUppercase;
-					break;
-				case 4:
-					_formatter = TextProcessor.FormatWithLowercase;
-					break;
-				default:
-					throw new ArgumentException("Given value is not supported!", nameof(indexSelected));
-			}
-		}
-
-		private void timerNotifications_Tick(object sender, EventArgs e) {
-			string senderName = GetRandomSender();
-			string messageBody = GetRandomMessage();
-			messageBody = _formatter(messageBody);
-
-			SendMessageToSmartphone(senderName, messageBody);
-		}
 		#region Form events
-		private void NotificationsPanel_FormClosed(object sender, FormClosedEventArgs e) {
-			_messageGeneratingThread.Abort();
-			//SwitchOnOffTimers(false); // Turn off timers
+		private void NotificationsPanel_FormClosing(object sender, FormClosingEventArgs e) {
 			DisableNotificationsOfNewMessages();
 			DisableUpdatingSendersList();
 			DisablePhoneBatteryUpdateOnProgBar();
+
+			_messagesGenerator.StopGeneratingNewMessages();
+			_phoneControl.Dispose();
+		}
+
+		private void buttonChargePhone_Click(object sender, EventArgs e) {
+			if (buttonChargePhone.Text.ToLower() == "charge phone") {
+				buttonChargePhone.Text = "Stop charging";
+				_phoneControl.PlugPhoneToPowerSource();
+			} else {
+				buttonChargePhone.Text = "Charge phone";
+				_phoneControl.UnplugPhoneFromPowerSource();
+			}
 		}
 
 		private void comboBoxFormattingStyle_SelectedIndexChanged(object sender, EventArgs e) {
-			SelectFormatter(comboBoxFormattingStyle.SelectedIndex);
+			TextProcessor.SelectFormatter(comboBoxFormattingStyle.SelectedIndex);
 		}
 		private void buttonRefresh_Click(object sender, EventArgs e) {
 			RefreshMessageList();
@@ -166,9 +157,5 @@ namespace GUI {
 			RefreshMessageList();
 		}
 		#endregion
-
-		private void buttonChargePhone_Click(object sender, EventArgs e) {
-
-		}
 	}
 }

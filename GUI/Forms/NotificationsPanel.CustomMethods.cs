@@ -19,21 +19,7 @@ using PhonePlayerBusinessLogic;
 namespace GUI {
 	public partial class NotificationsPanel : Form {
 		private readonly PhoneControl _phoneControl;
-		private readonly Random _random;
-		private static readonly string[] _messagesTexts = { "Payment successful! See details at: https://privatbank.ua/payments/mypayments",
-			"Your order arrived at destination country!",
-			"Update available!",
-			"You missed 3 calls from +3809987654321",
-			"Money transfer successful!",
-			"New video from Metallica Official Channel, watch now: you.tu/jsdka",
-			".NET Core 3.3.3.81 available for download!",
-			"Login to your account from new device."};
-		private static readonly string[] _messagesSenders = { "SimCorp Ltd.",
-			"Microsoft Corporation",
-			"System Notification Service" };
-		private delegate string MessageFormatDelegate(string text);
-		private MessageFormatDelegate _formatter;
-		private Thread _messageGeneratingThread;
+		private IMessagesGenerator _messagesGenerator;
 
 		#region GetSomething methods
 		// https://stackoverflow.com/questions/3117957/return-value-from-control-invokemethodinvoker-delegate-i-need
@@ -55,43 +41,15 @@ namespace GUI {
 		public DateTime GetToDate() {
 			return datePickerToDate.Value;
 		}
-
-		private string GetRandomSender() {
-			int senderIndex = _random.Next(_messagesSenders.Length);
-			return _messagesSenders[senderIndex];
-		}
-		private string GetRandomMessage() {
-			int messageIndex = _random.Next(_messagesTexts.Length);
-			return _messagesTexts[messageIndex];
-		}
 		#endregion
 
-		private void GenerateNewMessagesInBackground() {
-			while (true) {
-				GenerateNewMessage();
-				Thread.Sleep(3333);
-			}
-		}
-		private void GenerateNewMessage() {
-			string senderName = GetRandomSender();
-			string messageBody = GetRandomMessage();
-			messageBody = _formatter(messageBody);
-
-			SendMessageToSmartphone(senderName, messageBody);
-		}
-		private void SendMessageToSmartphone(string senderName, string messageBody) {
-			_phoneControl.MobilePhone.ReceiveMessage(senderName, messageBody);
-		}
-
 		private void SetProgressBarValue(int value) {
-			if (InvokeRequired) {
+			if (InvokeRequired && !progressBarBatteryPercentage.IsDisposed) {
 				Invoke(new MethodInvoker(() => SetProgressBarValue(value)));
 			} else if (progressBarBatteryPercentage != null) {
 				progressBarBatteryPercentage.Value = value;
 			}
 		}
-
-
 
 		#region Filtering
 		private void EnableDisableGroupBoxes(bool switchOn) {
@@ -176,16 +134,12 @@ namespace GUI {
 				Invoke(new MethodInvoker(() => PrintMessageToListView(message)));
 			} else {
 				string messageDatereceived = ComposeMessageDate();
-				//AddToListView(messageDatereceived);
 				ListViewItem viewItem = new ListViewItem(new[] { message.Sender, message.Body, messageDatereceived });
 				listViewNotifications.Items.Add(viewItem);
 			}
 
 			string ComposeMessageDate() {
 				return message.ReceivedTime.ToShortDateString() + " " + message.ReceivedTime.ToShortTimeString();
-			}
-			void AddToListView(string messageDatereceived) {
-
 			}
 		}
 
@@ -256,14 +210,14 @@ namespace GUI {
 
 			RefreshMessageList();
 		}
-		private void EnablePhoneBatteryUpdateObProgBar() {
+		private void EnablePhoneBatteryUpdateOnProgBar() {
 			_phoneControl.MobilePhone.Battery.CurrentCapacityChanged += DisplayBatteryPercentage;
 		}
 		private void DisablePhoneBatteryUpdateOnProgBar() {
 			_phoneControl.MobilePhone.Battery.CurrentCapacityChanged -= DisplayBatteryPercentage;
 		}
 		private void DisplayBatteryPercentage(object sender, CurrBatCapacityChngdEventArgs e) {
-			if (progressBarBatteryPercentage == null || _phoneControl == null || _phoneControl.MobilePhone == null || _phoneControl.MobilePhone.Battery == null) {
+			if (progressBarBatteryPercentage.IsDisposed) {
 				return;
 			}
 

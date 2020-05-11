@@ -73,7 +73,7 @@ namespace Core.HardwareComponents {
 			if (delta > 0) {
 				IncreaseCurrentCapacity(delta);
 			} else {
-				delta *= -1;
+				delta = Math.Abs(delta);
 				DecreaseCurrentCapacity(delta);
 			}
 			OnCurrentCapacityChanged();
