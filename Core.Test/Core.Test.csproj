@@ -49,8 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BatteryTest.cs" />
     <Compile Include="ChipsetTest.cs" />
     <Compile Include="ConsoleWriterTest.cs" />
+    <Compile Include="MessagesGenerator_TaskTest.cs" />
+    <Compile Include="MessagesGenerator_ThreadTest.cs" />
     <Compile Include="MessagesStorageTest.cs" />
     <Compile Include="TextProcessorTest.cs" />
     <Compile Include="FileManagerTest.cs" />

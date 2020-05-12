@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Core;
 using Core.Enums;
+using Core.HardwareComponents;
 using Core.Interfaces;
 using Core.SoftwareComponents;
 
@@ -30,6 +32,7 @@ namespace PhonePlayerBusinessLogic.Test {
 			public IOutput Output { get; set; }
 			public IOutput NotificationsOutput { get; set; }
 			public MessagesStorage MessagesStorage { get; set; }
+			public IBattery Battery { get; set; }
 
 			public void DisableNotifications() {
 				throw new NotImplementedException();
@@ -68,11 +71,14 @@ namespace PhonePlayerBusinessLogic.Test {
 
 		[TestInitialize]
 		public void SetUp() {
-			IMobilePhone mobilePhone = new FakeMobilePhone();
+			IMobilePhone mobilePhone = new FakeMobilePhone {
+				Battery = new Battery(1000, 1000)
+			};
 			IAudioOutputDevice audioOutputDevice = new FakeHeadphones();
 			PhoneControlUnderTest = new PhoneControl(mobilePhone, audioOutputDevice, null);
 		}
 
+		#region AudioDevice-related tests
 		[TestMethod]
 		public void PlayAudio_AudioDeviceNotNull_NotNullString_ExpectAudioDevicePlayCalled() {
 			string audioFile = "audioFile";
@@ -206,5 +212,195 @@ namespace PhonePlayerBusinessLogic.Test {
 
 			Assert.AreEqual(expectedResult, actualResult);
 		}
+		#endregion
+		#region Battery-related tests
+		[TestMethod]
+		public void SetBatteryRates_ChargeRateZero_ExpectArgumentExxception() {
+			int chargeRate = 0;
+			int dischargeRate = -100;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetBatteryRates(chargeRate, dischargeRate);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetBatteryRates_DischargeLevelZero_ExpectArgumentException() {
+			int chargeRate = 100;
+			int dischargeRate = 0;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetBatteryRates(chargeRate, dischargeRate);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetBatteryRates_BothRatesNegative_ExpectNoExceptions() {
+			int chargeRate = -100;
+			int dischargeRate = -100;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetBatteryRates(chargeRate, dischargeRate);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsFalse(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetBatteryRates_BothRatesPositive_ExpectNoExceptions() {
+			int chargeRate = 100;
+			int dischargeRate = 100;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetBatteryRates(chargeRate, dischargeRate);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsFalse(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetBatteryRates_ChargeNegativeDischargePositive_ExpectNoExceptions() {
+			int chargeRate = -100;
+			int dischargeRate = 100;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetBatteryRates(chargeRate, dischargeRate);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsFalse(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetBatteryRates_ChargePositiveDischargeNegative_ExpectNoExceptions() {
+			int chargeRate = 100;
+			int dischargeRate = -100;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetBatteryRates(chargeRate, dischargeRate);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsFalse(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetChargingDischargingInterval_IntervalIsZero_ExpectArgumentException() {
+			int interval = 0;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetChargingDischargingInterval(interval);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetChargingDischargingInterval_IntervalIsLessThanZero_ExpectArgumentException() {
+			int interval = -10;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetChargingDischargingInterval(interval);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsTrue(exceptionThrown);
+		}
+		[TestMethod]
+		public void SetChargingDischargingInterval_IntervalIsPositive_ExpectNoException() {
+			int interval = 100;
+			bool exceptionThrown = false;
+
+			try {
+				PhoneControlUnderTest.SetChargingDischargingInterval(interval);
+			} catch (ArgumentException) {
+				exceptionThrown = true;
+			}
+
+			Assert.IsFalse(exceptionThrown);
+		}
+
+		[TestMethod]
+		public void UnplugPhoneFromPowerSource_WaitAWhile_ExpectHalfOfTheBatteryLeft() {
+			// Arrange
+			int actualChargePctAtStart;
+			int actualChargePctAfterUnplugging;
+			int actualChargePctAfterResetAndWaiting;
+			int expectedChargePctAtStart = 100;
+			int expectedChargePctAfterUnplugging = 60;
+			int expectedChargePctAfterResetAndWaiting = 50;
+
+			// Act
+			PhoneControlUnderTest.ResetCharging();
+			actualChargePctAtStart = PhoneControlUnderTest.MobilePhone.Battery.CurrentChargePercentage;
+			PhoneControlUnderTest.SetChargingDischargingInterval(10);
+			PhoneControlUnderTest.SetBatteryRates(200, 100);
+			PhoneControlUnderTest.UnplugPhoneFromPowerSource();
+
+			Thread.Sleep(45);
+
+			PhoneControlUnderTest.ResetCharging();
+			actualChargePctAfterUnplugging = PhoneControlUnderTest.MobilePhone.Battery.CurrentChargePercentage;
+
+			Thread.Sleep(200);
+
+			actualChargePctAfterResetAndWaiting = PhoneControlUnderTest.MobilePhone.Battery.CurrentChargePercentage;
+
+			// Assert
+			Assert.AreEqual(expectedChargePctAtStart, actualChargePctAtStart);
+			Assert.AreEqual(expectedChargePctAfterUnplugging, actualChargePctAfterUnplugging);
+			Assert.AreEqual(expectedChargePctAfterResetAndWaiting, actualChargePctAfterResetAndWaiting);
+		}
+		[TestMethod]
+		public void PlugPhoneToPowerSource_WaitAWhile_ExpectFullBattery() {
+			// Arrange
+			int actualChargePctAtStart;
+			int actualChargePctAfterUnplugging;
+			int actualChargePctAfterResetAndWaiting;
+			int expectedChargePctAtStart = 50;
+			int expectedChargePctAfterUnplugging = 100;
+			int expectedChargePctAfterResetAndWaiting = 100;
+
+			// Act
+			PhoneControlUnderTest.MobilePhone.Battery.ChangeCurrentCapacity(-500); // Set Battery to 50%
+			PhoneControlUnderTest.ResetCharging();
+			actualChargePctAtStart = PhoneControlUnderTest.MobilePhone.Battery.CurrentChargePercentage;
+			PhoneControlUnderTest.SetChargingDischargingInterval(10);
+			PhoneControlUnderTest.SetBatteryRates(200, 100);
+			PhoneControlUnderTest.PlugPhoneToPowerSource();
+
+			Thread.Sleep(55);
+
+			PhoneControlUnderTest.ResetCharging();
+			actualChargePctAfterUnplugging = PhoneControlUnderTest.MobilePhone.Battery.CurrentChargePercentage;
+
+			Thread.Sleep(200);
+
+			actualChargePctAfterResetAndWaiting = PhoneControlUnderTest.MobilePhone.Battery.CurrentChargePercentage;
+
+			// Assert
+			Assert.AreEqual(expectedChargePctAtStart, actualChargePctAtStart);
+			Assert.AreEqual(expectedChargePctAfterUnplugging, actualChargePctAfterUnplugging);
+			Assert.AreEqual(expectedChargePctAfterResetAndWaiting, actualChargePctAfterResetAndWaiting);
+		}
+		#endregion
 	}
 }

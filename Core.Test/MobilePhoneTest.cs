@@ -21,6 +21,7 @@ namespace Core.Test {
 		public IOutput Output { get; set; }
 		public IOutput NotificationsOutput { get; set; }
 		public MessagesStorage MessagesStorage { get; set; }
+		public IBattery Battery { get; set; }
 
 		public void DisableNotifications() {
 			throw new NotImplementedException();

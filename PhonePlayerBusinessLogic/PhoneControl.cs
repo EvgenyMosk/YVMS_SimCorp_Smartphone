@@ -15,6 +15,7 @@ namespace PhonePlayerBusinessLogic {
 	public class PhoneControl : IDisposable {
 		private int _dischargeRateMah;// = -20;
 		private int _chargeRateMah;// = 100;
+		private int _chargingDischargingInterval;
 		public IMobilePhone MobilePhone { get; set; }
 		private CancellationTokenSource _cancellationTokenChargePhone;
 		private CancellationTokenSource _cancellationTokenDischargePhone;
@@ -30,6 +31,8 @@ namespace PhonePlayerBusinessLogic {
 			if (mobilePhone.AudioOutputDevice != null) {
 				MobilePhone.AudioOutputDevice.Output = audioDeviceOutput;
 			}
+
+			_chargingDischargingInterval = 1000;
 		}
 		public virtual void PlayAudio(string audioFile) {
 			if (MobilePhone.AudioOutputDevice == null || string.IsNullOrWhiteSpace(audioFile)) {
@@ -57,6 +60,13 @@ namespace PhonePlayerBusinessLogic {
 
 			_chargeRateMah = Math.Abs(chargeRate);
 			_dischargeRateMah = Math.Abs(dischargeRate) * -1; // Make sure it's always negative
+		}
+		public void SetChargingDischargingInterval(int interval) {
+			if (interval <= 0) {
+				throw new ArgumentException("Interval cannot be less than or equal to zero!", nameof(interval));
+			}
+
+			_chargingDischargingInterval = interval;
 		}
 		public void ResetCharging() {
 			_cancellationTokenChargePhone?.Cancel();
@@ -92,7 +102,7 @@ namespace PhonePlayerBusinessLogic {
 			Task.Run(() => {
 				while (MobilePhone.Battery.CurrentChargePercentage > 0
 				&& !cancellationToken.IsCancellationRequested) {
-					Thread.Sleep(1000);
+					Thread.Sleep(_chargingDischargingInterval);
 					MobilePhone.Battery.ChangeCurrentCapacity(_dischargeRateMah);
 				}
 			}, cancellationToken);
@@ -100,7 +110,7 @@ namespace PhonePlayerBusinessLogic {
 		private void ChargePhone(CancellationToken cancellationToken) {
 			Task.Run(() => {
 				while (!cancellationToken.IsCancellationRequested) {
-					Thread.Sleep(1000);
+					Thread.Sleep(_chargingDischargingInterval);
 					MobilePhone.Battery.ChangeCurrentCapacity(_chargeRateMah);
 				}
 			}, cancellationToken);
