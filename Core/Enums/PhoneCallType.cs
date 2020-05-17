@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Enums {
 	public enum PhoneCallType {
-		OutgoingSuccessfull = 1,
-		OutgoingUnsuccessfull = 2,
-		IncomingSuccessfull = 3,
-		IncomingUnsuccessfull = 4,
+		OutgoingSuccessfull = 0,
+		OutgoingUnsuccessfull = 1,
+		IncomingSuccessfull = 2,
+		IncomingUnsuccessfull = 3,
 	}
 }

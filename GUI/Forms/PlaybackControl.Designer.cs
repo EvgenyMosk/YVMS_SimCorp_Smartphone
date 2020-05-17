@@ -34,6 +34,7 @@
 			this.visualConsole = new System.Windows.Forms.RichTextBox();
 			this.buttonNotificationsFormTasksLaunch = new System.Windows.Forms.Button();
 			this.buttonNotificationsFormThreadLaunch = new System.Windows.Forms.Button();
+			this.buttonCallsPanelFormLaunch = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -150,11 +151,22 @@
 			this.buttonNotificationsFormThreadLaunch.UseVisualStyleBackColor = true;
 			this.buttonNotificationsFormThreadLaunch.Click += new System.EventHandler(this.buttonNotificationsFormThreadLaunch_Click);
 			// 
+			// buttonCallsPanelFormLaunch
+			// 
+			this.buttonCallsPanelFormLaunch.Location = new System.Drawing.Point(0, 617);
+			this.buttonCallsPanelFormLaunch.Name = "buttonCallsPanelFormLaunch";
+			this.buttonCallsPanelFormLaunch.Size = new System.Drawing.Size(359, 50);
+			this.buttonCallsPanelFormLaunch.TabIndex = 9;
+			this.buttonCallsPanelFormLaunch.Text = "Phone Calls panel";
+			this.buttonCallsPanelFormLaunch.UseVisualStyleBackColor = true;
+			this.buttonCallsPanelFormLaunch.Click += new System.EventHandler(this.buttonCallsPanelFormLaunch_Click);
+			// 
 			// PlaybackControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(359, 611);
+			this.ClientSize = new System.Drawing.Size(359, 668);
+			this.Controls.Add(this.buttonCallsPanelFormLaunch);
 			this.Controls.Add(this.buttonNotificationsFormThreadLaunch);
 			this.Controls.Add(this.buttonNotificationsFormTasksLaunch);
 			this.Controls.Add(this.visualConsole);
@@ -184,6 +196,7 @@
 		private System.Windows.Forms.RichTextBox visualConsole;
 		private System.Windows.Forms.Button buttonNotificationsFormTasksLaunch;
 		private System.Windows.Forms.Button buttonNotificationsFormThreadLaunch;
+		private System.Windows.Forms.Button buttonCallsPanelFormLaunch;
 	}
 }
 

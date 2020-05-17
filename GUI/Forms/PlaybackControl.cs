@@ -13,6 +13,8 @@ using Core.Enums;
 using Core.HardwareComponents;
 using Core.Writers;
 
+using GUI.Forms;
+
 using PhonePlayerBusinessLogic;
 
 namespace GUI {
@@ -125,6 +127,11 @@ namespace GUI {
 			bool useThread = true;
 			NotificationsPanel notificationsPanel = new NotificationsPanel(PhoneControl, useThread);
 			notificationsPanel.ShowDialog();
+		}
+
+		private void buttonCallsPanelFormLaunch_Click(object sender, EventArgs e) {
+			PhoneCallsPanelForm phoneCallsPanel = new PhoneCallsPanelForm(PhoneControl);
+			phoneCallsPanel.ShowDialog();
 		}
 	}
 }

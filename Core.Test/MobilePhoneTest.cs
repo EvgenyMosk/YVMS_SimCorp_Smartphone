@@ -22,6 +22,7 @@ namespace Core.Test {
 		public IOutput NotificationsOutput { get; set; }
 		public MessagesStorage MessagesStorage { get; set; }
 		public IBattery Battery { get; set; }
+		public PhoneCallsCollection PhoneCallsStorage { get; set; }
 
 		public void DisableNotifications() {
 			throw new NotImplementedException();
@@ -40,6 +41,14 @@ namespace Core.Test {
 		}
 
 		public void NotifyAboutReceivedMessage(object sender, NotificationEventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		public void ReceiveCall(ICall call) {
+			throw new NotImplementedException();
+		}
+
+		public void ReceiveCall(IContact contact, PhoneNumber phoneNumber, PhoneCallType callType, DateTime callTime) {
 			throw new NotImplementedException();
 		}
 

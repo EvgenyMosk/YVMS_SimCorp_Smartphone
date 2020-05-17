@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.SoftwareComponents {
-	public class PhoneNumber : IComparable<PhoneNumber> {
+	public class PhoneNumber : IComparable<PhoneNumber>, ICloneable {
 		private int _countryCode;
 		private int _operatorCode;
 		private int _userIdentifier;
@@ -19,6 +19,10 @@ namespace Core.SoftwareComponents {
 			int.TryParse(countryCode, out _countryCode);
 			int.TryParse(operatorCode, out _operatorCode);
 			int.TryParse(userIdentifier, out _userIdentifier);
+		}
+
+		public object Clone() {
+			return new PhoneNumber(_countryCode, _operatorCode, _userIdentifier);
 		}
 
 		public int CompareTo(PhoneNumber other) {

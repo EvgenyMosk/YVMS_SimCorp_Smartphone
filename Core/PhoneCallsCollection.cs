@@ -6,17 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Core.Interfaces;
+using Core.SoftwareComponents;
 
 namespace Core {
 	public class PhoneCallsCollection : IList<ICall> {
 		private List<ICall> _callsList;
+		public event EventHandler<NewPhoneCallEventArgs> NewPhoneCallReceived;
+
+		protected void OnNewPhoneCallReceived(ICall phoneCall) {
+			NewPhoneCallReceived?.Invoke(this, new NewPhoneCallEventArgs(phoneCall));
+		}
 
 		public PhoneCallsCollection(List<ICall> callsList) {
 			if (callsList != null) {
 				_callsList = callsList;
+				_callsList.Sort();
 			} else {
 				_callsList = new List<ICall>();
 			}
+		}
+
+		public IList<ICall> GetCalls() {
+			return _callsList;
 		}
 
 		#region IList implementation
@@ -35,6 +46,7 @@ namespace Core {
 		public void Add(ICall item) {
 			_callsList.Add(item);
 			_callsList.Sort();
+			OnNewPhoneCallReceived(item);
 		}
 
 		public void Clear() {
@@ -59,6 +71,7 @@ namespace Core {
 
 		public void Insert(int index, ICall item) {
 			_callsList.Insert(index, item);
+			OnNewPhoneCallReceived(item);
 		}
 
 		public bool Remove(ICall item) {

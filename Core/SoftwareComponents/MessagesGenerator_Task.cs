@@ -10,8 +10,8 @@ using Core.Interfaces;
 
 namespace Core.SoftwareComponents {
 	public class MessagesGenerator_Task : IMessagesGenerator {
-		private IMobilePhone _mobilePhone;
-		private CancellationTokenSource _cancellationTokenSource;
+		protected IMobilePhone _mobilePhone;
+		protected CancellationTokenSource _cancellationTokenSource;
 		public int MessagesGenerationInterval { get; }
 		public MessagesGenerator_Task(IMobilePhone mobilePhone, int messagesGenerationInterval) {
 			if (mobilePhone == null) {
@@ -36,14 +36,14 @@ namespace Core.SoftwareComponents {
 		public void StopGeneratingNewMessages() {
 			_cancellationTokenSource.Cancel();
 		}
-		private void GenerateNewMessage() {
+		protected virtual void GenerateNewMessage() {
 			string senderName = TextProcessor.GetRandomSender();
 			string messageBody = TextProcessor.GetRandomMessage();
 			messageBody = TextProcessor.GetFormattedText(messageBody);
 
 			SendMessageToSmartphone(senderName, messageBody);
 		}
-		private void SendMessageToSmartphone(string senderName, string messageBody) {
+		protected virtual void SendMessageToSmartphone(string senderName, string messageBody) {
 			_mobilePhone.ReceiveMessage(senderName, messageBody);
 		}
 	}

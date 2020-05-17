@@ -54,6 +54,12 @@
     <Compile Include="Forms\NotificationsPanel.CustomMethods.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\PhoneCallsPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PhoneCallsPanel.Designer.cs">
+      <DependentUpon>PhoneCallsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PlaybackControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\NotificationsPanel.resx">
       <DependentUpon>NotificationsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PhoneCallsPanel.resx">
+      <DependentUpon>PhoneCallsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlaybackControl.resx">
       <DependentUpon>PlaybackControl.cs</DependentUpon>

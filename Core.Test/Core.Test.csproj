@@ -55,6 +55,7 @@
     <Compile Include="MessagesGenerator_TaskTest.cs" />
     <Compile Include="MessagesGenerator_ThreadTest.cs" />
     <Compile Include="MessagesStorageTest.cs" />
+    <Compile Include="PhoneCallsCollectionTest.cs" />
     <Compile Include="PhoneCallTest.cs" />
     <Compile Include="TextProcessorTest.cs" />
     <Compile Include="FileManagerTest.cs" />

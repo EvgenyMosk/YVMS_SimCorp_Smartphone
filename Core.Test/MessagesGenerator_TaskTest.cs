@@ -40,6 +40,15 @@ namespace Core.Test {
 			public string Manufacturer { get; }
 			public int? YearOfProduction { get; }
 			public string Version { get; set; }
+			public PhoneCallsCollection PhoneCallsStorage { get; set; }
+
+			public void ReceiveCall(ICall call) {
+				throw new NotImplementedException();
+			}
+
+			public void ReceiveCall(IContact contact, PhoneNumber phoneNumber, PhoneCallType callType, DateTime callTime) {
+				throw new NotImplementedException();
+			}
 
 			public void ReceiveMessage(string senderName, string messageBody) {
 				FakeMessage message = new FakeMessage(senderName, messageBody);

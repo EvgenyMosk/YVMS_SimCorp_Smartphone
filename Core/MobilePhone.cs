@@ -23,6 +23,7 @@ namespace Core {
 		public OS OperatingSystem { get; set; }
 		public PhoneBootState PhoneBootState { get; set; }
 		internal NotificationService NotificationService { get; set; }
+		public PhoneCallsCollection PhoneCallsStorage { get; set; }
 		public MessagesStorage MessagesStorage { get; set; }
 		public IOutput NotificationsOutput { get; set; }
 		#endregion
@@ -39,6 +40,7 @@ namespace Core {
 			YearOfProduction = yearOfProduction;
 			Version = version;
 			NotificationsOutput = output;
+			PhoneCallsStorage = new PhoneCallsCollection(new List<ICall>());
 			MessagesStorage = new MessagesStorage(new List<IMessage>());
 			NotificationService = new NotificationService(MessagesStorage);
 		}
@@ -52,6 +54,13 @@ namespace Core {
 
 		public void ReceiveMessage(string senderName, string messageBody) {
 			NotificationService.ReceiveMessage(senderName, messageBody);
+		}
+		public void ReceiveCall(ICall call) {
+			PhoneCallsStorage.Add(call);
+		}
+		public void ReceiveCall(IContact contact, PhoneNumber phoneNumber, PhoneCallType callType, DateTime callTime) {
+			ICall call = new PhoneCall(contact, phoneNumber, callType, callTime);
+			PhoneCallsStorage.Add(call);
 		}
 		public virtual void PressPowerButton(int secondsButtonBeingHold = 1) {
 			if (secondsButtonBeingHold <= 0) {

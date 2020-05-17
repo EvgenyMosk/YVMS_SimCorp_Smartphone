@@ -51,7 +51,9 @@
     <Compile Include="Interfaces\IBattery.cs" />
     <Compile Include="Interfaces\IMessagesGenerator.cs" />
     <Compile Include="PhoneCallsCollection.cs" />
+    <Compile Include="SoftwareComponents\NewPhoneCallEventArgs.cs" />
     <Compile Include="SoftwareComponents\PhoneCall.cs" />
+    <Compile Include="SoftwareComponents\PhoneCallsGenerator_Task.cs" />
     <Compile Include="SoftwareComponents\PhoneNumber.cs" />
     <Compile Include="SoftwareComponents\Contact.cs" />
     <Compile Include="SoftwareComponents\MessagesGenerator_Task.cs" />
