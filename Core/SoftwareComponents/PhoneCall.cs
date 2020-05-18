@@ -35,8 +35,7 @@ namespace Core.SoftwareComponents {
 			return obj is PhoneCall call &&
 				   EqualityComparer<IContact>.Default.Equals(Contact, call.Contact) &&
 				   EqualityComparer<PhoneNumber>.Default.Equals(PhoneNumber, call.PhoneNumber) &&
-				   CallType == call.CallType &&
-				   CallTime == call.CallTime;
+				   CallType == call.CallType;
 		}
 
 		public override int GetHashCode() {

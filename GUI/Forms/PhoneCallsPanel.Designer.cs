@@ -29,21 +29,26 @@
 			this.callDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.label1 = new System.Windows.Forms.Label();
 			this.richTextBoxLastMessage = new System.Windows.Forms.RichTextBox();
+			this.mergedWithPrev = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.phoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SuspendLayout();
 			// 
 			// listViewPhoneCalls
 			// 
 			this.listViewPhoneCalls.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.contactName,
+            this.phoneNumber,
             this.callDirection,
-            this.callDate});
+            this.callDate,
+            this.mergedWithPrev});
 			this.listViewPhoneCalls.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.listViewPhoneCalls.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.listViewPhoneCalls.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.listViewPhoneCalls.HideSelection = false;
+			this.listViewPhoneCalls.HoverSelection = true;
 			this.listViewPhoneCalls.Location = new System.Drawing.Point(0, 109);
 			this.listViewPhoneCalls.Name = "listViewPhoneCalls";
-			this.listViewPhoneCalls.Size = new System.Drawing.Size(588, 572);
+			this.listViewPhoneCalls.Size = new System.Drawing.Size(1071, 572);
 			this.listViewPhoneCalls.TabIndex = 0;
 			this.listViewPhoneCalls.UseCompatibleStateImageBehavior = false;
 			this.listViewPhoneCalls.View = System.Windows.Forms.View.Details;
@@ -61,7 +66,7 @@
 			// callDate
 			// 
 			this.callDate.Text = "Call Date";
-			this.callDate.Width = 250;
+			this.callDate.Width = 300;
 			// 
 			// label1
 			// 
@@ -74,17 +79,28 @@
 			// 
 			// richTextBoxLastMessage
 			// 
-			this.richTextBoxLastMessage.Location = new System.Drawing.Point(12, 32);
+			this.richTextBoxLastMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.richTextBoxLastMessage.Location = new System.Drawing.Point(0, 38);
 			this.richTextBoxLastMessage.Name = "richTextBoxLastMessage";
-			this.richTextBoxLastMessage.Size = new System.Drawing.Size(564, 71);
+			this.richTextBoxLastMessage.Size = new System.Drawing.Size(1071, 71);
 			this.richTextBoxLastMessage.TabIndex = 2;
 			this.richTextBoxLastMessage.Text = "";
+			// 
+			// mergedWithPrev
+			// 
+			this.mergedWithPrev.Text = "Merged with previous";
+			this.mergedWithPrev.Width = 140;
+			// 
+			// phoneNumber
+			// 
+			this.phoneNumber.Text = "Contact phone number";
+			this.phoneNumber.Width = 160;
 			// 
 			// PhoneCallsPanelForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(588, 681);
+			this.ClientSize = new System.Drawing.Size(1071, 681);
 			this.Controls.Add(this.richTextBoxLastMessage);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.listViewPhoneCalls);
@@ -108,5 +124,7 @@
 		private System.Windows.Forms.ColumnHeader callDate;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.RichTextBox richTextBoxLastMessage;
+		private System.Windows.Forms.ColumnHeader mergedWithPrev;
+		private System.Windows.Forms.ColumnHeader phoneNumber;
 	}
 }

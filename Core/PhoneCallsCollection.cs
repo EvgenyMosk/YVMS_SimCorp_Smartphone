@@ -29,6 +29,9 @@ namespace Core {
 		public IList<ICall> GetCalls() {
 			return _callsList;
 		}
+		public IEnumerable<IGrouping<string, ICall>> GetCallsGroupByContact() {
+			return _callsList.GroupBy(call => call.Contact.Name);
+		}
 
 		#region IList implementation
 		public ICall this[int index] {

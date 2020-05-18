@@ -23,7 +23,7 @@ namespace Core.SoftwareComponents {
 
 			PhoneCallType callType = TextProcessor.GetRandomCallType();
 
-			DateTime callTime = TextProcessor.GetRandomDateTime();
+			DateTime callTime = DateTime.Now;//TextProcessor.GetRandomDateTime();
 
 			ICall call = new PhoneCall(contact, phoneNumber, callType, callTime);
 
