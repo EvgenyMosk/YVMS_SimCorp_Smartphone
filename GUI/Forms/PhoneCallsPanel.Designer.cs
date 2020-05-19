@@ -25,12 +25,12 @@
 		private void InitializeComponent() {
 			this.listViewPhoneCalls = new System.Windows.Forms.ListView();
 			this.contactName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.phoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.callDirection = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.callDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.mergedWithPrev = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.label1 = new System.Windows.Forms.Label();
 			this.richTextBoxLastMessage = new System.Windows.Forms.RichTextBox();
-			this.mergedWithPrev = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.phoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SuspendLayout();
 			// 
 			// listViewPhoneCalls
@@ -45,7 +45,6 @@
 			this.listViewPhoneCalls.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.listViewPhoneCalls.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.listViewPhoneCalls.HideSelection = false;
-			this.listViewPhoneCalls.HoverSelection = true;
 			this.listViewPhoneCalls.Location = new System.Drawing.Point(0, 109);
 			this.listViewPhoneCalls.Name = "listViewPhoneCalls";
 			this.listViewPhoneCalls.Size = new System.Drawing.Size(1071, 572);
@@ -58,6 +57,11 @@
 			this.contactName.Text = "Contact Name";
 			this.contactName.Width = 160;
 			// 
+			// phoneNumber
+			// 
+			this.phoneNumber.Text = "Contact phone number";
+			this.phoneNumber.Width = 160;
+			// 
 			// callDirection
 			// 
 			this.callDirection.Text = "Call Direction";
@@ -67,6 +71,11 @@
 			// 
 			this.callDate.Text = "Call Date";
 			this.callDate.Width = 300;
+			// 
+			// mergedWithPrev
+			// 
+			this.mergedWithPrev.Text = "Merged with previous";
+			this.mergedWithPrev.Width = 140;
 			// 
 			// label1
 			// 
@@ -85,16 +94,6 @@
 			this.richTextBoxLastMessage.Size = new System.Drawing.Size(1071, 71);
 			this.richTextBoxLastMessage.TabIndex = 2;
 			this.richTextBoxLastMessage.Text = "";
-			// 
-			// mergedWithPrev
-			// 
-			this.mergedWithPrev.Text = "Merged with previous";
-			this.mergedWithPrev.Width = 140;
-			// 
-			// phoneNumber
-			// 
-			this.phoneNumber.Text = "Contact phone number";
-			this.phoneNumber.Width = 160;
 			// 
 			// PhoneCallsPanelForm
 			// 

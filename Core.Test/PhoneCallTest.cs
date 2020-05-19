@@ -45,6 +45,7 @@ namespace Core.Test {
 			_fakeContact2 = new FakeContact(name2, phoneNumbers2);
 		}
 
+		#region CompareTo
 		[TestMethod]
 		public void CompareTo_SortList_ListIsNotSorted_ExpectElementsWasNotSwapped() {
 			//Arrange
@@ -130,5 +131,104 @@ namespace Core.Test {
 			// Assert
 			Assert.IsTrue(exceptionThrown);
 		}
+		#endregion
+
+		#region Equals tests
+		[TestMethod]
+		public void Equals_SecondObjIsNotAPhoneCall_ExpectFalse() {
+			PhoneNumber phoneNumber1 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType1 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate1 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall1 = new PhoneCall(_fakeContact1, phoneNumber1, callType1, callDate1);
+
+			Assert.AreNotEqual(phoneCall1, _fakeContact2);
+		}
+
+		[TestMethod]
+		public void Equals_SecondObjHasDiffenentContact_ExpectFalse() {
+			PhoneNumber phoneNumber1 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType1 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate1 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall1 = new PhoneCall(_fakeContact1, phoneNumber1, callType1, callDate1);
+
+			PhoneNumber phoneNumber2 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType2 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate2 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall2 = new PhoneCall(_fakeContact2, phoneNumber2, callType2, callDate2);
+
+			Assert.AreNotEqual(phoneCall1, phoneCall2);
+		}
+
+		[TestMethod]
+		public void Equals_SecondObjHasDiffenentPhoneNumbers_ExpectFalse() {
+			PhoneNumber phoneNumber1 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType1 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate1 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall1 = new PhoneCall(_fakeContact1, phoneNumber1, callType1, callDate1);
+
+			PhoneNumber phoneNumber2 = _fakeContact1.PhoneNumbers[1];
+			PhoneCallType callType2 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate2 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall2 = new PhoneCall(_fakeContact1, phoneNumber2, callType2, callDate2);
+
+			Assert.AreNotEqual(phoneCall1, phoneCall2);
+		}
+
+		[TestMethod]
+		public void Equals_SecondObjHasAllDiffenentCallType_ExpectFalse() {
+			PhoneNumber phoneNumber1 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType1 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate1 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall1 = new PhoneCall(_fakeContact1, phoneNumber1, callType1, callDate1);
+
+			PhoneNumber phoneNumber2 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType2 = PhoneCallType.IncomingUnsuccessfull;
+			DateTime callDate2 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall2 = new PhoneCall(_fakeContact1, phoneNumber2, callType2, callDate2);
+
+			Assert.AreNotEqual(phoneCall1, phoneCall2);
+		}
+
+		[TestMethod]
+		public void Equals_SecondObjHasAllSameButDiffenentCallDate_ExpectTrue() {
+			PhoneNumber phoneNumber1 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType1 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate1 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall1 = new PhoneCall(_fakeContact1, phoneNumber1, callType1, callDate1);
+
+			PhoneNumber phoneNumber2 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType2 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate2 = new DateTime(2020, 01, 01);
+
+			PhoneCall phoneCall2 = new PhoneCall(_fakeContact1, phoneNumber2, callType2, callDate2);
+
+			Assert.AreEqual(phoneCall1, phoneCall2);
+		}
+
+		[TestMethod]
+		public void Equals_SecondObjHasTheSameContactPhoneNumberCalltypeDate_ExpectTrue() {
+			PhoneNumber phoneNumber1 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType1 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate1 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall1 = new PhoneCall(_fakeContact1, phoneNumber1, callType1, callDate1);
+
+			PhoneNumber phoneNumber2 = _fakeContact1.PhoneNumbers[0];
+			PhoneCallType callType2 = PhoneCallType.IncomingSuccessfull;
+			DateTime callDate2 = new DateTime(2000, 01, 01);
+
+			PhoneCall phoneCall2 = new PhoneCall(_fakeContact1, phoneNumber2, callType2, callDate2);
+
+			Assert.AreEqual(phoneCall1, phoneCall2);
+		}
+		#endregion
 	}
 }
